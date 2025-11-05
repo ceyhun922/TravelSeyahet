@@ -10,12 +10,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("DAL")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("TravelWeb")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+171a5b5eb9e2377fd5f2c571be72b0bfe0ce5768")]
-[assembly: System.Reflection.AssemblyProductAttribute("DAL")]
-[assembly: System.Reflection.AssemblyTitleAttribute("DAL")]
+[assembly: System.Reflection.AssemblyProductAttribute("TravelWeb")]
+[assembly: System.Reflection.AssemblyTitleAttribute("TravelWeb")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // MSBuild WriteCodeFragment sınıfı tarafından oluşturuldu.
