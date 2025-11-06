@@ -245,6 +245,234 @@
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
     },
     {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/about.html",
+      "PackagePath": "staticwebassets/web/about.html"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/css/style-liberty.css",
+      "PackagePath": "staticwebassets/web/assets/css/style-liberty.css"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/fonts/FontAwesome.otf",
+      "PackagePath": "staticwebassets/web/assets/fonts/FontAwesome.otf"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/fonts/fontawesome-webfont.eot",
+      "PackagePath": "staticwebassets/web/assets/fonts/fontawesome-webfont.eot"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/fonts/fontawesome-webfont.svg",
+      "PackagePath": "staticwebassets/web/assets/fonts/fontawesome-webfont.svg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/fonts/fontawesome-webfont.ttf",
+      "PackagePath": "staticwebassets/web/assets/fonts/fontawesome-webfont.ttf"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/fonts/fontawesome-webfont.woff",
+      "PackagePath": "staticwebassets/web/assets/fonts/fontawesome-webfont.woff"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/fonts/fontawesome-webfont.woff2",
+      "PackagePath": "staticwebassets/web/assets/fonts/fontawesome-webfont.woff2"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/banner1.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/banner1.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/banner2.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/banner2.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/banner3.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/banner3.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/banner4.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/banner4.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/c1.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/c1.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/c2.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/c2.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/c3.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/c3.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/c4.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/c4.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/close.png",
+      "PackagePath": "staticwebassets/web/assets/images/close.png"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/date.png",
+      "PackagePath": "staticwebassets/web/assets/images/date.png"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/dots.png",
+      "PackagePath": "staticwebassets/web/assets/images/dots.png"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/down.png",
+      "PackagePath": "staticwebassets/web/assets/images/down.png"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/g1.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/g1.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/g10.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/g10.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/g2.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/g2.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/g3.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/g3.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/g4.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/g4.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/g5.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/g5.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/g6.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/g6.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/g7.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/g7.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/g8.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/g8.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/g9.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/g9.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/img-sprite.png",
+      "PackagePath": "staticwebassets/web/assets/images/img-sprite.png"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/team1.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/team1.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/team2.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/team2.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/team3.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/team3.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/team4.jpg",
+      "PackagePath": "staticwebassets/web/assets/images/team4.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/js/all.js",
+      "PackagePath": "staticwebassets/web/assets/js/all.js"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/js/app.js",
+      "PackagePath": "staticwebassets/web/assets/js/app.js"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/js/bootstrap.min.js",
+      "PackagePath": "staticwebassets/web/assets/js/bootstrap.min.js"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/js/jquery-3.3.1.min.js",
+      "PackagePath": "staticwebassets/web/assets/js/jquery-3.3.1.min.js"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/js/jquery.countup.js",
+      "PackagePath": "staticwebassets/web/assets/js/jquery.countup.js"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/js/jquery.min.js",
+      "PackagePath": "staticwebassets/web/assets/js/jquery.min.js"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/js/jquery.waypoints.min.js",
+      "PackagePath": "staticwebassets/web/assets/js/jquery.waypoints.min.js"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/js/jquery.zoomslider.min.js",
+      "PackagePath": "staticwebassets/web/assets/js/jquery.zoomslider.min.js"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/js/lightbox-plus-jquery.min.js",
+      "PackagePath": "staticwebassets/web/assets/js/lightbox-plus-jquery.min.js"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/js/main.js",
+      "PackagePath": "staticwebassets/web/assets/js/main.js"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/js/modernizr-2.6.2.min.js",
+      "PackagePath": "staticwebassets/web/assets/js/modernizr-2.6.2.min.js"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/js/owl.carousel.js",
+      "PackagePath": "staticwebassets/web/assets/js/owl.carousel.js"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/js/popper.min.js",
+      "PackagePath": "staticwebassets/web/assets/js/popper.min.js"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/js/theme-change.js",
+      "PackagePath": "staticwebassets/web/assets/js/theme-change.js"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/blog-single.html",
+      "PackagePath": "staticwebassets/web/blog-single.html"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/blog.html",
+      "PackagePath": "staticwebassets/web/blog.html"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/contact.html",
+      "PackagePath": "staticwebassets/web/contact.html"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/index.html",
+      "PackagePath": "staticwebassets/web/index.html"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/landing-single.html",
+      "PackagePath": "staticwebassets/web/landing-single.html"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/liberty-license-W3Layouts.txt",
+      "PackagePath": "staticwebassets/web/liberty-license-W3Layouts.txt"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/pricing.html",
+      "PackagePath": "staticwebassets/web/pricing.html"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/services.html",
+      "PackagePath": "staticwebassets/web/services.html"
+    },
+    {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.TravelWeb.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
