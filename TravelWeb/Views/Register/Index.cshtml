@@ -1,0 +1,43 @@
+@model RegisterViewModel
+
+<!-- contact-form -->
+<section class="w3l-contact mt-5" id="contact">
+  <div class="contact-infubd py-5">
+    <div class="container py-lg-3">
+      <div class="contact-grids row">
+        <div class="col-lg-12 mt-lg-0 mt-5">
+        @using (Html.BeginForm("Index", "Register", FormMethod.Post, new { @class = "signin-form" }))
+          {
+            @Html.ValidationSummary()
+            <div class="input-grids">
+              <div class="form-group">
+                @Html.TextBoxFor(x=>x.Username, new {@class="contact-input",@placeholder="İstifadəçi Adi"})
+                @Html.ValidationMessageFor(x => x.Username, "", new { @class = "text-danger" })
+              </div>
+               <div class="form-group">
+                @Html.TextBoxFor(x=>x.Mail, new {@class="contact-input",@placeholder="İstifadəçi Maili"})
+                @Html.ValidationMessageFor(x => x.Mail, "", new { @class = "text-danger" })
+              </div>
+              <div class="form-group">
+                @Html.PasswordFor(x=>x.Password,new {@class="contact-input",@placeholder="İstifadəçi Şifrəsi"})
+                @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+
+              </div>
+              <div class="form-group">
+                @Html.PasswordFor(x=>x.ConfirmPassword,new {@class="contact-input",@placeholder="Şifrə Tərkarı"})
+                @Html.ValidationMessageFor(x => x.ConfirmPassword, "", new { @class = "text-danger" })
+
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-outline-danger">Qeydiyyat Ol</button>
+              </div>
+
+            </div>
+          }
+        </div>
+
+      </div>
+
+    </div>
+</section>
+<!-- /contact-form -->
