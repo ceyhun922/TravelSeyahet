@@ -22,5 +22,6 @@ namespace DAL.Concrete
         public DbSet<Rotasion>? Rotasions { get; set; }
         public DbSet<SubAbout>? SubAbouts  { get; set; }
         public DbSet<Testimonial>? Testimonials  { get; set; }
+        public DbSet<Slider>? Sliders  { get; set; }
     }
 }
