@@ -1,1 +1,34 @@
-<p>Login</p>
+@model LoginViewModel
+
+<!-- contact-form -->
+<section class="w3l-contact mt-5" id="contact">
+  <div class="contact-infubd py-5">
+    <div class="container py-lg-3">
+      <div class="contact-grids row">
+        <div class="col-lg-12 mt-lg-0 mt-5">
+        @using (Html.BeginForm("Index", "login", FormMethod.Post, new { @class = "signin-form" }))
+          {
+            @Html.ValidationSummary()
+            <div class="input-grids">
+              <div class="form-group">
+                @Html.TextBoxFor(x=>x.Email, new {@class="contact-input",@placeholder="İstifadəçi Maili"})
+                @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+              </div>
+              <div class="form-group">
+                @Html.PasswordFor(x=>x.Password,new {@class="contact-input",@placeholder="İstifadəçi Şifrəsi"})
+                @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger" })
+
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-outline-danger">Giriş Et</button>
+              </div>
+
+            </div>
+          }
+        </div>
+
+      </div>
+
+    </div>
+</section>
+<!-- /contact-form -->
