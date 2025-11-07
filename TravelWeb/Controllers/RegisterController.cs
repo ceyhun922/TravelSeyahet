@@ -3,12 +3,14 @@
 using Entities.Concrete;
 using Entities.ViewModel;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Services.ValidationRule;
 
 namespace TravelWeb.Controllers
 {
+    [AllowAnonymous]
     public class RegisterController : Controller
     {
         private readonly UserManager<Writer> _manager;
@@ -23,6 +25,10 @@ namespace TravelWeb.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
         [HttpPost]

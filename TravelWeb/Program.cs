@@ -2,8 +2,10 @@ using DAL.Concrete;
 using Entities.Concrete;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Services.ValidationRule;
 
@@ -13,7 +15,12 @@ builder.Services.AddControllersWithViews(opt =>
 {
     opt.ModelMetadataDetailsProviders.Clear();
 
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+
+    opt.Filters.Add(new AuthorizeFilter(policy));
 });
+
+
 
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
@@ -36,6 +43,8 @@ builder.Services.AddIdentity<Writer, Role>(opt =>
     opt.Password.RequireNonAlphanumeric = false;
     opt.Password.RequireUppercase = false;
 }).AddEntityFrameworkStores<Context>().AddDefaultTokenProviders();
+
+
 
 
 var app = builder.Build();
