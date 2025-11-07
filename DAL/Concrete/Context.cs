@@ -1,5 +1,6 @@
 
 
+using DAL.CoreData;
 using Entities.Concrete;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -7,9 +8,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Concrete
 {
-    public class Context : IdentityDbContext<Writer, Role,int>
+    public class Context : IdentityDbContext<Writer, Role, int>
     {
         public Context(DbContextOptions<Context> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.ApplyConfiguration(new NotificationCoreData());
+        }
 
         public DbSet<About>? Abouts { get; set; }
         public DbSet<About2>? Abouts2 { get; set; }
@@ -20,8 +28,11 @@ namespace DAL.Concrete
         public DbSet<Guide>? Guides { get; set; }
         public DbSet<Rezervation>? Rezervations { get; set; }
         public DbSet<Rotasion>? Rotasions { get; set; }
-        public DbSet<SubAbout>? SubAbouts  { get; set; }
-        public DbSet<Testimonial>? Testimonials  { get; set; }
-        public DbSet<Slider>? Sliders  { get; set; }
+        public DbSet<SubAbout>? SubAbouts { get; set; }
+        public DbSet<Testimonial>? Testimonials { get; set; }
+        public DbSet<Slider>? Sliders { get; set; }
+        public DbSet<Notification>?  Notifications { get; set; }
+
     }
+    
 }
