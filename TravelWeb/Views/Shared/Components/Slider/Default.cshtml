@@ -1,0 +1,80 @@
+@using Entities.Concrete
+@using System.Text.Json
+ @model List<Slider>
+ <!--banner-slider-->
+  <!-- main-slider -->
+  <section class="w3l-main-slider" id="home">
+  @{
+            var imagePaths = Model
+                .Where(x => !string.IsNullOrEmpty(x.SliderBanner))
+                .Select(x => x.SliderBanner.StartsWith("/") 
+                    ? x.SliderBanner 
+                    : "/web/assets/images/" + x.SliderBanner)
+                .ToList();
+
+            var jsonArray = JsonSerializer.Serialize(imagePaths);
+
+             var titles = JsonSerializer.Serialize(Model.Select(x => x.SliderTitle1).ToList());
+        var subtitles = JsonSerializer.Serialize(Model.Select(x => x.SliderTitle2).ToList());
+        }
+    <div class="banner-content">
+    
+      <div id="demo-1"
+        data-zs-src='@Html.Raw(jsonArray)'
+        data-zs-overlay="dots">
+        <div class="demo-inner-content">
+        
+          <div class="container">
+          
+            <div class="banner-infhny">
+                                    <h3 id="sliderTitle">@Model.FirstOrDefault()?.SliderTitle1</h3>
+                        <h6 id="sliderSubtitle" class="mb-3">@Model.FirstOrDefault()?.SliderTitle2</h6>
+
+
+              <div class="flex-wrap search-wthree-field mt-md-5 mt-4">
+                <form action="#" method="post" class="booking-form">
+                  <div class="row book-form">
+                    <div class="form-input col-md-4 mt-md-0 mt-3">
+
+                      <select name="selectpicker" class="selectpicker">
+                        <option value="">Destinaion</option>
+                        <option value="africa">Africa</option>
+                        <option value="america">America</option>
+                        <option value="asia">Asia</option>
+                        <option value="eastern-europe">Eastern Europe</option>
+                        <option value="europe">Europe</option>
+                        <option value="south-america">South America</option>
+                      </select>
+
+                    </div>
+                    <div class="form-input col-md-4 mt-md-0 mt-3">
+
+                      <input type="date" name="" placeholder="Date" required="">
+                    </div>
+                    <div class="bottom-btn col-md-4 mt-md-0 mt-3">
+                      <button class="btn btn-style btn-secondary"><span class="fa fa-search mr-3"
+                          aria-hidden="true"></span> Search</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var titles = @Html.Raw(titles);
+        var subtitles = @Html.Raw(subtitles);
+        var currentIndex = 0;
+
+        setInterval(function () {
+            currentIndex = (currentIndex + 1) % titles.length;
+            document.getElementById("sliderTitle").textContent = titles[currentIndex];
+            document.getElementById("sliderSubtitle").textContent = subtitles[currentIndex];
+        }, 3000); 
+    });
+</script>

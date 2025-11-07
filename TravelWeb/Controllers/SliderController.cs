@@ -1,4 +1,5 @@
 using DAL.Concrete;
+using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
 namespace TravelWeb.Controllers
@@ -12,10 +13,6 @@ namespace TravelWeb.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
-        {
-            var values = _context.Sliders.ToList();
-            return View(values);
-        }
+
     }
 }
