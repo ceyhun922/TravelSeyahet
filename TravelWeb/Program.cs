@@ -9,10 +9,18 @@ using Services.ValidationRule;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews(options =>
+builder.Services.AddControllersWithViews(opt =>
 {
-    options.ModelMetadataDetailsProviders.Clear(); 
+    opt.ModelMetadataDetailsProviders.Clear();
+
 });
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddFluentValidationClientsideAdapters();
+
+
+builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<LoginValidation>();
 
 builder.Services.AddDbContext<Context>(opt =>
 {

@@ -31,15 +31,10 @@ namespace TravelWeb.Controllers
             LoginValidation validations = new LoginValidation();
             ValidationResult validation = validations.Validate(model);
 
-            if (!validation.IsValid)
+            if (!ModelState.IsValid)
             {
-                foreach (var err in validation.Errors)
-                {
-                    ModelState.AddModelError("", err.ErrorMessage);
-                }
                 return View(model);
             }
-
             var user = await _userManager.FindByEmailAsync(model.Email);
 
             if (user == null)
@@ -47,6 +42,7 @@ namespace TravelWeb.Controllers
                 ModelState.AddModelError("", "E-poçt və ya parol yanlışdır.");
                 return View(model);
             }
+
 
             var result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, true, false);
 

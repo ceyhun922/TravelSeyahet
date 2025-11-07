@@ -28,11 +28,11 @@ namespace TravelWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(RegisterViewModel model)
         {
-            RegisterValidation validation = new RegisterValidation();
-            ValidationResult validationResult = validation.Validate(model);
-
-            if (validationResult.IsValid)
+            if (!ModelState.IsValid)
             {
+                return View(model);
+            }
+
                Writer writer = new Writer
                 {
                     UserName = model.Username,
@@ -47,21 +47,13 @@ namespace TravelWeb.Controllers
                     await _signInManager.SignInAsync(writer, isPersistent: false);
                     return RedirectToAction("Index", "Login");
                 }
-                else
+               
+           
+                foreach (var err in result.Errors)
                 {
-                    foreach (var err in result.Errors)
-                    {
-                        ModelState.AddModelError("", err.Description);
-                    }
+                    ModelState.AddModelError("",err.Description);
                 }
-            }
-            else
-            {
-                foreach (var item in validationResult.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-            }
+            
 
             return View(model);
         }
