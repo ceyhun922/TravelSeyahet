@@ -16,7 +16,7 @@ namespace EntityLayer.Concrete
         public int DestinationCountLimit { get; set; }
         public bool DestinationStatus { get; set; }
         public List<Rotasion>? Rotasions { get; set; }
-        public string? UserId { get; set; }
+        public int? UserId { get; set; }
 
         public Writer? Writer { get; set; }
 

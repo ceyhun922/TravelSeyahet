@@ -16,12 +16,12 @@ namespace ServicesLayer.Concrete
             _destinationDAL = destinationDAL;
         }
 
-        public List<Destination> DestinationWithRotasionService(string userId)
+        public List<Destination> DestinationWithRotasionService(int userId)
         {
             return _destinationDAL.DestinationWithRotasionDAL(userId);
         }
 
-        public List<Destination> DestinationWithRotasionService(int id)
+        public List<Destination> DestinationWithRotasionServicee(int id)
         {
             return _destinationDAL.DestinationWithRotasionDAL(id);
         }

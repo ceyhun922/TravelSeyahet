@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace TravelWeb.Migrations
 {
     /// <inheritdoc />
@@ -136,6 +138,24 @@ namespace TravelWeb.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Guides", x => x.GuideID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    NotificationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NotificationType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NotificationTypeColor = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NotificationTypeIcon = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NotificationTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NotificationDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NotificationStatus = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.NotificationId);
                 });
 
             migrationBuilder.CreateTable(
@@ -306,7 +326,7 @@ namespace TravelWeb.Migrations
                     DestinationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DestinationCountLimit = table.Column<int>(type: "int", nullable: false),
                     DestinationStatus = table.Column<bool>(type: "bit", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     WriterId = table.Column<int>(type: "int", nullable: true),
                     GuideID = table.Column<int>(type: "int", nullable: false),
                     Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -418,6 +438,79 @@ namespace TravelWeb.Migrations
                         principalTable: "Destinations",
                         principalColumn: "DestinationId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Guides",
+                columns: new[] { "GuideID", "GuideDescription", "GuideFacebookUrl", "GuideImage", "GuideName", "GuideStatus", "GuideXUrl" },
+                values: new object[,]
+                {
+                    { 1, "Azərbaycanın tarixi yerləri üzrə ixtisaslaşmış bələdçi.", null, "/web/assets/images/team1.jpg", "Ceyhun Əliyev", true, null },
+                    { 2, "Qəbələ və Şəki bölgələri üzrə təcrübəli bələdçi.", null, "/web/assets/images/team2.jpg", "Nigar Məmmədova", true, null },
+                    { 3, "Bakı şəhərinin mədəni və memarlıq abidələrini tanıdan peşəkar bələdçi.", null, "/web/assets/images/team3.jpg", "Rauf Hüseynov", true, null },
+                    { 4, "Azərbaycan mətbəxi və ənənələri barədə tur bələdçisi.", null, "/web/assets/images/team4.jpg", "Günel İsmayılova", true, null },
+                    { 5, "Qarabağ və Şuşa istiqamətində tur rəhbəri.", null, "/web/assets/images/team1.jpg", "Elvin Rzayev", true, null },
+                    { 6, "Azərbaycanın təbiət parkları və yürüş turları üzrə mütəxəssis.", null, "/web/assets/images/team2.jpg", "Aysel Qasımova", true, null },
+                    { 7, "Qobustan və Abşeron yarımadası üzrə ixtisaslaşmış bələdçi.", null, "/web/assets/images/team3.jpg", "Murad Əliyev", true, null },
+                    { 8, "Mədəni və incəsənət turları üzrə təcrübəli bələdçi.", null, "/web/assets/images/team4.jpg", "Zəhra Həsənli", true, null },
+                    { 9, "İçərişəhər və tarixi Bakı turları üzrə bələdçi.", null, "/web/assets/images/team1.jpg", "Kamal Quliyev", true, null },
+                    { 10, "Qusar, Quba və Xaçmaz bölgələri üzrə bələdçi.", null, "/web/assets/images/team2.jpg", "Leyla Səlimova", true, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Notifications",
+                columns: new[] { "NotificationId", "NotificationDesc", "NotificationStatus", "NotificationTitle", "NotificationType", "NotificationTypeColor", "NotificationTypeIcon" },
+                values: new object[] { 1, "Online Olacaq", true, "Iclas", "warning", "preview-icon bg-success", "mdi mdi-calendar" });
+
+            migrationBuilder.InsertData(
+                table: "Testimonials",
+                columns: new[] { "TestimonialID", "TestimonialClient", "TestimonialComment", "TestimonialImage", "TestimonialStatus" },
+                values: new object[,]
+                {
+                    { 1, "Eldar Nəsibov", "Tur zamanı hər şey əla idi!", "/web/assets/images/test1.jpg", true },
+                    { 2, "Ləman Abbasova", "Bələdçilər çox mehriban idi.", "/web/assets/images/test2.jpg", true },
+                    { 3, "Kənan Quliyev", "Maraqlı və rahat səyahət idi.", "/web/assets/images/test3.jpg", true },
+                    { 4, "Aytac Nəbiyeva", "Qrup şəklində çox gözəl təşkil olunmuşdu.", "/web/assets/images/test4.jpg", true },
+                    { 5, "Rəşad Məmmədli", "Foto məkanlar möhtəşəm idi.", "/web/assets/images/test5.jpg", true },
+                    { 6, "Sevda Həsənova", "Ən sevdiyim tur agentliyidir!", "/web/assets/images/test6.jpg", true },
+                    { 7, "Orxan Əliyev", "Qarabağ turu inanılmaz idi.", "/web/assets/images/test7.jpg", true },
+                    { 8, "Aysel Qasımova", "Təbiət yürüşü çox zövqlü keçdi.", "/web/assets/images/test8.jpg", true },
+                    { 9, "Murad Hüseynov", "Təşkilatçılıq yüksək səviyyədə idi.", "/web/assets/images/test9.jpg", true },
+                    { 10, "Nigar Məmmədli", "Gələn dəfə də sizlərlə gedəcəm!", "/web/assets/images/test10.jpg", true }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Destinations",
+                columns: new[] { "DestinationId", "CapaCity", "CommentID", "DestinationCity", "DestinationCountLimit", "DestinationDayNight", "DestinationImage", "DestinationPrice", "DestinationStatus", "DestinationTime", "Guid", "GuideID", "TestimonialID", "UserId", "WriterId" },
+                values: new object[,]
+                {
+                    { 1, 25, 0, "Bakı", 30, "3 gün 2 gecə", "/web/assets/images/g1.jpg", 350.0, true, new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1480), new Guid("00000000-0000-0000-0000-000000000000"), 1, 1, 1, null },
+                    { 2, 20, 0, "Qəbələ", 25, "2 gün 1 gecə", "/web/assets/images/g2.jpg", 250.0, true, new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1480), new Guid("00000000-0000-0000-0000-000000000000"), 2, 2, 2, null },
+                    { 3, 15, 0, "Şəki", 20, "1 günlük tur", "/web/assets/images/g3.jpg", 180.0, true, new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1490), new Guid("00000000-0000-0000-0000-000000000000"), 3, 3, 3, null },
+                    { 4, 20, 0, "Quba", 25, "3 gün 2 gecə", "/web/assets/images/g4.jpg", 300.0, true, new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1490), new Guid("00000000-0000-0000-0000-000000000000"), 4, 4, 1, null },
+                    { 5, 30, 0, "Şuşa", 30, "4 gün 3 gecə", "/web/assets/images/g5.jpg", 400.0, true, new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1490), new Guid("00000000-0000-0000-0000-000000000000"), 5, 5, 2, null },
+                    { 6, 20, 0, "Lənkəran", 25, "2 gün 1 gecə", "/web/assets/images/g6.jpg", 270.0, true, new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1500), new Guid("00000000-0000-0000-0000-000000000000"), 6, 6, 3, null },
+                    { 7, 25, 0, "Naftalan", 30, "3 gün 2 gecə", "/web/assets/images/g7.jpg", 320.0, true, new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1500), new Guid("00000000-0000-0000-0000-000000000000"), 7, 7, 1, null },
+                    { 8, 15, 0, "İsmayıllı", 20, "1 günlük tur", "/web/assets/images/g8.jpg", 190.0, true, new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1500), new Guid("00000000-0000-0000-0000-000000000000"), 8, 8, 2, null },
+                    { 9, 20, 0, "Qusar", 25, "2 gün 1 gecə", "/web/assets/images/g9.jpg", 260.0, true, new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1510), new Guid("00000000-0000-0000-0000-000000000000"), 9, 9, 3, null },
+                    { 10, 25, 0, "Zaqatala", 30, "3 gün 2 gecə", "/web/assets/images/g10.jpg", 310.0, true, new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1510), new Guid("00000000-0000-0000-0000-000000000000"), 10, 10, 1, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Rotasions",
+                columns: new[] { "RotasionID", "DestinationId", "RotasionDescription", "RotasionName", "RotasionStatus" },
+                values: new object[,]
+                {
+                    { 1, 1, "Tarixi abidələrə səyahət", "Qobustan Qayaüstü", true },
+                    { 2, 2, "Təbiət gəzintisi və foto turları", "Nohur Gölü", true },
+                    { 3, 3, "Mədəni ekskursiya", "Xan Sarayı", true },
+                    { 4, 4, "Dağ yürüşü və piknik", "Qəçrəş Meşəsi", true },
+                    { 5, 5, "Qarabağın ürəyi olan şəhər", "Qalasına Ziyarət", true },
+                    { 6, 5, "Çay bağları və təbiət", "Xalça Müzeyi", true },
+                    { 7, 7, "Spa və sağlamlıq turu", "Naftalan Müalicə Mərkəzi", true },
+                    { 8, 8, "Ekoturizm və hiking", "İsmayıllı Meşələri", true },
+                    { 9, 9, "Qar idmanı və xizək turu", "Qış Mərkəzi", true },
+                    { 10, 10, "Təbiət və heyvanat dünyası ilə tanışlıq", "Qoruğ", true }
                 });
 
             migrationBuilder.CreateIndex(
@@ -532,6 +625,9 @@ namespace TravelWeb.Migrations
 
             migrationBuilder.DropTable(
                 name: "Features2");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "Rezervations");

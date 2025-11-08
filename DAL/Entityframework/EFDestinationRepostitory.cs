@@ -13,7 +13,7 @@ public class EFDestinationRepository : GenericRepository<Destination>, IDestinat
         _context = context;
     }
 
-    public List<Destination> DestinationWithRotasionDAL(string userId)
+    public List<Destination> DestinationWithRotasionDAL(int userId)
     {
         return _context.Destinations
             .Where(d=>d.UserId ==userId)                 
@@ -21,7 +21,7 @@ public class EFDestinationRepository : GenericRepository<Destination>, IDestinat
             .ToList();
     }
 
-    public List<Destination> DestinationWithRotasionDAL(int id)
+    public List<Destination> DestinationWithRotasionDALL(int id)
     {
         return _context.Destinations
         .Where(d => d.DestinationId == id)

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TravelWeb.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20251106014139_mig1")]
+    [Migration("20251108040537_mig1")]
     partial class mig1
     {
         /// <inheritdoc />
@@ -24,6 +24,54 @@ namespace TravelWeb.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Entities.Concrete.Notification", b =>
+                {
+                    b.Property<int>("NotificationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NotificationId"));
+
+                    b.Property<string>("NotificationDesc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("NotificationStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NotificationTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NotificationType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NotificationTypeColor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NotificationTypeIcon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NotificationId");
+
+                    b.ToTable("Notifications");
+
+                    b.HasData(
+                        new
+                        {
+                            NotificationId = 1,
+                            NotificationDesc = "Online Olacaq",
+                            NotificationStatus = true,
+                            NotificationTitle = "Iclas",
+                            NotificationType = "warning",
+                            NotificationTypeColor = "preview-icon bg-success",
+                            NotificationTypeIcon = "mdi mdi-calendar"
+                        });
+                });
 
             modelBuilder.Entity("Entities.Concrete.Role", b =>
                 {
@@ -293,8 +341,8 @@ namespace TravelWeb.Migrations
                     b.Property<int>("TestimonialID")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("WriterId")
                         .HasColumnType("int");
@@ -308,6 +356,178 @@ namespace TravelWeb.Migrations
                     b.HasIndex("WriterId");
 
                     b.ToTable("Destinations");
+
+                    b.HasData(
+                        new
+                        {
+                            DestinationId = 1,
+                            CapaCity = 25,
+                            CommentID = 0,
+                            DestinationCity = "Bakı",
+                            DestinationCountLimit = 30,
+                            DestinationDayNight = "3 gün 2 gecə",
+                            DestinationImage = "/web/assets/images/g1.jpg",
+                            DestinationPrice = 350.0,
+                            DestinationStatus = true,
+                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1480),
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 1,
+                            TestimonialID = 1,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            DestinationId = 2,
+                            CapaCity = 20,
+                            CommentID = 0,
+                            DestinationCity = "Qəbələ",
+                            DestinationCountLimit = 25,
+                            DestinationDayNight = "2 gün 1 gecə",
+                            DestinationImage = "/web/assets/images/g2.jpg",
+                            DestinationPrice = 250.0,
+                            DestinationStatus = true,
+                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1480),
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 2,
+                            TestimonialID = 2,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            DestinationId = 3,
+                            CapaCity = 15,
+                            CommentID = 0,
+                            DestinationCity = "Şəki",
+                            DestinationCountLimit = 20,
+                            DestinationDayNight = "1 günlük tur",
+                            DestinationImage = "/web/assets/images/g3.jpg",
+                            DestinationPrice = 180.0,
+                            DestinationStatus = true,
+                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1490),
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 3,
+                            TestimonialID = 3,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            DestinationId = 4,
+                            CapaCity = 20,
+                            CommentID = 0,
+                            DestinationCity = "Quba",
+                            DestinationCountLimit = 25,
+                            DestinationDayNight = "3 gün 2 gecə",
+                            DestinationImage = "/web/assets/images/g4.jpg",
+                            DestinationPrice = 300.0,
+                            DestinationStatus = true,
+                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1490),
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 4,
+                            TestimonialID = 4,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            DestinationId = 5,
+                            CapaCity = 30,
+                            CommentID = 0,
+                            DestinationCity = "Şuşa",
+                            DestinationCountLimit = 30,
+                            DestinationDayNight = "4 gün 3 gecə",
+                            DestinationImage = "/web/assets/images/g5.jpg",
+                            DestinationPrice = 400.0,
+                            DestinationStatus = true,
+                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1490),
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 5,
+                            TestimonialID = 5,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            DestinationId = 6,
+                            CapaCity = 20,
+                            CommentID = 0,
+                            DestinationCity = "Lənkəran",
+                            DestinationCountLimit = 25,
+                            DestinationDayNight = "2 gün 1 gecə",
+                            DestinationImage = "/web/assets/images/g6.jpg",
+                            DestinationPrice = 270.0,
+                            DestinationStatus = true,
+                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1500),
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 6,
+                            TestimonialID = 6,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            DestinationId = 7,
+                            CapaCity = 25,
+                            CommentID = 0,
+                            DestinationCity = "Naftalan",
+                            DestinationCountLimit = 30,
+                            DestinationDayNight = "3 gün 2 gecə",
+                            DestinationImage = "/web/assets/images/g7.jpg",
+                            DestinationPrice = 320.0,
+                            DestinationStatus = true,
+                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1500),
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 7,
+                            TestimonialID = 7,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            DestinationId = 8,
+                            CapaCity = 15,
+                            CommentID = 0,
+                            DestinationCity = "İsmayıllı",
+                            DestinationCountLimit = 20,
+                            DestinationDayNight = "1 günlük tur",
+                            DestinationImage = "/web/assets/images/g8.jpg",
+                            DestinationPrice = 190.0,
+                            DestinationStatus = true,
+                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1500),
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 8,
+                            TestimonialID = 8,
+                            UserId = 2
+                        },
+                        new
+                        {
+                            DestinationId = 9,
+                            CapaCity = 20,
+                            CommentID = 0,
+                            DestinationCity = "Qusar",
+                            DestinationCountLimit = 25,
+                            DestinationDayNight = "2 gün 1 gecə",
+                            DestinationImage = "/web/assets/images/g9.jpg",
+                            DestinationPrice = 260.0,
+                            DestinationStatus = true,
+                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1510),
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 9,
+                            TestimonialID = 9,
+                            UserId = 3
+                        },
+                        new
+                        {
+                            DestinationId = 10,
+                            CapaCity = 25,
+                            CommentID = 0,
+                            DestinationCity = "Zaqatala",
+                            DestinationCountLimit = 30,
+                            DestinationDayNight = "3 gün 2 gecə",
+                            DestinationImage = "/web/assets/images/g10.jpg",
+                            DestinationPrice = 310.0,
+                            DestinationStatus = true,
+                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1510),
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 10,
+                            TestimonialID = 10,
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Feature", b =>
@@ -389,6 +609,88 @@ namespace TravelWeb.Migrations
                     b.HasKey("GuideID");
 
                     b.ToTable("Guides");
+
+                    b.HasData(
+                        new
+                        {
+                            GuideID = 1,
+                            GuideDescription = "Azərbaycanın tarixi yerləri üzrə ixtisaslaşmış bələdçi.",
+                            GuideImage = "/web/assets/images/team1.jpg",
+                            GuideName = "Ceyhun Əliyev",
+                            GuideStatus = true
+                        },
+                        new
+                        {
+                            GuideID = 2,
+                            GuideDescription = "Qəbələ və Şəki bölgələri üzrə təcrübəli bələdçi.",
+                            GuideImage = "/web/assets/images/team2.jpg",
+                            GuideName = "Nigar Məmmədova",
+                            GuideStatus = true
+                        },
+                        new
+                        {
+                            GuideID = 3,
+                            GuideDescription = "Bakı şəhərinin mədəni və memarlıq abidələrini tanıdan peşəkar bələdçi.",
+                            GuideImage = "/web/assets/images/team3.jpg",
+                            GuideName = "Rauf Hüseynov",
+                            GuideStatus = true
+                        },
+                        new
+                        {
+                            GuideID = 4,
+                            GuideDescription = "Azərbaycan mətbəxi və ənənələri barədə tur bələdçisi.",
+                            GuideImage = "/web/assets/images/team4.jpg",
+                            GuideName = "Günel İsmayılova",
+                            GuideStatus = true
+                        },
+                        new
+                        {
+                            GuideID = 5,
+                            GuideDescription = "Qarabağ və Şuşa istiqamətində tur rəhbəri.",
+                            GuideImage = "/web/assets/images/team1.jpg",
+                            GuideName = "Elvin Rzayev",
+                            GuideStatus = true
+                        },
+                        new
+                        {
+                            GuideID = 6,
+                            GuideDescription = "Azərbaycanın təbiət parkları və yürüş turları üzrə mütəxəssis.",
+                            GuideImage = "/web/assets/images/team2.jpg",
+                            GuideName = "Aysel Qasımova",
+                            GuideStatus = true
+                        },
+                        new
+                        {
+                            GuideID = 7,
+                            GuideDescription = "Qobustan və Abşeron yarımadası üzrə ixtisaslaşmış bələdçi.",
+                            GuideImage = "/web/assets/images/team3.jpg",
+                            GuideName = "Murad Əliyev",
+                            GuideStatus = true
+                        },
+                        new
+                        {
+                            GuideID = 8,
+                            GuideDescription = "Mədəni və incəsənət turları üzrə təcrübəli bələdçi.",
+                            GuideImage = "/web/assets/images/team4.jpg",
+                            GuideName = "Zəhra Həsənli",
+                            GuideStatus = true
+                        },
+                        new
+                        {
+                            GuideID = 9,
+                            GuideDescription = "İçərişəhər və tarixi Bakı turları üzrə bələdçi.",
+                            GuideImage = "/web/assets/images/team1.jpg",
+                            GuideName = "Kamal Quliyev",
+                            GuideStatus = true
+                        },
+                        new
+                        {
+                            GuideID = 10,
+                            GuideDescription = "Qusar, Quba və Xaçmaz bölgələri üzrə bələdçi.",
+                            GuideImage = "/web/assets/images/team2.jpg",
+                            GuideName = "Leyla Səlimova",
+                            GuideStatus = true
+                        });
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Rezervation", b =>
@@ -466,6 +768,88 @@ namespace TravelWeb.Migrations
                     b.HasIndex("DestinationId");
 
                     b.ToTable("Rotasions");
+
+                    b.HasData(
+                        new
+                        {
+                            RotasionID = 1,
+                            DestinationId = 1,
+                            RotasionDescription = "Tarixi abidələrə səyahət",
+                            RotasionName = "Qobustan Qayaüstü",
+                            RotasionStatus = true
+                        },
+                        new
+                        {
+                            RotasionID = 2,
+                            DestinationId = 2,
+                            RotasionDescription = "Təbiət gəzintisi və foto turları",
+                            RotasionName = "Nohur Gölü",
+                            RotasionStatus = true
+                        },
+                        new
+                        {
+                            RotasionID = 3,
+                            DestinationId = 3,
+                            RotasionDescription = "Mədəni ekskursiya",
+                            RotasionName = "Xan Sarayı",
+                            RotasionStatus = true
+                        },
+                        new
+                        {
+                            RotasionID = 4,
+                            DestinationId = 4,
+                            RotasionDescription = "Dağ yürüşü və piknik",
+                            RotasionName = "Qəçrəş Meşəsi",
+                            RotasionStatus = true
+                        },
+                        new
+                        {
+                            RotasionID = 5,
+                            DestinationId = 5,
+                            RotasionDescription = "Qarabağın ürəyi olan şəhər",
+                            RotasionName = "Qalasına Ziyarət",
+                            RotasionStatus = true
+                        },
+                        new
+                        {
+                            RotasionID = 6,
+                            DestinationId = 5,
+                            RotasionDescription = "Çay bağları və təbiət",
+                            RotasionName = "Xalça Müzeyi",
+                            RotasionStatus = true
+                        },
+                        new
+                        {
+                            RotasionID = 7,
+                            DestinationId = 7,
+                            RotasionDescription = "Spa və sağlamlıq turu",
+                            RotasionName = "Naftalan Müalicə Mərkəzi",
+                            RotasionStatus = true
+                        },
+                        new
+                        {
+                            RotasionID = 8,
+                            DestinationId = 8,
+                            RotasionDescription = "Ekoturizm və hiking",
+                            RotasionName = "İsmayıllı Meşələri",
+                            RotasionStatus = true
+                        },
+                        new
+                        {
+                            RotasionID = 9,
+                            DestinationId = 9,
+                            RotasionDescription = "Qar idmanı və xizək turu",
+                            RotasionName = "Qış Mərkəzi",
+                            RotasionStatus = true
+                        },
+                        new
+                        {
+                            RotasionID = 10,
+                            DestinationId = 10,
+                            RotasionDescription = "Təbiət və heyvanat dünyası ilə tanışlıq",
+                            RotasionName = "Qoruğ",
+                            RotasionStatus = true
+                        });
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.SubAbout", b =>
@@ -516,6 +900,88 @@ namespace TravelWeb.Migrations
                     b.HasKey("TestimonialID");
 
                     b.ToTable("Testimonials");
+
+                    b.HasData(
+                        new
+                        {
+                            TestimonialID = 1,
+                            TestimonialClient = "Eldar Nəsibov",
+                            TestimonialComment = "Tur zamanı hər şey əla idi!",
+                            TestimonialImage = "/web/assets/images/test1.jpg",
+                            TestimonialStatus = true
+                        },
+                        new
+                        {
+                            TestimonialID = 2,
+                            TestimonialClient = "Ləman Abbasova",
+                            TestimonialComment = "Bələdçilər çox mehriban idi.",
+                            TestimonialImage = "/web/assets/images/test2.jpg",
+                            TestimonialStatus = true
+                        },
+                        new
+                        {
+                            TestimonialID = 3,
+                            TestimonialClient = "Kənan Quliyev",
+                            TestimonialComment = "Maraqlı və rahat səyahət idi.",
+                            TestimonialImage = "/web/assets/images/test3.jpg",
+                            TestimonialStatus = true
+                        },
+                        new
+                        {
+                            TestimonialID = 4,
+                            TestimonialClient = "Aytac Nəbiyeva",
+                            TestimonialComment = "Qrup şəklində çox gözəl təşkil olunmuşdu.",
+                            TestimonialImage = "/web/assets/images/test4.jpg",
+                            TestimonialStatus = true
+                        },
+                        new
+                        {
+                            TestimonialID = 5,
+                            TestimonialClient = "Rəşad Məmmədli",
+                            TestimonialComment = "Foto məkanlar möhtəşəm idi.",
+                            TestimonialImage = "/web/assets/images/test5.jpg",
+                            TestimonialStatus = true
+                        },
+                        new
+                        {
+                            TestimonialID = 6,
+                            TestimonialClient = "Sevda Həsənova",
+                            TestimonialComment = "Ən sevdiyim tur agentliyidir!",
+                            TestimonialImage = "/web/assets/images/test6.jpg",
+                            TestimonialStatus = true
+                        },
+                        new
+                        {
+                            TestimonialID = 7,
+                            TestimonialClient = "Orxan Əliyev",
+                            TestimonialComment = "Qarabağ turu inanılmaz idi.",
+                            TestimonialImage = "/web/assets/images/test7.jpg",
+                            TestimonialStatus = true
+                        },
+                        new
+                        {
+                            TestimonialID = 8,
+                            TestimonialClient = "Aysel Qasımova",
+                            TestimonialComment = "Təbiət yürüşü çox zövqlü keçdi.",
+                            TestimonialImage = "/web/assets/images/test8.jpg",
+                            TestimonialStatus = true
+                        },
+                        new
+                        {
+                            TestimonialID = 9,
+                            TestimonialClient = "Murad Hüseynov",
+                            TestimonialComment = "Təşkilatçılıq yüksək səviyyədə idi.",
+                            TestimonialImage = "/web/assets/images/test9.jpg",
+                            TestimonialStatus = true
+                        },
+                        new
+                        {
+                            TestimonialID = 10,
+                            TestimonialClient = "Nigar Məmmədli",
+                            TestimonialComment = "Gələn dəfə də sizlərlə gedəcəm!",
+                            TestimonialImage = "/web/assets/images/test10.jpg",
+                            TestimonialStatus = true
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

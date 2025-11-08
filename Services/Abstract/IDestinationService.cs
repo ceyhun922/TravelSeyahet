@@ -5,7 +5,7 @@ namespace ServicesLayer.Abstract
 {
     public interface IDestinationService : IGenericService<Destination>
 {
-    List<Destination> DestinationWithRotasionService(string userId);
-    List<Destination> DestinationWithRotasionService(int id);
+    List<Destination> DestinationWithRotasionService(int userId);
+    List<Destination> DestinationWithRotasionServicee(int id);
 }
 }

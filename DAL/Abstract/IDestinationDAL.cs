@@ -4,8 +4,8 @@ namespace DAL.Abstract
 {
     public interface IDestinationDAL : IGenericDAL<Destination>
     {
-        List<Destination> DestinationWithRotasionDAL(string userId);
-        List<Destination> DestinationWithRotasionDAL(int id);
+        List<Destination> DestinationWithRotasionDAL(int userId);
+        List<Destination> DestinationWithRotasionDALL(int id);
     }
 
 }

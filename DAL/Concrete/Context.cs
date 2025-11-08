@@ -17,6 +17,10 @@ namespace DAL.Concrete
             base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new NotificationCoreData());
+            builder.ApplyConfiguration(new DestinationCoreData());
+            builder.ApplyConfiguration(new GuideCoreData());
+            builder.ApplyConfiguration(new RotasionCoreData());
+            builder.ApplyConfiguration(new TestimontalCoreData());
         }
 
         public DbSet<About>? Abouts { get; set; }
