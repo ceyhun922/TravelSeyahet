@@ -21,6 +21,7 @@ namespace DAL.Concrete
             builder.ApplyConfiguration(new GuideCoreData());
             builder.ApplyConfiguration(new RotasionCoreData());
             builder.ApplyConfiguration(new TestimontalCoreData());
+            builder.ApplyConfiguration(new SliderCoreData());
         }
 
         public DbSet<About>? Abouts { get; set; }

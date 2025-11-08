@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tLAGX3lm57N5UhBsxU+6yG/RyBIxcOl2fcngdBZf64U=",
+  "Hash": "nyTPnBKimV9/cVEMqX1ckHNZNIoQxFmqcu22pQlCnrk=",
   "Source": "TravelWeb",
   "BasePath": "_content/TravelWeb",
   "Mode": "Default",
@@ -5660,6 +5660,25 @@
       "OriginalItemSpec": "wwwroot/writter/assets/images/file-icons/flag.png"
     },
     {
+      "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/writter/assets/images/file-icons/Internet-Explorer.png",
+      "SourceId": "TravelWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/",
+      "BasePath": "_content/TravelWeb",
+      "RelativePath": "writter/assets/images/file-icons/Internet-Explorer.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/writter/assets/images/file-icons/Internet-Explorer.png"
+    },
+    {
       "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/writter/assets/images/file-icons/icon-3.svg",
       "SourceId": "TravelWeb",
       "SourceType": "Discovered",
@@ -5696,25 +5715,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/writter/assets/images/file-icons/icon-google.svg"
-    },
-    {
-      "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/writter/assets/images/file-icons/Internet-Explorer.png",
-      "SourceId": "TravelWeb",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/",
-      "BasePath": "_content/TravelWeb",
-      "RelativePath": "writter/assets/images/file-icons/Internet-Explorer.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/writter/assets/images/file-icons/Internet-Explorer.png"
     },
     {
       "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/writter/assets/images/file-icons/opera.png",
@@ -12975,6 +12975,25 @@
       "OriginalItemSpec": "wwwroot/writter/dist/assets/images/file-icons/flag.png"
     },
     {
+      "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/writter/dist/assets/images/file-icons/Internet-Explorer.png",
+      "SourceId": "TravelWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/",
+      "BasePath": "_content/TravelWeb",
+      "RelativePath": "writter/dist/assets/images/file-icons/Internet-Explorer.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/writter/dist/assets/images/file-icons/Internet-Explorer.png"
+    },
+    {
       "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/writter/dist/assets/images/file-icons/icon-3.svg",
       "SourceId": "TravelWeb",
       "SourceType": "Discovered",
@@ -13011,25 +13030,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/writter/dist/assets/images/file-icons/icon-google.svg"
-    },
-    {
-      "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/writter/dist/assets/images/file-icons/Internet-Explorer.png",
-      "SourceId": "TravelWeb",
-      "SourceType": "Discovered",
-      "ContentRoot": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/",
-      "BasePath": "_content/TravelWeb",
-      "RelativePath": "writter/dist/assets/images/file-icons/Internet-Explorer.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/writter/dist/assets/images/file-icons/Internet-Explorer.png"
     },
     {
       "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/writter/dist/assets/images/file-icons/opera.png",

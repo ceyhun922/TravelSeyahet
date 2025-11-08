@@ -1,4 +1,6 @@
+using DAL.Abstract;
 using DAL.Concrete;
+using DAL.Entityframework;
 using Entities.Concrete;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -8,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Services.ValidationRule;
+using ServicesLayer.Abstract;
+using ServicesLayer.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +32,11 @@ builder.Services.AddFluentValidationClientsideAdapters();
 
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidation>();
 builder.Services.AddValidatorsFromAssemblyContaining<LoginValidation>();
+
+builder.Services.AddScoped<IDestinationDAL, EFDestinationRepository>();
+builder.Services.AddScoped<IDestinationService, DestinationManager>();
+builder.Services.AddScoped<IGuideDAL, EFGuideRepository>();
+builder.Services.AddScoped<IGuideService, GuideManager>();
 
 builder.Services.AddDbContext<Context>(opt =>
 {

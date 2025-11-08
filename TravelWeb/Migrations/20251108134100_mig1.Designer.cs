@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TravelWeb.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20251108040537_mig1")]
+    [Migration("20251108134100_mig1")]
     partial class mig1
     {
         /// <inheritdoc />
@@ -126,6 +126,16 @@ namespace TravelWeb.Migrations
                     b.HasKey("SliderId");
 
                     b.ToTable("Sliders");
+
+                    b.HasData(
+                        new
+                        {
+                            SliderId = 1,
+                            SliderBanner = "/web/assets/images/banner1.jpg",
+                            SliderStatus = true,
+                            SliderTitle1 = "Seyahetin Dadını Çıxart",
+                            SliderTitle2 = "Dünyaya Ferqli Bax"
+                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.Writer", b =>
@@ -369,7 +379,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g1.jpg",
                             DestinationPrice = 350.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1480),
+                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(10),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 1,
                             TestimonialID = 1,
@@ -386,7 +396,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g2.jpg",
                             DestinationPrice = 250.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1480),
+                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(10),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 2,
                             TestimonialID = 2,
@@ -403,7 +413,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g3.jpg",
                             DestinationPrice = 180.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1490),
+                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(10),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 3,
                             TestimonialID = 3,
@@ -420,7 +430,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g4.jpg",
                             DestinationPrice = 300.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1490),
+                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(20),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 4,
                             TestimonialID = 4,
@@ -437,7 +447,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g5.jpg",
                             DestinationPrice = 400.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1490),
+                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(20),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 5,
                             TestimonialID = 5,
@@ -454,7 +464,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g6.jpg",
                             DestinationPrice = 270.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1500),
+                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(20),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 6,
                             TestimonialID = 6,
@@ -471,7 +481,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g7.jpg",
                             DestinationPrice = 320.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1500),
+                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(30),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 7,
                             TestimonialID = 7,
@@ -488,7 +498,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g8.jpg",
                             DestinationPrice = 190.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1500),
+                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(30),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 8,
                             TestimonialID = 8,
@@ -505,7 +515,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g9.jpg",
                             DestinationPrice = 260.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1510),
+                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(40),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 9,
                             TestimonialID = 9,
@@ -522,7 +532,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g10.jpg",
                             DestinationPrice = 310.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 8, 5, 36, 811, DateTimeKind.Local).AddTicks(1510),
+                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(40),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 10,
                             TestimonialID = 10,
