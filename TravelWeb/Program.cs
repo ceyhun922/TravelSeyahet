@@ -29,9 +29,11 @@ builder.Services.AddControllersWithViews(opt =>
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddFluentValidationClientsideAdapters();
 
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidation>();
 builder.Services.AddValidatorsFromAssemblyContaining<LoginValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<ChangePassword>();
 
 builder.Services.AddScoped<IDestinationDAL, EFDestinationRepository>();
 builder.Services.AddScoped<IDestinationService, DestinationManager>();
@@ -71,8 +73,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
