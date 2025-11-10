@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TravelWeb.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20251108134100_mig1")]
-    partial class mig1
+    [Migration("20251110200232_mig2")]
+    partial class mig2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -135,6 +135,310 @@ namespace TravelWeb.Migrations
                             SliderStatus = true,
                             SliderTitle1 = "Seyahetin Dadını Çıxart",
                             SliderTitle2 = "Dünyaya Ferqli Bax"
+                        });
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Tour", b =>
+                {
+                    b.Property<int>("TourId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TourId"));
+
+                    b.Property<int>("DestinationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TourClock")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TourDetail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TourLocaion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TourStatus")
+                        .HasColumnType("bit");
+
+                    b.HasKey("TourId");
+
+                    b.HasIndex("DestinationId");
+
+                    b.ToTable("Tours");
+
+                    b.HasData(
+                        new
+                        {
+                            TourId = 1,
+                            DestinationId = 1,
+                            TourClock = new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Tarixi şəhər turu",
+                            TourLocaion = "İçərişəhər turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 2,
+                            DestinationId = 1,
+                            TourClock = new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Bulvar gəzintisi",
+                            TourLocaion = "Dənizkənarı Bulvar turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 3,
+                            DestinationId = 1,
+                            TourClock = new DateTime(2025, 11, 11, 20, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Panorama turları",
+                            TourLocaion = "Flame Towers turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 4,
+                            DestinationId = 2,
+                            TourClock = new DateTime(2025, 11, 11, 10, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Dağ-xizək turu",
+                            TourLocaion = "Tufandağ turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 5,
+                            DestinationId = 2,
+                            TourClock = new DateTime(2025, 11, 11, 15, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Göl ətrafında gəzinti",
+                            TourLocaion = "Nohur gölü turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 6,
+                            DestinationId = 2,
+                            TourClock = new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Tarixi tur",
+                            TourLocaion = "Qəbələ Qədim şəhəri turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 7,
+                            DestinationId = 3,
+                            TourClock = new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Mədəniyyət turu",
+                            TourLocaion = "Şəki xan sarayı turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 8,
+                            DestinationId = 3,
+                            TourClock = new DateTime(2025, 11, 11, 13, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Tarixi kilsə turları",
+                            TourLocaion = "Kiş kəndi turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 9,
+                            DestinationId = 3,
+                            TourClock = new DateTime(2025, 11, 11, 18, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Şirniyyat turu",
+                            TourLocaion = "Şəki bazarı turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 10,
+                            DestinationId = 4,
+                            TourClock = new DateTime(2025, 11, 11, 8, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Meşə turu",
+                            TourLocaion = "Qəçrəş turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 11,
+                            DestinationId = 4,
+                            TourClock = new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Dağ kəndi turu",
+                            TourLocaion = "Xınalıq turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 12,
+                            DestinationId = 4,
+                            TourClock = new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Çay ətrafında gəzinti",
+                            TourLocaion = "Qudyalçay turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 13,
+                            DestinationId = 5,
+                            TourClock = new DateTime(2025, 11, 11, 10, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Tarixi mədəni tur",
+                            TourLocaion = "Cıdır düz turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 14,
+                            DestinationId = 5,
+                            TourClock = new DateTime(2025, 11, 11, 15, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Mədəni abidələr turu",
+                            TourLocaion = "Yuxarı Gövhər Ağa məscidi turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 15,
+                            DestinationId = 5,
+                            TourClock = new DateTime(2025, 11, 11, 20, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Qala turu",
+                            TourLocaion = "Şuşa qalası turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 16,
+                            DestinationId = 6,
+                            TourClock = new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Ekoturizm",
+                            TourLocaion = "Hirkan Milli Parkı turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 17,
+                            DestinationId = 6,
+                            TourClock = new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Dəniz gəzintisi",
+                            TourLocaion = "Mayak sahili turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 18,
+                            DestinationId = 6,
+                            TourClock = new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Tarixi yerlər turu",
+                            TourLocaion = "Lənkəran qalası turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 19,
+                            DestinationId = 7,
+                            TourClock = new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Müalicəvi istirahət",
+                            TourLocaion = "Naftalan sanatoriyası turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 20,
+                            DestinationId = 7,
+                            TourClock = new DateTime(2025, 11, 11, 13, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Şəhər gəzintisi",
+                            TourLocaion = "Naftalan şəhər mərkəzi turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 21,
+                            DestinationId = 7,
+                            TourClock = new DateTime(2025, 11, 11, 18, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Açıq hava fəaliyyəti",
+                            TourLocaion = "Naftalan parkı turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 22,
+                            DestinationId = 8,
+                            TourClock = new DateTime(2025, 11, 11, 8, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Əl sənətkarlıq turu",
+                            TourLocaion = "Lahıc kəndi turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 23,
+                            DestinationId = 8,
+                            TourClock = new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Təbiət gəzintisi",
+                            TourLocaion = "İsmayıllı meşələri turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 24,
+                            DestinationId = 8,
+                            TourClock = new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Mədəni tur",
+                            TourLocaion = "Basqal kəndi turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 25,
+                            DestinationId = 9,
+                            TourClock = new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Xizək turu",
+                            TourLocaion = "Şahdağ turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 26,
+                            DestinationId = 9,
+                            TourClock = new DateTime(2025, 11, 11, 15, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Ailəvi istirahət",
+                            TourLocaion = "Qusar şəhər parkı turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 27,
+                            DestinationId = 9,
+                            TourClock = new DateTime(2025, 11, 11, 20, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Dağ yürüşü",
+                            TourLocaion = "Ləzə kəndi turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 28,
+                            DestinationId = 10,
+                            TourClock = new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Tarixi tur",
+                            TourLocaion = "Zaqatala qalası turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 29,
+                            DestinationId = 10,
+                            TourClock = new DateTime(2025, 11, 11, 13, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Mədəni kənd turu",
+                            TourLocaion = "Yuxarı Çardaqlar turu",
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 30,
+                            DestinationId = 10,
+                            TourClock = new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local),
+                            TourDetail = "Təbiət və mədəniyyət turu",
+                            TourLocaion = "Qalal kəndi turu",
+                            TourStatus = true
                         });
                 });
 
@@ -379,28 +683,11 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g1.jpg",
                             DestinationPrice = 350.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(10),
+                            DestinationTime = new DateTime(2025, 11, 11, 0, 2, 31, 684, DateTimeKind.Local).AddTicks(260),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 1,
                             TestimonialID = 1,
                             UserId = 1
-                        },
-                        new
-                        {
-                            DestinationId = 2,
-                            CapaCity = 20,
-                            CommentID = 0,
-                            DestinationCity = "Qəbələ",
-                            DestinationCountLimit = 25,
-                            DestinationDayNight = "2 gün 1 gecə",
-                            DestinationImage = "/web/assets/images/g2.jpg",
-                            DestinationPrice = 250.0,
-                            DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(10),
-                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
-                            GuideID = 2,
-                            TestimonialID = 2,
-                            UserId = 2
                         },
                         new
                         {
@@ -413,7 +700,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g3.jpg",
                             DestinationPrice = 180.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(10),
+                            DestinationTime = new DateTime(2025, 11, 11, 0, 2, 31, 684, DateTimeKind.Local).AddTicks(270),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 3,
                             TestimonialID = 3,
@@ -430,11 +717,28 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g4.jpg",
                             DestinationPrice = 300.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(20),
+                            DestinationTime = new DateTime(2025, 11, 11, 0, 2, 31, 684, DateTimeKind.Local).AddTicks(270),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 4,
                             TestimonialID = 4,
                             UserId = 1
+                        },
+                        new
+                        {
+                            DestinationId = 2,
+                            CapaCity = 20,
+                            CommentID = 0,
+                            DestinationCity = "Qəbələ",
+                            DestinationCountLimit = 25,
+                            DestinationDayNight = "2 gün 1 gecə",
+                            DestinationImage = "/web/assets/images/g2.jpg",
+                            DestinationPrice = 250.0,
+                            DestinationStatus = true,
+                            DestinationTime = new DateTime(2025, 11, 11, 0, 2, 31, 684, DateTimeKind.Local).AddTicks(280),
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 2,
+                            TestimonialID = 2,
+                            UserId = 2
                         },
                         new
                         {
@@ -447,7 +751,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g5.jpg",
                             DestinationPrice = 400.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(20),
+                            DestinationTime = new DateTime(2025, 11, 11, 0, 2, 31, 684, DateTimeKind.Local).AddTicks(280),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 5,
                             TestimonialID = 5,
@@ -464,7 +768,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g6.jpg",
                             DestinationPrice = 270.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(20),
+                            DestinationTime = new DateTime(2025, 11, 11, 0, 2, 31, 684, DateTimeKind.Local).AddTicks(280),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 6,
                             TestimonialID = 6,
@@ -481,7 +785,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g7.jpg",
                             DestinationPrice = 320.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(30),
+                            DestinationTime = new DateTime(2025, 11, 11, 0, 2, 31, 684, DateTimeKind.Local).AddTicks(290),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 7,
                             TestimonialID = 7,
@@ -498,7 +802,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g8.jpg",
                             DestinationPrice = 190.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(30),
+                            DestinationTime = new DateTime(2025, 11, 11, 0, 2, 31, 684, DateTimeKind.Local).AddTicks(290),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 8,
                             TestimonialID = 8,
@@ -515,7 +819,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g9.jpg",
                             DestinationPrice = 260.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(40),
+                            DestinationTime = new DateTime(2025, 11, 11, 0, 2, 31, 684, DateTimeKind.Local).AddTicks(290),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 9,
                             TestimonialID = 9,
@@ -532,7 +836,7 @@ namespace TravelWeb.Migrations
                             DestinationImage = "/web/assets/images/g10.jpg",
                             DestinationPrice = 310.0,
                             DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 8, 17, 41, 0, 247, DateTimeKind.Local).AddTicks(40),
+                            DestinationTime = new DateTime(2025, 11, 11, 0, 2, 31, 684, DateTimeKind.Local).AddTicks(300),
                             Guid = new Guid("00000000-0000-0000-0000-000000000000"),
                             GuideID = 10,
                             TestimonialID = 10,
@@ -1097,6 +1401,17 @@ namespace TravelWeb.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Entities.Concrete.Tour", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Destination", "Destination")
+                        .WithMany("Tours")
+                        .HasForeignKey("DestinationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Destination");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Comment", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Destination", "Destination")
@@ -1219,6 +1534,8 @@ namespace TravelWeb.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Rotasions");
+
+                    b.Navigation("Tours");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Guide", b =>

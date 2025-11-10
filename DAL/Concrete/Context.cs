@@ -22,9 +22,17 @@ namespace DAL.Concrete
             builder.ApplyConfiguration(new RotasionCoreData());
             builder.ApplyConfiguration(new TestimontalCoreData());
             builder.ApplyConfiguration(new SliderCoreData());
+            builder.ApplyConfiguration(new TourCoreData());
+
+            builder.Entity<Destination>()
+                .HasMany(d => d.Rotasions)
+                .WithOne(r => r.Destination)
+                .HasForeignKey(r => r.DestinationId);
+
         }
 
         public DbSet<About>? Abouts { get; set; }
+        public DbSet<Tour>? Tours { get; set; }
         public DbSet<About2>? Abouts2 { get; set; }
         public DbSet<Comment>? Comments { get; set; }
         public DbSet<Destination>? Destinations { get; set; }
@@ -36,8 +44,8 @@ namespace DAL.Concrete
         public DbSet<SubAbout>? SubAbouts { get; set; }
         public DbSet<Testimonial>? Testimonials { get; set; }
         public DbSet<Slider>? Sliders { get; set; }
-        public DbSet<Notification>?  Notifications { get; set; }
+        public DbSet<Notification>? Notifications { get; set; }
 
     }
-    
+
 }

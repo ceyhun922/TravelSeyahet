@@ -1,0 +1,71 @@
+@model List<Destination>
+@{
+    Layout = "_WritterLayout";
+}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Rezervasyon Formu</h4>
+
+        <div class="form-group">
+            <label>Şəhər</label>
+            <select id="DestinationId" class="form-control">
+                <option value="">Seçin</option>
+                @foreach (var dest in Model)
+                {
+                    <option value="@dest.DestinationId">@dest.DestinationCity</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Rota</label>
+            <select id="RotasionId" class="form-control">
+                <option value="">Əvvəlcə şəhər seçin</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // 🔥 Modeli camelCase ile serialize ediyoruz
+        const allDestinations = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+            Model,
+            new System.Text.Json.JsonSerializerOptions {
+                PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase,
+                DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never
+            }
+        ));
+
+        console.log("Tüm destinasyonlar:", allDestinations); // test için
+
+        $('#DestinationId').change(function () {
+            const destId = parseInt($(this).val());
+            const rotationSelect = $('#RotasionId');
+            rotationSelect.empty();
+
+            if (!destId) {
+                rotationSelect.append('<option value="">Əvvəlcə şəhər seçin</option>');
+                return;
+            }
+
+            // 🔍 JSON camelCase, yani rotasions
+            const selected = allDestinations.find(d => d.destinationId === destId);
+            console.log("Seçilen:", selected);
+
+            if (selected && selected.rotasions?.length > 0) {
+                rotationSelect.append('<option value="">Seçin</option>');
+                selected.rotasions.forEach(r => {
+                    rotationSelect.append(
+                        `<option value="${r.rotasionID}">${r.rotasionName}</option>`
+                    );
+                });
+            } else {
+                rotationSelect.append('<option value="">Bu şəhərdə rota yoxdur</option>');
+            }
+        });
+    </script>
+}
+‚‚

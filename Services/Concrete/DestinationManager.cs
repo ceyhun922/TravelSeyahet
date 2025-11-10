@@ -16,14 +16,9 @@ namespace ServicesLayer.Concrete
             _destinationDAL = destinationDAL;
         }
 
-        public List<Destination> DestinationWithRotasionService(int userId)
+        public List<Destination> AllDestinationWithRotationService()
         {
-            return _destinationDAL.DestinationWithRotasionDAL(userId);
-        }
-
-        public List<Destination> DestinationWithRotasionServicee(int id)
-        {
-            return _destinationDAL.DestinationWithRotasionDAL(id);
+            return _destinationDAL.AllDestinationWithRotationDAL();
         }
 
         public Destination GetFindIdService(int id)
