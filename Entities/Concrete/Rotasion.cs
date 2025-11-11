@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using Entities.Concrete;
 
 namespace EntityLayer.Concrete
 {
@@ -10,9 +11,9 @@ namespace EntityLayer.Concrete
         public string? RotasionName { get; set; }
         public string? RotasionDescription { get; set; }
         public bool RotasionStatus { get; set; }
-        public int DestinationId { get; set; }
+        public int TourId { get; set; }
         
         [JsonIgnore]   
-        public Destination? Destination { get; set; }
+        public Tour? Tour { get; set; }
     }
 }

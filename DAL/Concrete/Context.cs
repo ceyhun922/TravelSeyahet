@@ -15,19 +15,13 @@ namespace DAL.Concrete
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            builder.ApplyConfiguration(new NotificationCoreData());
-            builder.ApplyConfiguration(new DestinationCoreData());
-            builder.ApplyConfiguration(new GuideCoreData());
-            builder.ApplyConfiguration(new RotasionCoreData());
-            builder.ApplyConfiguration(new TestimontalCoreData());
-            builder.ApplyConfiguration(new SliderCoreData());
-            builder.ApplyConfiguration(new TourCoreData());
-
-            builder.Entity<Destination>()
-                .HasMany(d => d.Rotasions)
-                .WithOne(r => r.Destination)
-                .HasForeignKey(r => r.DestinationId);
+            builder.ApplyConfiguration(new GuideCoreData());       
+            builder.ApplyConfiguration(new DestinationCoreData()); 
+            builder.ApplyConfiguration(new TourCoreData());         
+            builder.ApplyConfiguration(new TestimontalCoreData());        
+            builder.ApplyConfiguration(new RotasionCoreData());     
+            builder.ApplyConfiguration(new NotificationCoreData()); 
+            builder.ApplyConfiguration(new SliderCoreData());      
 
         }
 

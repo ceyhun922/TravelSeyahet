@@ -1,3 +1,5 @@
+using Entities.Concrete;
+
 namespace EntityLayer.Concrete
 {
     public class Guide
@@ -9,6 +11,6 @@ namespace EntityLayer.Concrete
         public string? GuideFacebookUrl { get; set; }
         public string? GuideXUrl { get; set; }
         public bool GuideStatus { get; set; }
-        public List<Destination>? Destinations { get; set; }
+        public List<Tour>? Tours { get; set; }
      }
 }

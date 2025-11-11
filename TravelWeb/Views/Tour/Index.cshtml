@@ -1,5 +1,5 @@
 @using EntityLayer.Concrete
-  @model List<Destination>
+  @model List<Tour>
   <!-- about breadcrumb -->
   <section class="w3l-about-breadcrumb text-left">
     <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
@@ -23,13 +23,13 @@
           {
               <div class="col-lg-4 col-md-4 col-6">
                   <div class="column">
-                      <a><img src="@item.DestinationImage" alt="@item.DestinationCity" class="img-fluid"></a>
+                      <a><img src="@item.TourImage" alt="@item.TourLocaion" class="img-fluid"></a>
                       <div class="info">
-                          <h4><a href="blog-single.html">@item.DestinationCity</a></h4>
-                          <p>@item.DestinationDayNight </p>
+                           <h4><a href="blog-single.html">@item.TourLocaion</a></h4>
+                           <p>@item.DTourDayNight </p>
                           <div class="dst-btm">
                             <h6 class="">Start From </h6>
-                            <span>@item.DestinationPrice.ToString(new System.Globalization.CultureInfo("az-AZ"))</span>
+                            <span>@item.TourPrice.ToString(new System.Globalization.CultureInfo("az-AZ"))</span>
                           </div>
                       </div>
                   </div>

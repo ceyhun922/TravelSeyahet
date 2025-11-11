@@ -26,12 +26,13 @@ namespace TravelWeb.Controllers
 
         public IActionResult NewRezervations()
         {
-            var destinations = _destinationService.AllDestinationWithRotationService();
-            foreach (var d in destinations)
-            {
-                Console.WriteLine($"{d.DestinationCity} → {d.Rotasions?.Count ?? 0} rota");
-            }
-            return View(destinations);
+            /*  var destinations = _destinationService.AllDestinationWithRotationService();
+             foreach (var d in destinations)
+             {
+                 Console.WriteLine($"{d.DestinationCity} → {d.Rotasions?.Count ?? 0} rota");
+             }
+             return View(destinations); */
+            return View();
         }
 
 

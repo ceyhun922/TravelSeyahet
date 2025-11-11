@@ -28,7 +28,7 @@ namespace EntityLayer.Concrete
         public Writer? Writer { get; set; }
         public int DestinationId { get; set; }
 
-        public Destination? Destination { get; set; }
+        public Tour? Tour { get; set; }
 
 
     }

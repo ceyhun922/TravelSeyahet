@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TravelWeb.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20251109190645_mig1")]
-    partial class mig1
+    [Migration("20251110225452_mig_seed_fix")]
+    partial class mig_seed_fix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -135,6 +135,559 @@ namespace TravelWeb.Migrations
                             SliderStatus = true,
                             SliderTitle1 = "Seyahetin Dadını Çıxart",
                             SliderTitle2 = "Dünyaya Ferqli Bax"
+                        });
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Tour", b =>
+                {
+                    b.Property<int>("TourId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TourId"));
+
+                    b.Property<int>("CommentID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DTourDayNight")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DestinationId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("Guid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("GuideID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TestimonialID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TourCapaCity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TourClock")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TourCountLimit")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TourDetail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TourImage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TourLocaion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("TourPrice")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("TourStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WriterId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TourId");
+
+                    b.HasIndex("DestinationId");
+
+                    b.HasIndex("GuideID");
+
+                    b.HasIndex("TestimonialID");
+
+                    b.HasIndex("WriterId");
+
+                    b.ToTable("Tours");
+
+                    b.HasData(
+                        new
+                        {
+                            TourId = 1,
+                            CommentID = 0,
+                            DestinationId = 1,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 1,
+                            TestimonialID = 1,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Tarixi şəhər turu",
+                            TourLocaion = "İçərişəhər turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 2,
+                            CommentID = 0,
+                            DestinationId = 1,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 2,
+                            TestimonialID = 2,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Bulvar gəzintisi",
+                            TourLocaion = "Dənizkənarı Bulvar turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 3,
+                            CommentID = 0,
+                            DestinationId = 1,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 3,
+                            TestimonialID = 3,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 20, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Panorama turları",
+                            TourLocaion = "Flame Towers turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 4,
+                            CommentID = 0,
+                            DestinationId = 2,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 3,
+                            TestimonialID = 4,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 10, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Dağ-xizək turu",
+                            TourLocaion = "Tufandağ turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 5,
+                            CommentID = 0,
+                            DestinationId = 2,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 4,
+                            TestimonialID = 5,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 15, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Göl ətrafında gəzinti",
+                            TourLocaion = "Nohur gölü turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 6,
+                            CommentID = 0,
+                            DestinationId = 2,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 5,
+                            TestimonialID = 6,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Tarixi tur",
+                            TourLocaion = "Qəbələ Qədim şəhəri turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 7,
+                            CommentID = 0,
+                            DestinationId = 3,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 6,
+                            TestimonialID = 7,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Mədəniyyət turu",
+                            TourLocaion = "Şəki xan sarayı turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 8,
+                            CommentID = 0,
+                            DestinationId = 3,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 7,
+                            TestimonialID = 8,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 13, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Tarixi kilsə turları",
+                            TourLocaion = "Kiş kəndi turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 9,
+                            CommentID = 0,
+                            DestinationId = 3,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 7,
+                            TestimonialID = 9,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 18, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Şirniyyat turu",
+                            TourLocaion = "Şəki bazarı turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 10,
+                            CommentID = 0,
+                            DestinationId = 4,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 5,
+                            TestimonialID = 10,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 8, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Meşə turu",
+                            TourLocaion = "Qəçrəş turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 11,
+                            CommentID = 0,
+                            DestinationId = 4,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 8,
+                            TestimonialID = 1,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Dağ kəndi turu",
+                            TourLocaion = "Xınalıq turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 12,
+                            CommentID = 0,
+                            DestinationId = 4,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 9,
+                            TestimonialID = 2,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Çay ətrafında gəzinti",
+                            TourLocaion = "Qudyalçay turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 13,
+                            CommentID = 0,
+                            DestinationId = 5,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 7,
+                            TestimonialID = 3,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 10, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Tarixi mədəni tur",
+                            TourLocaion = "Cıdır düz turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 14,
+                            CommentID = 0,
+                            DestinationId = 5,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 9,
+                            TestimonialID = 4,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 15, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Mədəni abidələr turu",
+                            TourLocaion = "Yuxarı Gövhər Ağa məscidi turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 15,
+                            CommentID = 0,
+                            DestinationId = 5,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 10,
+                            TestimonialID = 5,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 20, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Qala turu",
+                            TourLocaion = "Şuşa qalası turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 16,
+                            CommentID = 0,
+                            DestinationId = 6,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 9,
+                            TestimonialID = 6,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Ekoturizm",
+                            TourLocaion = "Hirkan Milli Parkı turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 17,
+                            CommentID = 0,
+                            DestinationId = 6,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 10,
+                            TestimonialID = 7,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Dəniz gəzintisi",
+                            TourLocaion = "Mayak sahili turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 18,
+                            CommentID = 0,
+                            DestinationId = 6,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 6,
+                            TestimonialID = 8,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Tarixi yerlər turu",
+                            TourLocaion = "Lənkəran qalası turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 19,
+                            CommentID = 0,
+                            DestinationId = 7,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 10,
+                            TestimonialID = 9,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Müalicəvi istirahət",
+                            TourLocaion = "Naftalan sanatoriyası turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 20,
+                            CommentID = 0,
+                            DestinationId = 7,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 5,
+                            TestimonialID = 10,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 13, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Şəhər gəzintisi",
+                            TourLocaion = "Naftalan şəhər mərkəzi turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 21,
+                            CommentID = 0,
+                            DestinationId = 7,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 5,
+                            TestimonialID = 1,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 18, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Açıq hava fəaliyyəti",
+                            TourLocaion = "Naftalan parkı turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 22,
+                            CommentID = 0,
+                            DestinationId = 8,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 3,
+                            TestimonialID = 2,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 8, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Əl sənətkarlıq turu",
+                            TourLocaion = "Lahıc kəndi turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 23,
+                            CommentID = 0,
+                            DestinationId = 8,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 5,
+                            TestimonialID = 3,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Təbiət gəzintisi",
+                            TourLocaion = "İsmayıllı meşələri turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 24,
+                            CommentID = 0,
+                            DestinationId = 8,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 3,
+                            TestimonialID = 4,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Mədəni tur",
+                            TourLocaion = "Basqal kəndi turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 25,
+                            CommentID = 0,
+                            DestinationId = 9,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 9,
+                            TestimonialID = 5,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Xizək turu",
+                            TourLocaion = "Şahdağ turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 26,
+                            CommentID = 0,
+                            DestinationId = 9,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 4,
+                            TestimonialID = 6,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 15, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Ailəvi istirahət",
+                            TourLocaion = "Qusar şəhər parkı turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 27,
+                            CommentID = 0,
+                            DestinationId = 9,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 9,
+                            TestimonialID = 7,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 20, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Dağ yürüşü",
+                            TourLocaion = "Ləzə kəndi turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 28,
+                            CommentID = 0,
+                            DestinationId = 10,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 8,
+                            TestimonialID = 8,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Tarixi tur",
+                            TourLocaion = "Zaqatala qalası turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 29,
+                            CommentID = 0,
+                            DestinationId = 10,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 2,
+                            TestimonialID = 9,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 13, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Mədəni kənd turu",
+                            TourLocaion = "Yuxarı Çardaqlar turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
+                        },
+                        new
+                        {
+                            TourId = 30,
+                            CommentID = 0,
+                            DestinationId = 10,
+                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
+                            GuideID = 1,
+                            TestimonialID = 10,
+                            TourCapaCity = 0,
+                            TourClock = new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local),
+                            TourCountLimit = 0,
+                            TourDetail = "Təbiət və mədəniyyət turu",
+                            TourLocaion = "Qalal kəndi turu",
+                            TourPrice = 0.0,
+                            TourStatus = true
                         });
                 });
 
@@ -289,7 +842,7 @@ namespace TravelWeb.Migrations
                     b.Property<string>("CommentUserName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DestinationId")
+                    b.Property<int?>("TourId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -300,7 +853,7 @@ namespace TravelWeb.Migrations
 
                     b.HasKey("CommentID");
 
-                    b.HasIndex("DestinationId");
+                    b.HasIndex("TourId");
 
                     b.HasIndex("WriterId");
 
@@ -315,55 +868,13 @@ namespace TravelWeb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DestinationId"));
 
-                    b.Property<int>("CapaCity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CommentID")
-                        .HasColumnType("int");
-
                     b.Property<string>("DestinationCity")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DestinationCountLimit")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DestinationDayNight")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DestinationImage")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("DestinationPrice")
-                        .HasColumnType("float");
-
-                    b.Property<bool>("DestinationStatus")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("DestinationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("Guid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("GuideID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TestimonialID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("WriterId")
+                    b.Property<int>("TourId")
                         .HasColumnType("int");
 
                     b.HasKey("DestinationId");
-
-                    b.HasIndex("GuideID");
-
-                    b.HasIndex("TestimonialID");
-
-                    b.HasIndex("WriterId");
 
                     b.ToTable("Destinations");
 
@@ -371,172 +882,62 @@ namespace TravelWeb.Migrations
                         new
                         {
                             DestinationId = 1,
-                            CapaCity = 25,
-                            CommentID = 0,
                             DestinationCity = "Bakı",
-                            DestinationCountLimit = 30,
-                            DestinationDayNight = "3 gün 2 gecə",
-                            DestinationImage = "/web/assets/images/g1.jpg",
-                            DestinationPrice = 350.0,
-                            DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9060),
-                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
-                            GuideID = 1,
-                            TestimonialID = 1,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            DestinationId = 2,
-                            CapaCity = 20,
-                            CommentID = 0,
-                            DestinationCity = "Qəbələ",
-                            DestinationCountLimit = 25,
-                            DestinationDayNight = "2 gün 1 gecə",
-                            DestinationImage = "/web/assets/images/g2.jpg",
-                            DestinationPrice = 250.0,
-                            DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9060),
-                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
-                            GuideID = 2,
-                            TestimonialID = 2,
-                            UserId = 2
+                            TourId = 0
                         },
                         new
                         {
                             DestinationId = 3,
-                            CapaCity = 15,
-                            CommentID = 0,
                             DestinationCity = "Şəki",
-                            DestinationCountLimit = 20,
-                            DestinationDayNight = "1 günlük tur",
-                            DestinationImage = "/web/assets/images/g3.jpg",
-                            DestinationPrice = 180.0,
-                            DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9070),
-                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
-                            GuideID = 3,
-                            TestimonialID = 3,
-                            UserId = 3
+                            TourId = 0
                         },
                         new
                         {
                             DestinationId = 4,
-                            CapaCity = 20,
-                            CommentID = 0,
                             DestinationCity = "Quba",
-                            DestinationCountLimit = 25,
-                            DestinationDayNight = "3 gün 2 gecə",
-                            DestinationImage = "/web/assets/images/g4.jpg",
-                            DestinationPrice = 300.0,
-                            DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9070),
-                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
-                            GuideID = 4,
-                            TestimonialID = 4,
-                            UserId = 1
+                            TourId = 0
+                        },
+                        new
+                        {
+                            DestinationId = 2,
+                            DestinationCity = "Qəbələ",
+                            TourId = 0
                         },
                         new
                         {
                             DestinationId = 5,
-                            CapaCity = 30,
-                            CommentID = 0,
                             DestinationCity = "Şuşa",
-                            DestinationCountLimit = 30,
-                            DestinationDayNight = "4 gün 3 gecə",
-                            DestinationImage = "/web/assets/images/g5.jpg",
-                            DestinationPrice = 400.0,
-                            DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9070),
-                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
-                            GuideID = 5,
-                            TestimonialID = 5,
-                            UserId = 2
+                            TourId = 0
                         },
                         new
                         {
                             DestinationId = 6,
-                            CapaCity = 20,
-                            CommentID = 0,
                             DestinationCity = "Lənkəran",
-                            DestinationCountLimit = 25,
-                            DestinationDayNight = "2 gün 1 gecə",
-                            DestinationImage = "/web/assets/images/g6.jpg",
-                            DestinationPrice = 270.0,
-                            DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9080),
-                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
-                            GuideID = 6,
-                            TestimonialID = 6,
-                            UserId = 3
+                            TourId = 0
                         },
                         new
                         {
                             DestinationId = 7,
-                            CapaCity = 25,
-                            CommentID = 0,
                             DestinationCity = "Naftalan",
-                            DestinationCountLimit = 30,
-                            DestinationDayNight = "3 gün 2 gecə",
-                            DestinationImage = "/web/assets/images/g7.jpg",
-                            DestinationPrice = 320.0,
-                            DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9080),
-                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
-                            GuideID = 7,
-                            TestimonialID = 7,
-                            UserId = 1
+                            TourId = 0
                         },
                         new
                         {
                             DestinationId = 8,
-                            CapaCity = 15,
-                            CommentID = 0,
                             DestinationCity = "İsmayıllı",
-                            DestinationCountLimit = 20,
-                            DestinationDayNight = "1 günlük tur",
-                            DestinationImage = "/web/assets/images/g8.jpg",
-                            DestinationPrice = 190.0,
-                            DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9080),
-                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
-                            GuideID = 8,
-                            TestimonialID = 8,
-                            UserId = 2
+                            TourId = 0
                         },
                         new
                         {
                             DestinationId = 9,
-                            CapaCity = 20,
-                            CommentID = 0,
                             DestinationCity = "Qusar",
-                            DestinationCountLimit = 25,
-                            DestinationDayNight = "2 gün 1 gecə",
-                            DestinationImage = "/web/assets/images/g9.jpg",
-                            DestinationPrice = 260.0,
-                            DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9090),
-                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
-                            GuideID = 9,
-                            TestimonialID = 9,
-                            UserId = 3
+                            TourId = 0
                         },
                         new
                         {
                             DestinationId = 10,
-                            CapaCity = 25,
-                            CommentID = 0,
                             DestinationCity = "Zaqatala",
-                            DestinationCountLimit = 30,
-                            DestinationDayNight = "3 gün 2 gecə",
-                            DestinationImage = "/web/assets/images/g10.jpg",
-                            DestinationPrice = 310.0,
-                            DestinationStatus = true,
-                            DestinationTime = new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9090),
-                            Guid = new Guid("00000000-0000-0000-0000-000000000000"),
-                            GuideID = 10,
-                            TestimonialID = 10,
-                            UserId = 1
+                            TourId = 0
                         });
                 });
 
@@ -735,6 +1136,9 @@ namespace TravelWeb.Migrations
                     b.Property<double>("TotalPrice")
                         .HasColumnType("float");
 
+                    b.Property<int?>("TourId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
@@ -746,7 +1150,7 @@ namespace TravelWeb.Migrations
 
                     b.HasKey("RezervationID");
 
-                    b.HasIndex("DestinationId");
+                    b.HasIndex("TourId");
 
                     b.HasIndex("WriterId");
 
@@ -761,9 +1165,6 @@ namespace TravelWeb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RotasionID"));
 
-                    b.Property<int>("DestinationId")
-                        .HasColumnType("int");
-
                     b.Property<string>("RotasionDescription")
                         .HasColumnType("nvarchar(max)");
 
@@ -773,9 +1174,12 @@ namespace TravelWeb.Migrations
                     b.Property<bool>("RotasionStatus")
                         .HasColumnType("bit");
 
+                    b.Property<int>("TourId")
+                        .HasColumnType("int");
+
                     b.HasKey("RotasionID");
 
-                    b.HasIndex("DestinationId");
+                    b.HasIndex("TourId");
 
                     b.ToTable("Rotasions");
 
@@ -783,82 +1187,74 @@ namespace TravelWeb.Migrations
                         new
                         {
                             RotasionID = 1,
-                            DestinationId = 1,
                             RotasionDescription = "Tarixi abidələrə səyahət",
                             RotasionName = "Qobustan Qayaüstü",
-                            RotasionStatus = true
+                            RotasionStatus = true,
+                            TourId = 1
                         },
                         new
                         {
                             RotasionID = 2,
-                            DestinationId = 2,
                             RotasionDescription = "Təbiət gəzintisi və foto turları",
                             RotasionName = "Nohur Gölü",
-                            RotasionStatus = true
+                            RotasionStatus = true,
+                            TourId = 5
                         },
                         new
                         {
                             RotasionID = 3,
-                            DestinationId = 3,
                             RotasionDescription = "Mədəni ekskursiya",
                             RotasionName = "Xan Sarayı",
-                            RotasionStatus = true
+                            RotasionStatus = true,
+                            TourId = 7
                         },
                         new
                         {
                             RotasionID = 4,
-                            DestinationId = 4,
                             RotasionDescription = "Dağ yürüşü və piknik",
                             RotasionName = "Qəçrəş Meşəsi",
-                            RotasionStatus = true
+                            RotasionStatus = true,
+                            TourId = 10
                         },
                         new
                         {
                             RotasionID = 5,
-                            DestinationId = 5,
-                            RotasionDescription = "Qarabağın ürəyi olan şəhər",
-                            RotasionName = "Qalasına Ziyarət",
-                            RotasionStatus = true
+                            RotasionDescription = "Qarabağın ürəyi",
+                            RotasionName = "Şuşa qalası",
+                            RotasionStatus = true,
+                            TourId = 15
                         },
                         new
                         {
                             RotasionID = 6,
-                            DestinationId = 5,
-                            RotasionDescription = "Çay bağları və təbiət",
-                            RotasionName = "Xalça Müzeyi",
-                            RotasionStatus = true
+                            RotasionDescription = "Spa və sağlamlıq turu",
+                            RotasionName = "Naftalan Müalicə Mərkəzi",
+                            RotasionStatus = true,
+                            TourId = 19
                         },
                         new
                         {
                             RotasionID = 7,
-                            DestinationId = 7,
-                            RotasionDescription = "Spa və sağlamlıq turu",
-                            RotasionName = "Naftalan Müalicə Mərkəzi",
-                            RotasionStatus = true
+                            RotasionDescription = "Ekoturizm və hiking",
+                            RotasionName = "İsmayıllı Meşələri",
+                            RotasionStatus = true,
+                            TourId = 23
                         },
                         new
                         {
                             RotasionID = 8,
-                            DestinationId = 8,
-                            RotasionDescription = "Ekoturizm və hiking",
-                            RotasionName = "İsmayıllı Meşələri",
-                            RotasionStatus = true
+                            RotasionDescription = "Qar idmanı və xizək",
+                            RotasionName = "Şahdağ Mərkəzi",
+                            RotasionStatus = true,
+                            TourId = 25
                         },
                         new
                         {
                             RotasionID = 9,
-                            DestinationId = 9,
-                            RotasionDescription = "Qar idmanı və xizək turu",
-                            RotasionName = "Qış Mərkəzi",
-                            RotasionStatus = true
-                        },
-                        new
-                        {
-                            RotasionID = 10,
-                            DestinationId = 10,
-                            RotasionDescription = "Təbiət və heyvanat dünyası ilə tanışlıq",
-                            RotasionName = "Qoruğ",
-                            RotasionStatus = true
+                            RotasionDescription = "Tarixi səfər",
+                            RotasionName = "Zaqatala Qalası",
+                            RotasionStatus = true,
+                            TourId = 28
                         });
                 });
 
@@ -1097,31 +1493,22 @@ namespace TravelWeb.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Comment", b =>
+            modelBuilder.Entity("Entities.Concrete.Tour", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Destination", "Destination")
-                        .WithMany("Comments")
-                        .HasForeignKey("DestinationId");
+                        .WithMany("Tours")
+                        .HasForeignKey("DestinationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Entities.Concrete.Writer", "Writer")
-                        .WithMany()
-                        .HasForeignKey("WriterId");
-
-                    b.Navigation("Destination");
-
-                    b.Navigation("Writer");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.Destination", b =>
-                {
                     b.HasOne("EntityLayer.Concrete.Guide", null)
-                        .WithMany("Destinations")
+                        .WithMany("Tours")
                         .HasForeignKey("GuideID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("EntityLayer.Concrete.Testimonial", "Testimonial")
-                        .WithMany("Destinations")
+                        .WithMany("Tours")
                         .HasForeignKey("TestimonialID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1130,37 +1517,52 @@ namespace TravelWeb.Migrations
                         .WithMany()
                         .HasForeignKey("WriterId");
 
+                    b.Navigation("Destination");
+
                     b.Navigation("Testimonial");
+
+                    b.Navigation("Writer");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Comment", b =>
+                {
+                    b.HasOne("Entities.Concrete.Tour", "Tour")
+                        .WithMany("Comments")
+                        .HasForeignKey("TourId");
+
+                    b.HasOne("Entities.Concrete.Writer", "Writer")
+                        .WithMany()
+                        .HasForeignKey("WriterId");
+
+                    b.Navigation("Tour");
 
                     b.Navigation("Writer");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Rezervation", b =>
                 {
-                    b.HasOne("EntityLayer.Concrete.Destination", "Destination")
+                    b.HasOne("Entities.Concrete.Tour", "Tour")
                         .WithMany()
-                        .HasForeignKey("DestinationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TourId");
 
                     b.HasOne("Entities.Concrete.Writer", "Writer")
                         .WithMany()
                         .HasForeignKey("WriterId");
 
-                    b.Navigation("Destination");
+                    b.Navigation("Tour");
 
                     b.Navigation("Writer");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Rotasion", b =>
                 {
-                    b.HasOne("EntityLayer.Concrete.Destination", "Destination")
+                    b.HasOne("Entities.Concrete.Tour", "Tour")
                         .WithMany("Rotasions")
-                        .HasForeignKey("DestinationId")
+                        .HasForeignKey("TourId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Destination");
+                    b.Navigation("Tour");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -1214,21 +1616,26 @@ namespace TravelWeb.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Destination", b =>
+            modelBuilder.Entity("Entities.Concrete.Tour", b =>
                 {
                     b.Navigation("Comments");
 
                     b.Navigation("Rotasions");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Destination", b =>
+                {
+                    b.Navigation("Tours");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Guide", b =>
                 {
-                    b.Navigation("Destinations");
+                    b.Navigation("Tours");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Testimonial", b =>
                 {
-                    b.Navigation("Destinations");
+                    b.Navigation("Tours");
                 });
 #pragma warning restore 612, 618
         }

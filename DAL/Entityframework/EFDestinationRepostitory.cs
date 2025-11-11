@@ -13,9 +13,16 @@ public class EFDestinationRepository : GenericRepository<Destination>, IDestinat
         _context = context;
     }
 
-    public List<Destination> AllDestinationWithRotationDAL()
+   /*  public List<Destination> AllDestinationWithTourDAL()
     {
-        return _context.Destinations.Include(d => d.Rotasions).ToList();
+        return _context.Destinations.Include(x => x.Tours).ToList();
+    } */
 
-    }
+
+
+    /*     public List<Destination> AllDestinationWithRotationDAL()
+        {
+            return _context.To.Include(d => d.Rotasions).ToList();
+
+        } */
 }

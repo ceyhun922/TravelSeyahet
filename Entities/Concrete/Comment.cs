@@ -12,6 +12,6 @@ namespace EntityLayer.Concrete
         public bool? CommentStatus { get; set; }
         public string? UserId { get; set; }
         public Writer? Writer { get; set; }
-        public Destination? Destination { get; set; }
+        public Tour? Tour { get; set; }
     }
 }

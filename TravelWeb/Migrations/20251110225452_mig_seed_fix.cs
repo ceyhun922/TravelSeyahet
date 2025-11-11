@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TravelWeb.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class mig_seed_fix : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -88,6 +88,20 @@ namespace TravelWeb.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Destinations",
+                columns: table => new
+                {
+                    DestinationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DestinationCity = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TourId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Destinations", x => x.DestinationId);
                 });
 
             migrationBuilder.CreateTable(
@@ -313,19 +327,21 @@ namespace TravelWeb.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Destinations",
+                name: "Tours",
                 columns: table => new
                 {
-                    DestinationId = table.Column<int>(type: "int", nullable: false)
+                    TourId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DestinationCity = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DestinationDayNight = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DestinationPrice = table.Column<double>(type: "float", nullable: false),
-                    DestinationImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CapaCity = table.Column<int>(type: "int", nullable: false),
-                    DestinationTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DestinationCountLimit = table.Column<int>(type: "int", nullable: false),
-                    DestinationStatus = table.Column<bool>(type: "bit", nullable: false),
+                    TourLocaion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DTourDayNight = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TourPrice = table.Column<double>(type: "float", nullable: false),
+                    TourImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TourCapaCity = table.Column<int>(type: "int", nullable: false),
+                    TourCountLimit = table.Column<int>(type: "int", nullable: false),
+                    TourStatus = table.Column<bool>(type: "bit", nullable: false),
+                    TourDetail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TourClock = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DestinationId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true),
                     WriterId = table.Column<int>(type: "int", nullable: true),
                     GuideID = table.Column<int>(type: "int", nullable: false),
@@ -335,20 +351,26 @@ namespace TravelWeb.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Destinations", x => x.DestinationId);
+                    table.PrimaryKey("PK_Tours", x => x.TourId);
                     table.ForeignKey(
-                        name: "FK_Destinations_AspNetUsers_WriterId",
+                        name: "FK_Tours_AspNetUsers_WriterId",
                         column: x => x.WriterId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Destinations_Guides_GuideID",
+                        name: "FK_Tours_Destinations_DestinationId",
+                        column: x => x.DestinationId,
+                        principalTable: "Destinations",
+                        principalColumn: "DestinationId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Tours_Guides_GuideID",
                         column: x => x.GuideID,
                         principalTable: "Guides",
                         principalColumn: "GuideID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Destinations_Testimonials_TestimonialID",
+                        name: "FK_Tours_Testimonials_TestimonialID",
                         column: x => x.TestimonialID,
                         principalTable: "Testimonials",
                         principalColumn: "TestimonialID",
@@ -367,7 +389,7 @@ namespace TravelWeb.Migrations
                     CommentStatus = table.Column<bool>(type: "bit", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     WriterId = table.Column<int>(type: "int", nullable: true),
-                    DestinationId = table.Column<int>(type: "int", nullable: true)
+                    TourId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -378,10 +400,10 @@ namespace TravelWeb.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Comments_Destinations_DestinationId",
-                        column: x => x.DestinationId,
-                        principalTable: "Destinations",
-                        principalColumn: "DestinationId");
+                        name: "FK_Comments_Tours_TourId",
+                        column: x => x.TourId,
+                        principalTable: "Tours",
+                        principalColumn: "TourId");
                 });
 
             migrationBuilder.CreateTable(
@@ -400,7 +422,8 @@ namespace TravelWeb.Migrations
                     RemainderCapaCity = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     WriterId = table.Column<int>(type: "int", nullable: true),
-                    DestinationId = table.Column<int>(type: "int", nullable: false)
+                    DestinationId = table.Column<int>(type: "int", nullable: false),
+                    TourId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -411,11 +434,10 @@ namespace TravelWeb.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Rezervations_Destinations_DestinationId",
-                        column: x => x.DestinationId,
-                        principalTable: "Destinations",
-                        principalColumn: "DestinationId",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Rezervations_Tours_TourId",
+                        column: x => x.TourId,
+                        principalTable: "Tours",
+                        principalColumn: "TourId");
                 });
 
             migrationBuilder.CreateTable(
@@ -427,17 +449,34 @@ namespace TravelWeb.Migrations
                     RotasionName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RotasionDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RotasionStatus = table.Column<bool>(type: "bit", nullable: false),
-                    DestinationId = table.Column<int>(type: "int", nullable: false)
+                    TourId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rotasions", x => x.RotasionID);
                     table.ForeignKey(
-                        name: "FK_Rotasions_Destinations_DestinationId",
-                        column: x => x.DestinationId,
-                        principalTable: "Destinations",
-                        principalColumn: "DestinationId",
+                        name: "FK_Rotasions_Tours_TourId",
+                        column: x => x.TourId,
+                        principalTable: "Tours",
+                        principalColumn: "TourId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Destinations",
+                columns: new[] { "DestinationId", "DestinationCity", "TourId" },
+                values: new object[,]
+                {
+                    { 1, "Bakı", 0 },
+                    { 2, "Qəbələ", 0 },
+                    { 3, "Şəki", 0 },
+                    { 4, "Quba", 0 },
+                    { 5, "Şuşa", 0 },
+                    { 6, "Lənkəran", 0 },
+                    { 7, "Naftalan", 0 },
+                    { 8, "İsmayıllı", 0 },
+                    { 9, "Qusar", 0 },
+                    { 10, "Zaqatala", 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -485,37 +524,56 @@ namespace TravelWeb.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Destinations",
-                columns: new[] { "DestinationId", "CapaCity", "CommentID", "DestinationCity", "DestinationCountLimit", "DestinationDayNight", "DestinationImage", "DestinationPrice", "DestinationStatus", "DestinationTime", "Guid", "GuideID", "TestimonialID", "UserId", "WriterId" },
+                table: "Tours",
+                columns: new[] { "TourId", "CommentID", "DTourDayNight", "DestinationId", "Guid", "GuideID", "TestimonialID", "TourCapaCity", "TourClock", "TourCountLimit", "TourDetail", "TourImage", "TourLocaion", "TourPrice", "TourStatus", "UserId", "WriterId" },
                 values: new object[,]
                 {
-                    { 1, 25, 0, "Bakı", 30, "3 gün 2 gecə", "/web/assets/images/g1.jpg", 350.0, true, new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9060), new Guid("00000000-0000-0000-0000-000000000000"), 1, 1, 1, null },
-                    { 2, 20, 0, "Qəbələ", 25, "2 gün 1 gecə", "/web/assets/images/g2.jpg", 250.0, true, new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9060), new Guid("00000000-0000-0000-0000-000000000000"), 2, 2, 2, null },
-                    { 3, 15, 0, "Şəki", 20, "1 günlük tur", "/web/assets/images/g3.jpg", 180.0, true, new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9070), new Guid("00000000-0000-0000-0000-000000000000"), 3, 3, 3, null },
-                    { 4, 20, 0, "Quba", 25, "3 gün 2 gecə", "/web/assets/images/g4.jpg", 300.0, true, new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9070), new Guid("00000000-0000-0000-0000-000000000000"), 4, 4, 1, null },
-                    { 5, 30, 0, "Şuşa", 30, "4 gün 3 gecə", "/web/assets/images/g5.jpg", 400.0, true, new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9070), new Guid("00000000-0000-0000-0000-000000000000"), 5, 5, 2, null },
-                    { 6, 20, 0, "Lənkəran", 25, "2 gün 1 gecə", "/web/assets/images/g6.jpg", 270.0, true, new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9080), new Guid("00000000-0000-0000-0000-000000000000"), 6, 6, 3, null },
-                    { 7, 25, 0, "Naftalan", 30, "3 gün 2 gecə", "/web/assets/images/g7.jpg", 320.0, true, new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9080), new Guid("00000000-0000-0000-0000-000000000000"), 7, 7, 1, null },
-                    { 8, 15, 0, "İsmayıllı", 20, "1 günlük tur", "/web/assets/images/g8.jpg", 190.0, true, new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9080), new Guid("00000000-0000-0000-0000-000000000000"), 8, 8, 2, null },
-                    { 9, 20, 0, "Qusar", 25, "2 gün 1 gecə", "/web/assets/images/g9.jpg", 260.0, true, new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9090), new Guid("00000000-0000-0000-0000-000000000000"), 9, 9, 3, null },
-                    { 10, 25, 0, "Zaqatala", 30, "3 gün 2 gecə", "/web/assets/images/g10.jpg", 310.0, true, new DateTime(2025, 11, 9, 23, 6, 45, 126, DateTimeKind.Local).AddTicks(9090), new Guid("00000000-0000-0000-0000-000000000000"), 10, 10, 1, null }
+                    { 1, 0, null, 1, new Guid("00000000-0000-0000-0000-000000000000"), 1, 1, 0, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 0, "Tarixi şəhər turu", null, "İçərişəhər turu", 0.0, true, null, null },
+                    { 2, 0, null, 1, new Guid("00000000-0000-0000-0000-000000000000"), 2, 2, 0, new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local), 0, "Bulvar gəzintisi", null, "Dənizkənarı Bulvar turu", 0.0, true, null, null },
+                    { 3, 0, null, 1, new Guid("00000000-0000-0000-0000-000000000000"), 3, 3, 0, new DateTime(2025, 11, 11, 20, 0, 0, 0, DateTimeKind.Local), 0, "Panorama turları", null, "Flame Towers turu", 0.0, true, null, null },
+                    { 4, 0, null, 2, new Guid("00000000-0000-0000-0000-000000000000"), 3, 4, 0, new DateTime(2025, 11, 11, 10, 0, 0, 0, DateTimeKind.Local), 0, "Dağ-xizək turu", null, "Tufandağ turu", 0.0, true, null, null },
+                    { 5, 0, null, 2, new Guid("00000000-0000-0000-0000-000000000000"), 4, 5, 0, new DateTime(2025, 11, 11, 15, 0, 0, 0, DateTimeKind.Local), 0, "Göl ətrafında gəzinti", null, "Nohur gölü turu", 0.0, true, null, null },
+                    { 6, 0, null, 2, new Guid("00000000-0000-0000-0000-000000000000"), 5, 6, 0, new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local), 0, "Tarixi tur", null, "Qəbələ Qədim şəhəri turu", 0.0, true, null, null },
+                    { 7, 0, null, 3, new Guid("00000000-0000-0000-0000-000000000000"), 6, 7, 0, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 0, "Mədəniyyət turu", null, "Şəki xan sarayı turu", 0.0, true, null, null },
+                    { 8, 0, null, 3, new Guid("00000000-0000-0000-0000-000000000000"), 7, 8, 0, new DateTime(2025, 11, 11, 13, 0, 0, 0, DateTimeKind.Local), 0, "Tarixi kilsə turları", null, "Kiş kəndi turu", 0.0, true, null, null },
+                    { 9, 0, null, 3, new Guid("00000000-0000-0000-0000-000000000000"), 7, 9, 0, new DateTime(2025, 11, 11, 18, 0, 0, 0, DateTimeKind.Local), 0, "Şirniyyat turu", null, "Şəki bazarı turu", 0.0, true, null, null },
+                    { 10, 0, null, 4, new Guid("00000000-0000-0000-0000-000000000000"), 5, 10, 0, new DateTime(2025, 11, 11, 8, 0, 0, 0, DateTimeKind.Local), 0, "Meşə turu", null, "Qəçrəş turu", 0.0, true, null, null },
+                    { 11, 0, null, 4, new Guid("00000000-0000-0000-0000-000000000000"), 8, 1, 0, new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local), 0, "Dağ kəndi turu", null, "Xınalıq turu", 0.0, true, null, null },
+                    { 12, 0, null, 4, new Guid("00000000-0000-0000-0000-000000000000"), 9, 2, 0, new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local), 0, "Çay ətrafında gəzinti", null, "Qudyalçay turu", 0.0, true, null, null },
+                    { 13, 0, null, 5, new Guid("00000000-0000-0000-0000-000000000000"), 7, 3, 0, new DateTime(2025, 11, 11, 10, 0, 0, 0, DateTimeKind.Local), 0, "Tarixi mədəni tur", null, "Cıdır düz turu", 0.0, true, null, null },
+                    { 14, 0, null, 5, new Guid("00000000-0000-0000-0000-000000000000"), 9, 4, 0, new DateTime(2025, 11, 11, 15, 0, 0, 0, DateTimeKind.Local), 0, "Mədəni abidələr turu", null, "Yuxarı Gövhər Ağa məscidi turu", 0.0, true, null, null },
+                    { 15, 0, null, 5, new Guid("00000000-0000-0000-0000-000000000000"), 10, 5, 0, new DateTime(2025, 11, 11, 20, 0, 0, 0, DateTimeKind.Local), 0, "Qala turu", null, "Şuşa qalası turu", 0.0, true, null, null },
+                    { 16, 0, null, 6, new Guid("00000000-0000-0000-0000-000000000000"), 9, 6, 0, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 0, "Ekoturizm", null, "Hirkan Milli Parkı turu", 0.0, true, null, null },
+                    { 17, 0, null, 6, new Guid("00000000-0000-0000-0000-000000000000"), 10, 7, 0, new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local), 0, "Dəniz gəzintisi", null, "Mayak sahili turu", 0.0, true, null, null },
+                    { 18, 0, null, 6, new Guid("00000000-0000-0000-0000-000000000000"), 6, 8, 0, new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local), 0, "Tarixi yerlər turu", null, "Lənkəran qalası turu", 0.0, true, null, null },
+                    { 19, 0, null, 7, new Guid("00000000-0000-0000-0000-000000000000"), 10, 9, 0, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 0, "Müalicəvi istirahət", null, "Naftalan sanatoriyası turu", 0.0, true, null, null },
+                    { 20, 0, null, 7, new Guid("00000000-0000-0000-0000-000000000000"), 5, 10, 0, new DateTime(2025, 11, 11, 13, 0, 0, 0, DateTimeKind.Local), 0, "Şəhər gəzintisi", null, "Naftalan şəhər mərkəzi turu", 0.0, true, null, null },
+                    { 21, 0, null, 7, new Guid("00000000-0000-0000-0000-000000000000"), 5, 1, 0, new DateTime(2025, 11, 11, 18, 0, 0, 0, DateTimeKind.Local), 0, "Açıq hava fəaliyyəti", null, "Naftalan parkı turu", 0.0, true, null, null },
+                    { 22, 0, null, 8, new Guid("00000000-0000-0000-0000-000000000000"), 3, 2, 0, new DateTime(2025, 11, 11, 8, 0, 0, 0, DateTimeKind.Local), 0, "Əl sənətkarlıq turu", null, "Lahıc kəndi turu", 0.0, true, null, null },
+                    { 23, 0, null, 8, new Guid("00000000-0000-0000-0000-000000000000"), 5, 3, 0, new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local), 0, "Təbiət gəzintisi", null, "İsmayıllı meşələri turu", 0.0, true, null, null },
+                    { 24, 0, null, 8, new Guid("00000000-0000-0000-0000-000000000000"), 3, 4, 0, new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local), 0, "Mədəni tur", null, "Basqal kəndi turu", 0.0, true, null, null },
+                    { 25, 0, null, 9, new Guid("00000000-0000-0000-0000-000000000000"), 9, 5, 0, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 0, "Xizək turu", null, "Şahdağ turu", 0.0, true, null, null },
+                    { 26, 0, null, 9, new Guid("00000000-0000-0000-0000-000000000000"), 4, 6, 0, new DateTime(2025, 11, 11, 15, 0, 0, 0, DateTimeKind.Local), 0, "Ailəvi istirahət", null, "Qusar şəhər parkı turu", 0.0, true, null, null },
+                    { 27, 0, null, 9, new Guid("00000000-0000-0000-0000-000000000000"), 9, 7, 0, new DateTime(2025, 11, 11, 20, 0, 0, 0, DateTimeKind.Local), 0, "Dağ yürüşü", null, "Ləzə kəndi turu", 0.0, true, null, null },
+                    { 28, 0, null, 10, new Guid("00000000-0000-0000-0000-000000000000"), 8, 8, 0, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 0, "Tarixi tur", null, "Zaqatala qalası turu", 0.0, true, null, null },
+                    { 29, 0, null, 10, new Guid("00000000-0000-0000-0000-000000000000"), 2, 9, 0, new DateTime(2025, 11, 11, 13, 0, 0, 0, DateTimeKind.Local), 0, "Mədəni kənd turu", null, "Yuxarı Çardaqlar turu", 0.0, true, null, null },
+                    { 30, 0, null, 10, new Guid("00000000-0000-0000-0000-000000000000"), 1, 10, 0, new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local), 0, "Təbiət və mədəniyyət turu", null, "Qalal kəndi turu", 0.0, true, null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Rotasions",
-                columns: new[] { "RotasionID", "DestinationId", "RotasionDescription", "RotasionName", "RotasionStatus" },
+                columns: new[] { "RotasionID", "RotasionDescription", "RotasionName", "RotasionStatus", "TourId" },
                 values: new object[,]
                 {
-                    { 1, 1, "Tarixi abidələrə səyahət", "Qobustan Qayaüstü", true },
-                    { 2, 2, "Təbiət gəzintisi və foto turları", "Nohur Gölü", true },
-                    { 3, 3, "Mədəni ekskursiya", "Xan Sarayı", true },
-                    { 4, 4, "Dağ yürüşü və piknik", "Qəçrəş Meşəsi", true },
-                    { 5, 5, "Qarabağın ürəyi olan şəhər", "Qalasına Ziyarət", true },
-                    { 6, 5, "Çay bağları və təbiət", "Xalça Müzeyi", true },
-                    { 7, 7, "Spa və sağlamlıq turu", "Naftalan Müalicə Mərkəzi", true },
-                    { 8, 8, "Ekoturizm və hiking", "İsmayıllı Meşələri", true },
-                    { 9, 9, "Qar idmanı və xizək turu", "Qış Mərkəzi", true },
-                    { 10, 10, "Təbiət və heyvanat dünyası ilə tanışlıq", "Qoruğ", true }
+                    { 1, "Tarixi abidələrə səyahət", "Qobustan Qayaüstü", true, 1 },
+                    { 2, "Təbiət gəzintisi və foto turları", "Nohur Gölü", true, 5 },
+                    { 3, "Mədəni ekskursiya", "Xan Sarayı", true, 7 },
+                    { 4, "Dağ yürüşü və piknik", "Qəçrəş Meşəsi", true, 10 },
+                    { 5, "Qarabağın ürəyi", "Şuşa qalası", true, 15 },
+                    { 6, "Spa və sağlamlıq turu", "Naftalan Müalicə Mərkəzi", true, 19 },
+                    { 7, "Ekoturizm və hiking", "İsmayıllı Meşələri", true, 23 },
+                    { 8, "Qar idmanı və xizək", "Şahdağ Mərkəzi", true, 25 },
+                    { 9, "Tarixi səfər", "Zaqatala Qalası", true, 28 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -558,9 +616,9 @@ namespace TravelWeb.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_DestinationId",
+                name: "IX_Comments_TourId",
                 table: "Comments",
-                column: "DestinationId");
+                column: "TourId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_WriterId",
@@ -568,24 +626,9 @@ namespace TravelWeb.Migrations
                 column: "WriterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Destinations_GuideID",
-                table: "Destinations",
-                column: "GuideID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Destinations_TestimonialID",
-                table: "Destinations",
-                column: "TestimonialID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Destinations_WriterId",
-                table: "Destinations",
-                column: "WriterId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Rezervations_DestinationId",
+                name: "IX_Rezervations_TourId",
                 table: "Rezervations",
-                column: "DestinationId");
+                column: "TourId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rezervations_WriterId",
@@ -593,9 +636,29 @@ namespace TravelWeb.Migrations
                 column: "WriterId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rotasions_DestinationId",
+                name: "IX_Rotasions_TourId",
                 table: "Rotasions",
+                column: "TourId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tours_DestinationId",
+                table: "Tours",
                 column: "DestinationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tours_GuideID",
+                table: "Tours",
+                column: "GuideID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tours_TestimonialID",
+                table: "Tours",
+                column: "TestimonialID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tours_WriterId",
+                table: "Tours",
+                column: "WriterId");
         }
 
         /// <inheritdoc />
@@ -650,10 +713,13 @@ namespace TravelWeb.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Destinations");
+                name: "Tours");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Destinations");
 
             migrationBuilder.DropTable(
                 name: "Guides");

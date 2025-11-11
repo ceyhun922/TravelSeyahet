@@ -16,14 +16,12 @@ namespace TravelWeb.Controllers
 
         public IActionResult Index()
         {
-            var values = _destinationService.ListAllService();
-            return View(values);
+            return View();
         }
 
-        public IActionResult Detail(int id)
+        public IActionResult Detail()
         {
-            var value =_destinationService.GetFindIdService(id);
-            return View(value);
+            return View();
         }
     }
 }

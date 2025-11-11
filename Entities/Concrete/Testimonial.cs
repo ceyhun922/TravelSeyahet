@@ -1,3 +1,5 @@
+using Entities.Concrete;
+
 namespace EntityLayer.Concrete
 {
     public class Testimonial
@@ -8,7 +10,7 @@ namespace EntityLayer.Concrete
         public string? TestimonialImage { get; set; }
         public bool TestimonialStatus { get; set; }
 
-        public List<Destination>? Destinations { get; set; }
+        public List<Tour>?  Tours { get; set; }
 
     }
 }

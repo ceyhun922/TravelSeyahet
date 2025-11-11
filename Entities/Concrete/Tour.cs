@@ -2,14 +2,31 @@ using EntityLayer.Concrete;
 
 namespace Entities.Concrete
 {
-    public class Tour 
+    public class Tour
     {
         public int TourId { get; set; }
         public string TourLocaion { get; set; } = string.Empty;
+        public string? DTourDayNight { get; set; }
+        public double TourPrice { get; set; }
+        public string? TourImage { get; set; }
+        public int TourCapaCity { get; set; }
+        public int TourCountLimit { get; set; }
+        public bool TourStatus { get; set; } = true;
         public string TourDetail { get; set; } = string.Empty;
         public DateTime TourClock { get; set; }
-        public bool TourStatus { get; set; } = true;
         public int DestinationId { get; set; }
         public Destination? Destination { get; set; }
+        public List<Rotasion>? Rotasions { get; set; }
+        public int? UserId { get; set; }
+        public Writer? Writer { get; set; }
+        public int GuideID { get; set; }
+        public Guid Guid { get; set; }
+        public int TestimonialID { get; set; }
+
+        public Testimonial? Testimonial { get; set; }
+
+        public int CommentID { get; set; }
+
+        public List<Comment>? Comments { get; set; }
     }
 }

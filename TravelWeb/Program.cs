@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Services.Abstract;
+using Services.Concrete;
 using Services.ValidationRule;
 using ServicesLayer.Abstract;
 using ServicesLayer.Concrete;
@@ -39,6 +41,8 @@ builder.Services.AddScoped<IDestinationDAL, EFDestinationRepository>();
 builder.Services.AddScoped<IDestinationService, DestinationManager>();
 builder.Services.AddScoped<IGuideDAL, EFGuideRepository>();
 builder.Services.AddScoped<IGuideService, GuideManager>();
+builder.Services.AddScoped<ITourDAL, EFTourRepository>();
+builder.Services.AddScoped<ITourService, TourManager>();
 
 builder.Services.AddDbContext<Context>(opt =>
 {
