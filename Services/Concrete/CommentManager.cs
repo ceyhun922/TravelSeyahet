@@ -1,9 +1,9 @@
 using System.Linq.Expressions;
 using DAL.Abstract;
-using EntityLayer.Concrete;
-using ServicesLayer.Abstract;
+using Entities.Concrete;
+using Services.Abstract;
 
-namespace ServicesLayer.Concrete
+namespace Services.Concrete
 {
     public class CommentManager : ICommentService
     {

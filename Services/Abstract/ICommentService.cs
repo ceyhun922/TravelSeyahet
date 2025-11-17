@@ -1,6 +1,7 @@
-using EntityLayer.Concrete;
 
-namespace ServicesLayer.Abstract
+using Entities.Concrete;
+
+namespace Services.Abstract
 {
     public interface ICommentService : IGenericService<Comment>
     {

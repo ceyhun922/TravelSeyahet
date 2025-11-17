@@ -1,7 +1,7 @@
 using DAL.Abstract;
 using DAL.Concrete;
 using DAL.GenericRepositories;
-using EntityLayer.Concrete;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
 public class EFDestinationRepository : GenericRepository<Destination>, IDestinationDAL
@@ -13,16 +13,9 @@ public class EFDestinationRepository : GenericRepository<Destination>, IDestinat
         _context = context;
     }
 
-   /*  public List<Destination> AllDestinationWithTourDAL()
+    public List<Destination> AllDestinationSubTourDAL()
     {
-        return _context.Destinations.Include(x => x.Tours).ToList();
-    } */
+        return _context.Destinations.Include(d => d.Tours).ToList();
+    }
 
-
-
-    /*     public List<Destination> AllDestinationWithRotationDAL()
-        {
-            return _context.To.Include(d => d.Rotasions).ToList();
-
-        } */
 }

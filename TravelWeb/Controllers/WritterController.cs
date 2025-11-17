@@ -1,12 +1,12 @@
-using System.Threading.Tasks;
+
+
+using DAL.Concrete;
 using Entities.Concrete;
 using Entities.ViewModel;
-using EntityLayer.Concrete;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using ServicesLayer.Abstract;
+using Microsoft.EntityFrameworkCore;
+using Services.Abstract;
 
 namespace TravelWeb.Controllers
 {
@@ -15,25 +15,68 @@ namespace TravelWeb.Controllers
     {
         private readonly UserManager<Writer> _userManager;
         private readonly SignInManager<Writer> _signInManager;
+        private readonly ITourService _tourService;
         private readonly IDestinationService _destinationService;
+        private readonly IRezervationService _rezervationService;
+        private readonly Context _context;
 
-        public WritterController(UserManager<Writer> userManager, SignInManager<Writer> signInManager, IDestinationService destinationService)
+        public WritterController(UserManager<Writer> userManager, SignInManager<Writer> signInManager, ITourService tourService, IDestinationService destinationService, Context context, IRezervationService rezervationService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _tourService = tourService;
             _destinationService = destinationService;
+            _context = context;
+            _rezervationService = rezervationService;
         }
 
         public IActionResult NewRezervations()
         {
-            /*  var destinations = _destinationService.AllDestinationWithRotationService();
-             foreach (var d in destinations)
-             {
-                 Console.WriteLine($"{d.DestinationCity} → {d.Rotasions?.Count ?? 0} rota");
-             }
-             return View(destinations); */
-            return View();
+            var values =
+               _destinationService.AllDestinationSubTourService().ToList();
+
+            return View(values);
         }
+        [HttpPost]
+        public IActionResult NewRezervations(RezervationViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Məlumat düzgün deyil.");
+
+            var tour = _tourService.GetFindIdService(model.TourId);
+
+            if (tour == null)
+                return BadRequest("Tur tapılmadı.");
+
+            if (model.CountPerson > tour.TourCountLimit)
+                return BadRequest($"Bu turda yalnız {tour.TourCountLimit} yer var.");
+
+            double total = tour.TourPrice * model.CountPerson;
+
+            var rez = new Rezervation
+            {
+                DestinationId = model.DestinationId,
+                TourId = model.TourId,
+                RezervationCountPerson = model.CountPerson,
+                RezervationDate = model.RezervationDate,
+                RezervationTime = model.RezervationTime,
+                RezervationDescription = model.Description,
+                TotalPrice = total,
+                RemainderCapaCity = tour.TourCountLimit - model.CountPerson,
+                rezervationStatus = Rezervation.RezervationStatus.Pending,
+                UserId = User.Identity.Name
+            };
+
+            _rezervationService.InsertService(rez);
+    
+
+            // Turu yeniləyirik (yer qalığını azalt)
+            tour.TourCountLimit -= model.CountPerson;
+            _tourService.UpdateService(tour);
+
+            return Ok(new { success = true, message = "Rezervasiya uğurla əlavə edildi!" });
+        }
+
 
 
         public IActionResult Index()
@@ -103,6 +146,21 @@ namespace TravelWeb.Controllers
         }
 
 
+
+        /*         public IActionResult NewRezervations()
+                {
+
+
+                    //var destinations = _destinationService.AllDestinationSubTourService();
+
+                                foreach (var item in destinations)
+                                {
+                                    foreach (var tour in item.Tours)
+                                    {
+                                        System.Console.WriteLine($"{tour.TourLocaion}");
+                                    }
+                                } 
+                } */
 
 
 

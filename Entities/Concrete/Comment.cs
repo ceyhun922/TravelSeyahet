@@ -1,7 +1,7 @@
 
-using Entities.Concrete;
+using EntityLayer.Concrete;
 
-namespace EntityLayer.Concrete
+namespace Entities.Concrete
 {
     public class Comment
     {

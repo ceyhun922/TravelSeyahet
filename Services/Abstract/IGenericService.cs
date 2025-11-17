@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace ServicesLayer.Abstract
+namespace Services.Abstract
 {
     public interface IGenericService<T>
     {

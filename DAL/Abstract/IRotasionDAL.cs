@@ -1,4 +1,5 @@
-using EntityLayer.Concrete;
+
+using Entities.Concrete;
 
 namespace DAL.Abstract
 {

@@ -1,8 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using Entities.Concrete;
 
-namespace EntityLayer.Concrete
+namespace Entities.Concrete
 {
     public class Rotasion
     {

@@ -2,70 +2,228 @@
 @{
     Layout = "_WritterLayout";
 }
-
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Rezervasyon Formu</h4>
+                <div id="CapacityAlert" class="alert alert-danger d-none"></div>
+
+        <h4 class="card-title">Rezervasiya Formu</h4>
 
         <div class="form-group">
             <label>Şəhər</label>
             <select id="DestinationId" class="form-control">
                 <option value="">Seçin</option>
-                @foreach (var dest in Model)
+                @foreach (var d in Model)
                 {
-                    <option value="@dest.DestinationId">@dest.DestinationCity</option>
+                    <option value="@d.DestinationId">@d.DestinationCity</option>
                 }
             </select>
         </div>
 
         <div class="form-group">
-            <label>Rota</label>
-            <select id="RotasionId" class="form-control">
+            <label>Tur</label>
+            <select id="TourId" class="form-control">
                 <option value="">Əvvəlcə şəhər seçin</option>
             </select>
         </div>
+
+        <input type="hidden" id="TourPrice" />
+
+        <div class="form-group">
+            <label>Gün / Gecə</label>
+            <input id="TourDayNight" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label>Başlama Saatı</label>
+            <input id="TourClock" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label>Açıqlama</label>
+            <textarea id="TourDetail" class="form-control" rows="2" readonly></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Qalan Yer</label>
+            <input id="RemainderCapaCity" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label>Neçə nəfər?</label>
+            <input id="CountPerson" type="number" class="form-control" min="1" />
+        </div>
+
+
+        <div class="form-group">
+            <label>Ümumi Qiymət</label>
+            <input id="TotalPrice" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <input id="RezervationDate" type="hidden" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <input  id="RezervationTime" type="hidden" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label>Qeyd</label>
+            <textarea id="RezervationDescription" class="form-control"></textarea>
+        </div>
+
+        <button id="SaveBtn" class="btn btn-success mt-3">Rezervasiya Et</button>
+
     </div>
 </div>
 
+
 @section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        // 🔥 Modeli camelCase ile serialize ediyoruz
-        const allDestinations = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
-            Model,
-            new System.Text.Json.JsonSerializerOptions {
-                PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase,
-                DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.Never
-            }
-        ));
+<script>
 
-        console.log("Tüm destinasyonlar:", allDestinations); // test için
+    const allDestinations = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+        Model,
+        new System.Text.Json.JsonSerializerOptions {
+            PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase
+        }
+    ));
 
-        $('#DestinationId').change(function () {
-            const destId = parseInt($(this).val());
-            const rotationSelect = $('#RotasionId');
-            rotationSelect.empty();
+    // Şəhər - turlar
+    $('#DestinationId').change(function () {
 
-            if (!destId) {
-                rotationSelect.append('<option value="">Əvvəlcə şəhər seçin</option>');
-                return;
-            }
+        const destId = $(this).val();
+        const tourSelect = $('#TourId');
 
-            // 🔍 JSON camelCase, yani rotasions
-            const selected = allDestinations.find(d => d.destinationId === destId);
-            console.log("Seçilen:", selected);
+        tourSelect.empty();
+        clearDetails();
 
-            if (selected && selected.rotasions?.length > 0) {
-                rotationSelect.append('<option value="">Seçin</option>');
-                selected.rotasions.forEach(r => {
-                    rotationSelect.append(
-                        `<option value="${r.rotasionID}">${r.rotasionName}</option>`
-                    );
-                });
-            } else {
-                rotationSelect.append('<option value="">Bu şəhərdə rota yoxdur</option>');
+        if (!destId) {
+            tourSelect.append('<option value="">Əvvəlcə şəhər seçin</option>');
+            return;
+        }
+
+        const selected = allDestinations.find(x => x.destinationId == destId);
+
+        if (!selected?.tours?.length) {
+            tourSelect.append('<option value="">Bu şəhərdə tur yoxdur</option>');
+            return;
+        }
+
+        // 🔥 SADECE BOs YERİ OLAN TURLAR
+        const availableTours = selected.tours.filter(t => t.tourCountLimit > 0);
+
+        if (availableTours.length === 0) {
+            tourSelect.append('<option value="">Bu şəhərdə boş yerlı tur yoxdur</option>');
+            return;
+        }
+
+        tourSelect.append('<option value="">Seçin</option>');
+
+        availableTours.forEach(t => {
+            tourSelect.append(`<option value="${t.tourId}">${t.tourLocaion}</option>`);
+        });
+    });
+
+
+    // Tur seçildi
+    $('#TourId').change(function () {
+
+        const destId = $('#DestinationId').val();
+        const tourId = $(this).val();
+
+        const d = allDestinations.find(x => x.destinationId == destId);
+        const t = d?.tours?.find(x => x.tourId == tourId);
+
+        if (!t) {
+            clearDetails();
+            return;
+        }
+
+        $('#TourPrice').val(t.tourPrice);
+        $('#TourDayNight').val(t.dTourDayNight);
+        $('#TourClock').val(t.tourClock);
+        $('#TourDetail').val(t.tourDetail);
+        $('#RemainderCapaCity').val(t.tourCountLimit);
+
+        updateTotal();
+    });
+
+
+    // Adam sayı - capacity check + total price
+    $('#CountPerson').on('input', function () {
+
+        const count = Number($(this).val());
+        const remain = Number($('#RemainderCapaCity').val());
+        const alertBox = $('#CapacityAlert');
+
+        alertBox.addClass('d-none').text('');
+
+        if (!remain || remain <= 0) {
+            alertBox.removeClass('d-none').text("Bu turda boş yer yoxdur!");
+            $(this).val(0);
+            $('#TotalPrice').val('');
+            return;
+        }
+
+        if (count > remain) {
+            alertBox.removeClass('d-none').text(`Bu turda yalnız ${remain} yer var!`);
+            $(this).val(remain);
+        }
+
+        updateTotal();
+    });
+
+
+    function updateTotal() {
+        const count = Number($('#CountPerson').val());
+        const price = Number($('#TourPrice').val());
+
+        if (count > 0 && price > 0)
+            $('#TotalPrice').val(count * price);
+        else
+            $('#TotalPrice').val('');
+    }
+
+    function clearDetails() {
+        $('#TourPrice,#TourDayNight,#TourClock,#TourDetail,#RemainderCapaCity,#TotalPrice').val('');
+        $('#CountPerson').val('');
+        $('#CapacityAlert').addClass('d-none').text('');
+    }
+
+    $('#SaveBtn').click(function (e) {
+        e.preventDefault();
+
+        const data = {
+            destinationId: $('#DestinationId').val(),
+            tourId: $('#TourId').val(),
+            countPerson: $('#CountPerson').val(),
+            rezervationDate: $('#RezervationDate').val(),
+            rezervationTime: $('#RezervationTime').val(),
+            description: $('#RezervationDescription').val()
+        };
+
+        $.ajax({
+            url: '/Writter/NewRezervations',
+            method: 'POST',
+            data: data,
+            success: function (res) {
+                $('#CapacityAlert')
+                    .removeClass('d-none alert-danger')
+                    .addClass('alert alert-success')
+                    .text(res.message);
+
+                $('input, textarea').val('');
+                $('#TourId').empty().append('<option value="">Əvvəlcə şəhər seçin</option>');
+            },
+            error: function (err) {
+                $('#CapacityAlert')
+                    .removeClass('d-none alert-success')
+                    .addClass('alert alert-danger')
+                    .text(err.responseText);
             }
         });
-    </script>
+
+    });
+
+</script>
 }
-‚‚

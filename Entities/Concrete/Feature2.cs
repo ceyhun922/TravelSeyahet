@@ -1,4 +1,4 @@
-namespace EntityLayer.Concrete
+namespace Entities.Concrete
 {
     public class Feature2
     {

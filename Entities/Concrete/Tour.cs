@@ -1,4 +1,5 @@
-using EntityLayer.Concrete;
+using System.Text.Json.Serialization;
+using Entities.Concrete;
 
 namespace Entities.Concrete
 {
@@ -15,18 +16,20 @@ namespace Entities.Concrete
         public string TourDetail { get; set; } = string.Empty;
         public DateTime TourClock { get; set; }
         public int DestinationId { get; set; }
+        [JsonIgnore]
         public Destination? Destination { get; set; }
         public List<Rotasion>? Rotasions { get; set; }
+
         public int? UserId { get; set; }
         public Writer? Writer { get; set; }
-        public int GuideID { get; set; }
-        public Guid Guid { get; set; }
-        public int TestimonialID { get; set; }
 
+        public int GuideID { get; set; }
+        public Guide? Guide { get; set; }
+
+        public int TestimonialID { get; set; }
         public Testimonial? Testimonial { get; set; }
 
         public int CommentID { get; set; }
-
         public List<Comment>? Comments { get; set; }
     }
 }

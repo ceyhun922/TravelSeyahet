@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ServicesLayer.Abstract;
+using Services.Abstract;
 
 namespace TravelWeb.Controllers
 {

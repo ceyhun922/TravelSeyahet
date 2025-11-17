@@ -1,6 +1,6 @@
 using Entities.Concrete;
 
-namespace ServicesLayer.Abstract
+namespace Services.Abstract
 {
     public interface IWriterService : IGenericService<Writer>
     {

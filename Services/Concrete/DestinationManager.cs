@@ -1,9 +1,11 @@
+
+
 using System.Linq.Expressions;
 using DAL.Abstract;
-using EntityLayer.Concrete;
-using ServicesLayer.Abstract;
+using Entities.Concrete;
+using Services.Abstract;
 
-namespace ServicesLayer.Concrete
+namespace Services.Concrete
 {
     public class DestinationManager : IDestinationService
     {
@@ -14,6 +16,11 @@ namespace ServicesLayer.Concrete
         public DestinationManager(IDestinationDAL destinationDAL)
         {
             _destinationDAL = destinationDAL;
+        }
+
+        public List<Destination> AllDestinationSubTourService()
+        {
+            return _destinationDAL.AllDestinationSubTourDAL();
         }
 
         public Destination GetFindIdService(int id)

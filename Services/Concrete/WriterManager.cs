@@ -1,7 +1,7 @@
 using System.Linq.Expressions;
 using DAL.Abstract;
 using Entities.Concrete;
-using ServicesLayer.Abstract;
+using Services.Abstract;
 
 namespace ServicesLayer.Concrete
 {

@@ -1,6 +1,7 @@
-using Entities.Concrete;
 
-namespace EntityLayer.Concrete
+using System.Text.Json.Serialization;
+
+namespace Entities.Concrete
 {
     public class Testimonial
     {
@@ -9,6 +10,8 @@ namespace EntityLayer.Concrete
         public string? TestimonialComment { get; set; }
         public string? TestimonialImage { get; set; }
         public bool TestimonialStatus { get; set; }
+        [JsonIgnore]
+
 
         public List<Tour>?  Tours { get; set; }
 

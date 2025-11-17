@@ -12,18 +12,32 @@ namespace DAL.Concrete
     {
         public Context(DbContextOptions<Context> options) : base(options) { }
 
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.ApplyConfiguration(new GuideCoreData());       
-            builder.ApplyConfiguration(new DestinationCoreData()); 
-            builder.ApplyConfiguration(new TourCoreData());         
-            builder.ApplyConfiguration(new TestimontalCoreData());        
-            builder.ApplyConfiguration(new RotasionCoreData());     
-            builder.ApplyConfiguration(new NotificationCoreData()); 
-            builder.ApplyConfiguration(new SliderCoreData());      
 
+            // önce bağımsızlar
+            builder.ApplyConfiguration(new GuideCoreData());
+            builder.ApplyConfiguration(new DestinationCoreData());
+            builder.ApplyConfiguration(new TestimontalCoreData());
+
+            // sonra Destination'a bağlılar
+            builder.ApplyConfiguration(new TourCoreData());
+            builder.ApplyConfiguration(new RotasionCoreData());
+
+            // en son bağımsızlar
+            builder.ApplyConfiguration(new NotificationCoreData());
+            builder.ApplyConfiguration(new SliderCoreData());
+
+            // İlişkiyi zorla
+            builder.Entity<Tour>()
+                .HasOne(t => t.Destination)
+                .WithMany(d => d.Tours)
+                .HasForeignKey(t => t.DestinationId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
+
 
         public DbSet<About>? Abouts { get; set; }
         public DbSet<Tour>? Tours { get; set; }

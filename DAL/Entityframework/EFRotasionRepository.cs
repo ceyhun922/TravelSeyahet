@@ -1,8 +1,7 @@
 using DAL.Abstract;
 using DAL.Concrete;
 using DAL.GenericRepositories;
-using EntityLayer.Concrete;
-using Microsoft.EntityFrameworkCore;
+using Entities.Concrete;
 
 namespace DAL.Entityframework
 {

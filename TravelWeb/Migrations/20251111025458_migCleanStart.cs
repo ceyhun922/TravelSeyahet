@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TravelWeb.Migrations
 {
     /// <inheritdoc />
-    public partial class mig_seed_fix : Migration
+    public partial class migCleanStart : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -96,8 +96,7 @@ namespace TravelWeb.Migrations
                 {
                     DestinationId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DestinationCity = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TourId = table.Column<int>(type: "int", nullable: false)
+                    DestinationCity = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -345,7 +344,6 @@ namespace TravelWeb.Migrations
                     UserId = table.Column<int>(type: "int", nullable: true),
                     WriterId = table.Column<int>(type: "int", nullable: true),
                     GuideID = table.Column<int>(type: "int", nullable: false),
-                    Guid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TestimonialID = table.Column<int>(type: "int", nullable: false),
                     CommentID = table.Column<int>(type: "int", nullable: false)
                 },
@@ -362,7 +360,7 @@ namespace TravelWeb.Migrations
                         column: x => x.DestinationId,
                         principalTable: "Destinations",
                         principalColumn: "DestinationId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Tours_Guides_GuideID",
                         column: x => x.GuideID,
@@ -464,19 +462,20 @@ namespace TravelWeb.Migrations
 
             migrationBuilder.InsertData(
                 table: "Destinations",
-                columns: new[] { "DestinationId", "DestinationCity", "TourId" },
+                columns: new[] { "DestinationId", "DestinationCity" },
                 values: new object[,]
                 {
-                    { 1, "Bakı", 0 },
-                    { 2, "Qəbələ", 0 },
-                    { 3, "Şəki", 0 },
-                    { 4, "Quba", 0 },
-                    { 5, "Şuşa", 0 },
-                    { 6, "Lənkəran", 0 },
-                    { 7, "Naftalan", 0 },
-                    { 8, "İsmayıllı", 0 },
-                    { 9, "Qusar", 0 },
-                    { 10, "Zaqatala", 0 }
+                    { 1, "Bakı" },
+                    { 2, "Qəbələ" },
+                    { 3, "Şəki" },
+                    { 4, "Quba" },
+                    { 5, "Şuşa" },
+                    { 6, "Lənkəran" },
+                    { 7, "Naftalan" },
+                    { 8, "İsmayıllı" },
+                    { 9, "Qusar" },
+                    { 10, "Zaqatala" },
+                    { 11, "Qazax" }
                 });
 
             migrationBuilder.InsertData(
@@ -525,39 +524,29 @@ namespace TravelWeb.Migrations
 
             migrationBuilder.InsertData(
                 table: "Tours",
-                columns: new[] { "TourId", "CommentID", "DTourDayNight", "DestinationId", "Guid", "GuideID", "TestimonialID", "TourCapaCity", "TourClock", "TourCountLimit", "TourDetail", "TourImage", "TourLocaion", "TourPrice", "TourStatus", "UserId", "WriterId" },
+                columns: new[] { "TourId", "CommentID", "DTourDayNight", "DestinationId", "GuideID", "TestimonialID", "TourCapaCity", "TourClock", "TourCountLimit", "TourDetail", "TourImage", "TourLocaion", "TourPrice", "TourStatus", "UserId", "WriterId" },
                 values: new object[,]
                 {
-                    { 1, 0, null, 1, new Guid("00000000-0000-0000-0000-000000000000"), 1, 1, 0, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 0, "Tarixi şəhər turu", null, "İçərişəhər turu", 0.0, true, null, null },
-                    { 2, 0, null, 1, new Guid("00000000-0000-0000-0000-000000000000"), 2, 2, 0, new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local), 0, "Bulvar gəzintisi", null, "Dənizkənarı Bulvar turu", 0.0, true, null, null },
-                    { 3, 0, null, 1, new Guid("00000000-0000-0000-0000-000000000000"), 3, 3, 0, new DateTime(2025, 11, 11, 20, 0, 0, 0, DateTimeKind.Local), 0, "Panorama turları", null, "Flame Towers turu", 0.0, true, null, null },
-                    { 4, 0, null, 2, new Guid("00000000-0000-0000-0000-000000000000"), 3, 4, 0, new DateTime(2025, 11, 11, 10, 0, 0, 0, DateTimeKind.Local), 0, "Dağ-xizək turu", null, "Tufandağ turu", 0.0, true, null, null },
-                    { 5, 0, null, 2, new Guid("00000000-0000-0000-0000-000000000000"), 4, 5, 0, new DateTime(2025, 11, 11, 15, 0, 0, 0, DateTimeKind.Local), 0, "Göl ətrafında gəzinti", null, "Nohur gölü turu", 0.0, true, null, null },
-                    { 6, 0, null, 2, new Guid("00000000-0000-0000-0000-000000000000"), 5, 6, 0, new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local), 0, "Tarixi tur", null, "Qəbələ Qədim şəhəri turu", 0.0, true, null, null },
-                    { 7, 0, null, 3, new Guid("00000000-0000-0000-0000-000000000000"), 6, 7, 0, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 0, "Mədəniyyət turu", null, "Şəki xan sarayı turu", 0.0, true, null, null },
-                    { 8, 0, null, 3, new Guid("00000000-0000-0000-0000-000000000000"), 7, 8, 0, new DateTime(2025, 11, 11, 13, 0, 0, 0, DateTimeKind.Local), 0, "Tarixi kilsə turları", null, "Kiş kəndi turu", 0.0, true, null, null },
-                    { 9, 0, null, 3, new Guid("00000000-0000-0000-0000-000000000000"), 7, 9, 0, new DateTime(2025, 11, 11, 18, 0, 0, 0, DateTimeKind.Local), 0, "Şirniyyat turu", null, "Şəki bazarı turu", 0.0, true, null, null },
-                    { 10, 0, null, 4, new Guid("00000000-0000-0000-0000-000000000000"), 5, 10, 0, new DateTime(2025, 11, 11, 8, 0, 0, 0, DateTimeKind.Local), 0, "Meşə turu", null, "Qəçrəş turu", 0.0, true, null, null },
-                    { 11, 0, null, 4, new Guid("00000000-0000-0000-0000-000000000000"), 8, 1, 0, new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local), 0, "Dağ kəndi turu", null, "Xınalıq turu", 0.0, true, null, null },
-                    { 12, 0, null, 4, new Guid("00000000-0000-0000-0000-000000000000"), 9, 2, 0, new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local), 0, "Çay ətrafında gəzinti", null, "Qudyalçay turu", 0.0, true, null, null },
-                    { 13, 0, null, 5, new Guid("00000000-0000-0000-0000-000000000000"), 7, 3, 0, new DateTime(2025, 11, 11, 10, 0, 0, 0, DateTimeKind.Local), 0, "Tarixi mədəni tur", null, "Cıdır düz turu", 0.0, true, null, null },
-                    { 14, 0, null, 5, new Guid("00000000-0000-0000-0000-000000000000"), 9, 4, 0, new DateTime(2025, 11, 11, 15, 0, 0, 0, DateTimeKind.Local), 0, "Mədəni abidələr turu", null, "Yuxarı Gövhər Ağa məscidi turu", 0.0, true, null, null },
-                    { 15, 0, null, 5, new Guid("00000000-0000-0000-0000-000000000000"), 10, 5, 0, new DateTime(2025, 11, 11, 20, 0, 0, 0, DateTimeKind.Local), 0, "Qala turu", null, "Şuşa qalası turu", 0.0, true, null, null },
-                    { 16, 0, null, 6, new Guid("00000000-0000-0000-0000-000000000000"), 9, 6, 0, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 0, "Ekoturizm", null, "Hirkan Milli Parkı turu", 0.0, true, null, null },
-                    { 17, 0, null, 6, new Guid("00000000-0000-0000-0000-000000000000"), 10, 7, 0, new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local), 0, "Dəniz gəzintisi", null, "Mayak sahili turu", 0.0, true, null, null },
-                    { 18, 0, null, 6, new Guid("00000000-0000-0000-0000-000000000000"), 6, 8, 0, new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local), 0, "Tarixi yerlər turu", null, "Lənkəran qalası turu", 0.0, true, null, null },
-                    { 19, 0, null, 7, new Guid("00000000-0000-0000-0000-000000000000"), 10, 9, 0, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 0, "Müalicəvi istirahət", null, "Naftalan sanatoriyası turu", 0.0, true, null, null },
-                    { 20, 0, null, 7, new Guid("00000000-0000-0000-0000-000000000000"), 5, 10, 0, new DateTime(2025, 11, 11, 13, 0, 0, 0, DateTimeKind.Local), 0, "Şəhər gəzintisi", null, "Naftalan şəhər mərkəzi turu", 0.0, true, null, null },
-                    { 21, 0, null, 7, new Guid("00000000-0000-0000-0000-000000000000"), 5, 1, 0, new DateTime(2025, 11, 11, 18, 0, 0, 0, DateTimeKind.Local), 0, "Açıq hava fəaliyyəti", null, "Naftalan parkı turu", 0.0, true, null, null },
-                    { 22, 0, null, 8, new Guid("00000000-0000-0000-0000-000000000000"), 3, 2, 0, new DateTime(2025, 11, 11, 8, 0, 0, 0, DateTimeKind.Local), 0, "Əl sənətkarlıq turu", null, "Lahıc kəndi turu", 0.0, true, null, null },
-                    { 23, 0, null, 8, new Guid("00000000-0000-0000-0000-000000000000"), 5, 3, 0, new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local), 0, "Təbiət gəzintisi", null, "İsmayıllı meşələri turu", 0.0, true, null, null },
-                    { 24, 0, null, 8, new Guid("00000000-0000-0000-0000-000000000000"), 3, 4, 0, new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local), 0, "Mədəni tur", null, "Basqal kəndi turu", 0.0, true, null, null },
-                    { 25, 0, null, 9, new Guid("00000000-0000-0000-0000-000000000000"), 9, 5, 0, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 0, "Xizək turu", null, "Şahdağ turu", 0.0, true, null, null },
-                    { 26, 0, null, 9, new Guid("00000000-0000-0000-0000-000000000000"), 4, 6, 0, new DateTime(2025, 11, 11, 15, 0, 0, 0, DateTimeKind.Local), 0, "Ailəvi istirahət", null, "Qusar şəhər parkı turu", 0.0, true, null, null },
-                    { 27, 0, null, 9, new Guid("00000000-0000-0000-0000-000000000000"), 9, 7, 0, new DateTime(2025, 11, 11, 20, 0, 0, 0, DateTimeKind.Local), 0, "Dağ yürüşü", null, "Ləzə kəndi turu", 0.0, true, null, null },
-                    { 28, 0, null, 10, new Guid("00000000-0000-0000-0000-000000000000"), 8, 8, 0, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 0, "Tarixi tur", null, "Zaqatala qalası turu", 0.0, true, null, null },
-                    { 29, 0, null, 10, new Guid("00000000-0000-0000-0000-000000000000"), 2, 9, 0, new DateTime(2025, 11, 11, 13, 0, 0, 0, DateTimeKind.Local), 0, "Mədəni kənd turu", null, "Yuxarı Çardaqlar turu", 0.0, true, null, null },
-                    { 30, 0, null, 10, new Guid("00000000-0000-0000-0000-000000000000"), 1, 10, 0, new DateTime(2025, 11, 11, 19, 0, 0, 0, DateTimeKind.Local), 0, "Təbiət və mədəniyyət turu", null, "Qalal kəndi turu", 0.0, true, null, null }
+                    { 1, 1, "1 Gün", 1, 1, 1, 25, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 5, "Bakı İçərişəhərin qədim küçələri və Qız qalası ziyarəti.", "/web/assets/images/g1.jpg", "İçərişəhər tarixi turu", 40.0, true, null, null },
+                    { 2, 2, "2 Gün 1 Gecə", 1, 2, 2, 30, new DateTime(2025, 11, 11, 15, 0, 0, 0, DateTimeKind.Local), 8, "Panorama mənzərələri və Xəzər dənizi sahilində gəzinti.", "/web/assets/images/g2.jpg", "Flame Towers və Bulvar turu", 85.0, true, null, null },
+                    { 3, 3, "3 Gün 2 Gecə", 2, 3, 3, 20, new DateTime(2025, 11, 11, 10, 0, 0, 0, DateTimeKind.Local), 5, "Dağ-xizək istirahəti və Qəbələnin təbiəti.", "/web/assets/images/g3.jpg", "Tufandağ xizək turu", 190.0, true, null, null },
+                    { 4, 4, "1 Gün", 2, 4, 4, 35, new DateTime(2025, 11, 11, 14, 0, 0, 0, DateTimeKind.Local), 10, "Göl ətrafında rahat gəzinti və piknik.", "/web/assets/images/g4.jpg", "Nohur gölü gəzintisi", 50.0, true, null, null },
+                    { 5, 5, "2 Gün 1 Gecə", 3, 5, 5, 25, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 7, "Tarixi abidələr və Şəki mətbəxi.", "/web/assets/images/g5.jpg", "Şəki xan sarayı və karvansaray turu", 110.0, true, null, null },
+                    { 6, 6, "1 Gün", 4, 6, 6, 40, new DateTime(2025, 11, 11, 8, 0, 0, 0, DateTimeKind.Local), 10, "Meşəlikdə yürüş və istirahət.", "/web/assets/images/g6.jpg", "Qəçrəş meşə turu", 60.0, true, null, null },
+                    { 7, 7, "3 Gün 2 Gecə", 4, 7, 7, 20, new DateTime(2025, 11, 11, 12, 0, 0, 0, DateTimeKind.Local), 5, "Qafqazın ən qədim dağ kəndinə səyahət.", "/web/assets/images/g7.jpg", "Xınalıq kəndi turu", 220.0, true, null, null },
+                    { 8, 8, "2 Gün 1 Gecə", 5, 8, 8, 20, new DateTime(2025, 11, 11, 10, 0, 0, 0, DateTimeKind.Local), 6, "Qarabağın simvolu olan şəhərdə tarixi gəzinti.", "/web/assets/images/g8.jpg", "Şuşa qalası və Cıdır düz turu", 160.0, true, null, null },
+                    { 9, 9, "2 Gün 1 Gecə", 6, 9, 9, 25, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 8, "Ekoturizm və meşə yürüşləri.", "/web/assets/images/g9.jpg", "Hirkan Milli Parkı turu", 130.0, true, null, null },
+                    { 10, 10, "3 Gün 2 Gecə", 7, 10, 10, 30, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 10, "Müalicəvi neft vannaları və spa xidmətləri.", "/web/assets/images/g10.jpg", "Naftalan sanatoriya istirahəti", 200.0, true, null, null },
+                    { 11, 11, "1 Gün", 8, 3, 1, 30, new DateTime(2025, 11, 11, 8, 0, 0, 0, DateTimeKind.Local), 10, "Əl işləri və misgərlik sənəti ilə tanışlıq.", "/web/assets/images/g1.jpg", "Lahıc kəndi sənətkarlıq turu", 55.0, true, null, null },
+                    { 12, 12, "3 Gün 2 Gecə", 9, 4, 2, 25, new DateTime(2025, 11, 11, 11, 0, 0, 0, DateTimeKind.Local), 5, "Xizək, dağ yürüşü və qış istirahəti.", "/web/assets/images/g2.jpg", "Şahdağ xizək kompleksi turu", 250.0, true, null, null },
+                    { 13, 13, "2 Gün 1 Gecə", 10, 5, 3, 25, new DateTime(2025, 11, 11, 10, 0, 0, 0, DateTimeKind.Local), 6, "Tarixi qala və təbiət birləşməsi.", "/web/assets/images/g3.jpg", "Zaqatala qalası və mədəni tur", 140.0, true, null, null },
+                    { 14, 14, "1 Gün", 11, 6, 4, 30, new DateTime(2025, 11, 11, 8, 0, 0, 0, DateTimeKind.Local), 10, "Göyəzən dağının zirvəsinə yürüş və piknik.", "/web/assets/images/g4.jpg", "Göyəzən dağı turu", 60.0, true, null, null },
+                    { 15, 15, "2 Gün 1 Gecə", 11, 7, 5, 20, new DateTime(2025, 11, 11, 12, 0, 0, 0, DateTimeKind.Local), 5, "Qazaxın qədim məscid və qalaları ilə tanışlıq.", "/web/assets/images/g5.jpg", "Qazax tarixi abidələr turu", 125.0, true, null, null },
+                    { 16, 16, "1 Gün", 11, 8, 6, 25, new DateTime(2025, 11, 11, 9, 0, 0, 0, DateTimeKind.Local), 8, "Qazaxın simvolik Sınıq Körpüsünü ziyarət.", "/web/assets/images/g6.jpg", "Sınıq Körpü turu", 45.0, true, null, null },
+                    { 17, 17, "1 Gün", 5, 9, 7, 25, new DateTime(2025, 11, 11, 13, 0, 0, 0, DateTimeKind.Local), 7, "Şuşanın mədəni irsi və mənzərələri.", "/web/assets/images/g7.jpg", "Şuşa şəhər panoraması", 70.0, true, null, null },
+                    { 18, 18, "2 Gün 1 Gecə", 8, 10, 8, 30, new DateTime(2025, 11, 11, 16, 0, 0, 0, DateTimeKind.Local), 8, "Təbiət gəzintiləri və kamp fəaliyyəti.", "/web/assets/images/g8.jpg", "İsmayıllı meşə yürüşü", 120.0, true, null, null },
+                    { 19, 19, "3 Gün 2 Gecə", 9, 3, 9, 20, new DateTime(2025, 11, 11, 17, 0, 0, 0, DateTimeKind.Local), 5, "Qusar dağları boyunca yürüş və düşərgə.", "/web/assets/images/g9.jpg", "Qusar dağ yürüşü", 210.0, true, null, null },
+                    { 20, 20, "2 Gün 1 Gecə", 6, 2, 10, 25, new DateTime(2025, 11, 11, 18, 0, 0, 0, DateTimeKind.Local), 8, "Lənkəran çayı və qədim qalaları ziyarət.", "/web/assets/images/g10.jpg", "Lənkəran çay və qala turu", 135.0, true, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -565,15 +554,37 @@ namespace TravelWeb.Migrations
                 columns: new[] { "RotasionID", "RotasionDescription", "RotasionName", "RotasionStatus", "TourId" },
                 values: new object[,]
                 {
-                    { 1, "Tarixi abidələrə səyahət", "Qobustan Qayaüstü", true, 1 },
-                    { 2, "Təbiət gəzintisi və foto turları", "Nohur Gölü", true, 5 },
-                    { 3, "Mədəni ekskursiya", "Xan Sarayı", true, 7 },
-                    { 4, "Dağ yürüşü və piknik", "Qəçrəş Meşəsi", true, 10 },
-                    { 5, "Qarabağın ürəyi", "Şuşa qalası", true, 15 },
-                    { 6, "Spa və sağlamlıq turu", "Naftalan Müalicə Mərkəzi", true, 19 },
-                    { 7, "Ekoturizm və hiking", "İsmayıllı Meşələri", true, 23 },
-                    { 8, "Qar idmanı və xizək", "Şahdağ Mərkəzi", true, 25 },
-                    { 9, "Tarixi səfər", "Zaqatala Qalası", true, 28 }
+                    { 1, "Bakı İçərişəhərin simvolu, tarixi abidə.", "Qız Qalası", true, 1 },
+                    { 2, "Orta əsr memarlığının incisi.", "Şirvanşahlar Sarayı", true, 1 },
+                    { 3, "Xəzər sahili boyunca səyahət və foto çəkilişlər.", "Bulvar Gəzintisi", true, 2 },
+                    { 4, "Bakı gecəsinin parlayan simvolu.", "Flame Towers Panorama", true, 2 },
+                    { 5, "Xizək və teleferik macərası.", "Tufandağ Kompleksi", true, 3 },
+                    { 6, "Qəbələnd əyləncə parkında istirahət.", "Qəbələ Əyləncə Mərkəzi", true, 3 },
+                    { 7, "Təbiət qoynunda sakitlik və foto turları.", "Nohur Gölü", true, 4 },
+                    { 8, "Dağlıq ərazidə gəzinti və sərin hava.", "Yeddi Gözəl Şəlaləsi", true, 4 },
+                    { 9, "Şəki xanlarının tarixi iqamətgahı.", "Xan Sarayı", true, 5 },
+                    { 10, "İpək Yolu üzərində qədim karvansaray kompleksi.", "Karvansaray", true, 5 },
+                    { 11, "Qafqazın ən qədim kilsələrindən biri.", "Kiş Kilsəsi", true, 5 },
+                    { 12, "Meşəlikdə yürüş və piknik.", "Qəçrəş Meşəsi", true, 6 },
+                    { 13, "Təbiətin nadir gözəlliyi, dağlıq ərazi.", "Afurd Şəlaləsi", true, 6 },
+                    { 14, "Qafqazın ən qədim yaşayış məskəni.", "Xınalıq Kəndi", true, 7 },
+                    { 15, "Unikal yəhudi məhəlləsi və mədəniyyət.", "Quba Qırmızı Qəsəbə", true, 7 },
+                    { 16, "Qarabağın ürəyində tarixi qala.", "Şuşa Qalası", true, 8 },
+                    { 17, "Qarabağ mənzərələri və açıq hava tədbirləri.", "Cıdır Düzü", true, 8 },
+                    { 18, "İslam memarlığının incisi.", "Gövhər Ağa Məscidi", true, 8 },
+                    { 19, "Ekoturizm və dağ yürüşləri.", "Hirkan Meşəsi", true, 9 },
+                    { 20, "Dəniz kənarında gün batımı.", "Mayak Sahili", true, 9 },
+                    { 21, "Naftalan neft vannası və sağlamlıq mərkəzi.", "Sanatoriya Kompleksi", true, 10 },
+                    { 22, "Şəhər parkında istirahət və gəzinti.", "Naftalan Parkı", true, 10 },
+                    { 23, "Misgərlik və əl sənətkarlıq mərkəzi.", "Lahıc Kəndi", true, 11 },
+                    { 24, "Kənd həyatı və yerli mədəniyyət.", "Basqal Kəndi", true, 11 },
+                    { 25, "Dağ yürüşü və teleferik səyahəti.", "Şahdağ Dağ Yolu", true, 12 },
+                    { 26, "Dağlıq kənd həyatı və foto turlar.", "Ləzə Kəndi", true, 12 },
+                    { 27, "Tarixi qala və şəhər mənzərələri.", "Zaqatala Qalası", true, 13 },
+                    { 28, "Mədəni kənd turu və yerli mətbəx.", "Yuxarı Çardaqlar", true, 13 },
+                    { 29, "Zirvəyə yürüş və mənzərəli foto turları.", "Göyəzən Dağı", true, 14 },
+                    { 30, "Tarixi abidə və Qazax çayı ətrafı gəzinti.", "Sınıq Körpü", true, 16 },
+                    { 31, "Qazaxın qədim müdafiə istehkamı.", "Qazax Qalası", true, 15 }
                 });
 
             migrationBuilder.CreateIndex(

@@ -1,6 +1,6 @@
-using EntityLayer.Concrete;
+using Entities.Concrete;
 
-namespace ServicesLayer.Abstract
+namespace Services.Abstract
 {
     public interface IRezervationService : IGenericService<Rezervation>
     {

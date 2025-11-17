@@ -2,7 +2,6 @@ using System.Linq.Expressions;
 using DAL.Abstract;
 using Entities.Concrete;
 using Services.Abstract;
-using ServicesLayer.Abstract;
 
 namespace Services.Concrete
 {
@@ -13,6 +12,11 @@ namespace Services.Concrete
         public TourManager(ITourDAL tourDAL)
         {
             _tourDAL = tourDAL;
+        }
+
+        public List<Tour> AllToursWithDestinationsService()
+        {
+            return _tourDAL.AllToursWithDestinationsDAL();
         }
 
         public Tour GetFindIdService(int id)

@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using Services.Abstract;
 using Services.Concrete;
 using Services.ValidationRule;
-using ServicesLayer.Abstract;
 using ServicesLayer.Concrete;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,6 +42,8 @@ builder.Services.AddScoped<IGuideDAL, EFGuideRepository>();
 builder.Services.AddScoped<IGuideService, GuideManager>();
 builder.Services.AddScoped<ITourDAL, EFTourRepository>();
 builder.Services.AddScoped<ITourService, TourManager>();
+builder.Services.AddScoped<IRezervationDAL, EFRezervationRepository>();
+builder.Services.AddScoped<IRezervationService, RezervationManager>();
 
 builder.Services.AddDbContext<Context>(opt =>
 {

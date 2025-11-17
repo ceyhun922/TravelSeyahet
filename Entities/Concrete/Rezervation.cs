@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using Entities.Concrete;
 
-namespace EntityLayer.Concrete
+namespace Entities.Concrete
 {
     public class Rezervation
     {
@@ -27,6 +26,8 @@ namespace EntityLayer.Concrete
         public string? UserId { get; set; }
         public Writer? Writer { get; set; }
         public int DestinationId { get; set; }
+
+        public int TourId { get; set; }
 
         public Tour? Tour { get; set; }
 
