@@ -61,7 +61,13 @@ builder.Services.AddIdentity<Writer, Role>(opt =>
 }).AddEntityFrameworkStores<Context>().AddDefaultTokenProviders();
 
 
-
+builder.Services.ConfigureApplicationCookie(opt =>
+{
+    opt.Cookie.Name ="MyCookie";
+    opt.LoginPath ="/Login/Index";
+    opt.LogoutPath ="/Login/Logout";
+    opt.AccessDeniedPath ="/Login/Index";
+});
 
 var app = builder.Build();
 

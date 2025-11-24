@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/ceyhunyusif/Desktop/TravelAze/DAL/DAL.csproj": {}
+    "/Users/ceyhunyusif/Desktop/OTHER/TravelAze/DAL/DAL.csproj": {}
   },
   "projects": {
-    "/Users/ceyhunyusif/Desktop/TravelAze/DAL/DAL.csproj": {
+    "/Users/ceyhunyusif/Desktop/OTHER/TravelAze/DAL/DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ceyhunyusif/Desktop/TravelAze/DAL/DAL.csproj",
+        "projectUniqueName": "/Users/ceyhunyusif/Desktop/OTHER/TravelAze/DAL/DAL.csproj",
         "projectName": "DAL",
-        "projectPath": "/Users/ceyhunyusif/Desktop/TravelAze/DAL/DAL.csproj",
+        "projectPath": "/Users/ceyhunyusif/Desktop/OTHER/TravelAze/DAL/DAL.csproj",
         "packagesPath": "/Users/ceyhunyusif/.nuget/packages/",
-        "outputPath": "/Users/ceyhunyusif/Desktop/TravelAze/DAL/obj/",
+        "outputPath": "/Users/ceyhunyusif/Desktop/OTHER/TravelAze/DAL/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ceyhunyusif/.nuget/NuGet/NuGet.Config"
@@ -27,8 +27,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/ceyhunyusif/Desktop/TravelAze/Entities/Entities.csproj": {
-                "projectPath": "/Users/ceyhunyusif/Desktop/TravelAze/Entities/Entities.csproj"
+              "/Users/ceyhunyusif/Desktop/OTHER/TravelAze/Entities/Entities.csproj": {
+                "projectPath": "/Users/ceyhunyusif/Desktop/OTHER/TravelAze/Entities/Entities.csproj"
               }
             }
           }
@@ -77,14 +77,14 @@
         }
       }
     },
-    "/Users/ceyhunyusif/Desktop/TravelAze/Entities/Entities.csproj": {
+    "/Users/ceyhunyusif/Desktop/OTHER/TravelAze/Entities/Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/ceyhunyusif/Desktop/TravelAze/Entities/Entities.csproj",
+        "projectUniqueName": "/Users/ceyhunyusif/Desktop/OTHER/TravelAze/Entities/Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "/Users/ceyhunyusif/Desktop/TravelAze/Entities/Entities.csproj",
+        "projectPath": "/Users/ceyhunyusif/Desktop/OTHER/TravelAze/Entities/Entities.csproj",
         "packagesPath": "/Users/ceyhunyusif/.nuget/packages/",
-        "outputPath": "/Users/ceyhunyusif/Desktop/TravelAze/Entities/obj/",
+        "outputPath": "/Users/ceyhunyusif/Desktop/OTHER/TravelAze/Entities/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/ceyhunyusif/.nuget/NuGet/NuGet.Config"

@@ -1,0 +1,57 @@
+@model List<Rezervation>
+
+@{
+    Layout = "_WritterLayout";
+}
+
+<h2 class="mt-3 mb-4">Rezervasiyalarım</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Hazırda aktiv rezervasiyanız yoxdur.</div>
+}
+else
+{
+    <p>Seç</p>
+    <select class="form-control align-middle">
+        <option value="">Aktifler</option>
+        <option value="">Gözleyenler</option>
+        <option value="">Leğv edilenler</option>
+    </select>
+    <hr />
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>City</th>
+                <th>Price</th>
+                <th>Statu</th>
+                <th>Etraflı</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.RezervationID</td>
+                    <td>@item.RemainderCapaCity</td>
+                    <td>@item.TotalPrice</td>
+                    @if (item.RezervationStatus == RezervationStatus.Pending)
+                    {
+                        <td class="badge text-bg-warning">Qebul olundu</td>
+
+                    }
+                    else if (item.RezervationStatus == RezervationStatus.Approved)
+                    {
+                        <td class="badge text-bg-success">Qebul olundu</td>
+                    }
+                    else
+                    {
+                        <td class="badge text-bg-danger">Leğv olundu</td>
+                    }
+                    <td><a href=""> Bax</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

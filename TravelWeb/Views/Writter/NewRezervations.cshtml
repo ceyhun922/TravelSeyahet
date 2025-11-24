@@ -1,14 +1,21 @@
 @model List<Destination>
+
 @{
     Layout = "_WritterLayout";
 }
+
 <div class="card">
     <div class="card-body">
-                <div id="CapacityAlert" class="alert alert-danger d-none"></div>
 
-        <h4 class="card-title">Rezervasiya Formu</h4>
+        <div id="CapacityAlert" 
+             class="alert d-none" 
+             style="font-weight:600;">
+        </div>
 
-        <div class="form-group">
+        <h4 class="card-title mb-3">Rezervasiya Formu</h4>
+
+        <!-- Şəhər seçimi -->
+        <div class="form-group mb-3">
             <label>Şəhər</label>
             <select id="DestinationId" class="form-control">
                 <option value="">Seçin</option>
@@ -19,7 +26,8 @@
             </select>
         </div>
 
-        <div class="form-group">
+        <!-- Tur seçimi -->
+        <div class="form-group mb-3">
             <label>Tur</label>
             <select id="TourId" class="form-control">
                 <option value="">Əvvəlcə şəhər seçin</option>
@@ -28,57 +36,59 @@
 
         <input type="hidden" id="TourPrice" />
 
-        <div class="form-group">
+        <!-- Gün / Gecə -->
+        <div class="form-group mb-3">
             <label>Gün / Gecə</label>
             <input id="TourDayNight" class="form-control" readonly />
         </div>
 
-        <div class="form-group">
+        <!-- Başlama vaxtı -->
+        <div class="form-group mb-3">
             <label>Başlama Saatı</label>
             <input id="TourClock" class="form-control" readonly />
         </div>
 
-        <div class="form-group">
-            <label>Açıqlama</label>
+        <!-- Açıqlama -->
+        <div class="form-group mb-3">
+            <label>Tur haqqında</label>
             <textarea id="TourDetail" class="form-control" rows="2" readonly></textarea>
         </div>
 
-        <div class="form-group">
+        <!-- Qalan yer -->
+        <div class="form-group mb-3">
             <label>Qalan Yer</label>
             <input id="RemainderCapaCity" class="form-control" readonly />
         </div>
 
-        <div class="form-group">
+        <!-- Nəfər sayı -->
+        <div class="form-group mb-3">
             <label>Neçə nəfər?</label>
             <input id="CountPerson" type="number" class="form-control" min="1" />
         </div>
 
-
-        <div class="form-group">
+        <!-- Ümumi Qiymət -->
+        <div class="form-group mb-3">
             <label>Ümumi Qiymət</label>
             <input id="TotalPrice" class="form-control" readonly />
         </div>
 
-        <div class="form-group">
-            <input id="RezervationDate" type="hidden" class="form-control" />
-        </div>
+        <!-- Gizli tarix/saat -->
+        <input id="RezervationDate" type="hidden" />
+        <input id="RezervationTime" type="hidden" />
 
-        <div class="form-group">
-            <input  id="RezervationTime" type="hidden" class="form-control" />
-        </div>
-
-        <div class="form-group">
+        <!-- Qeyd -->
+        <div class="form-group mb-3">
             <label>Qeyd</label>
             <textarea id="RezervationDescription" class="form-control"></textarea>
         </div>
 
-        <button id="SaveBtn" class="btn btn-success mt-3">Rezervasiya Et</button>
+        <button id="SaveBtn" class="btn btn-success w-100 mt-2">Rezervasiya Et</button>
 
     </div>
 </div>
 
-
 @section Scripts {
+
 <script>
 
     const allDestinations = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
@@ -88,7 +98,7 @@
         }
     ));
 
-    // Şəhər - turlar
+    // ⭐ Şəhər seçildi
     $('#DestinationId').change(function () {
 
         const destId = $(this).val();
@@ -109,11 +119,11 @@
             return;
         }
 
-        // 🔥 SADECE BOs YERİ OLAN TURLAR
+        // ⭐ Qalan yeri olan turlar
         const availableTours = selected.tours.filter(t => t.tourCountLimit > 0);
 
         if (availableTours.length === 0) {
-            tourSelect.append('<option value="">Bu şəhərdə boş yerlı tur yoxdur</option>');
+            tourSelect.append('<option value="">Boş yerli tur yoxdur</option>');
             return;
         }
 
@@ -125,7 +135,7 @@
     });
 
 
-    // Tur seçildi
+    // ⭐ Tur seçildi
     $('#TourId').change(function () {
 
         const destId = $('#DestinationId').val();
@@ -148,31 +158,33 @@
         updateTotal();
     });
 
-
-    // Adam sayı - capacity check + total price
+    // ⭐ Nəfər sayı və total price
     $('#CountPerson').on('input', function () {
 
         const count = Number($(this).val());
         const remain = Number($('#RemainderCapaCity').val());
         const alertBox = $('#CapacityAlert');
 
-        alertBox.addClass('d-none').text('');
+        alertBox.addClass('d-none').removeClass('alert-danger alert-success');
 
         if (!remain || remain <= 0) {
-            alertBox.removeClass('d-none').text("Bu turda boş yer yoxdur!");
+            alertBox.removeClass('d-none')
+                    .addClass('alert alert-danger')
+                    .text("Bu turda boş yer yoxdur!");
             $(this).val(0);
             $('#TotalPrice').val('');
             return;
         }
 
         if (count > remain) {
-            alertBox.removeClass('d-none').text(`Bu turda yalnız ${remain} yer var!`);
+            alertBox.removeClass('d-none')
+                    .addClass('alert alert-danger')
+                    .text(`Bu turda yalnız ${remain} yer var!`);
             $(this).val(remain);
         }
 
         updateTotal();
     });
-
 
     function updateTotal() {
         const count = Number($('#CountPerson').val());
@@ -187,11 +199,16 @@
     function clearDetails() {
         $('#TourPrice,#TourDayNight,#TourClock,#TourDetail,#RemainderCapaCity,#TotalPrice').val('');
         $('#CountPerson').val('');
-        $('#CapacityAlert').addClass('d-none').text('');
     }
 
+
+    // ⭐ Rezervasiya Et
     $('#SaveBtn').click(function (e) {
         e.preventDefault();
+
+        // Auto doldur
+        $('#RezervationDate').val(new Date().toISOString().split("T")[0]);
+        $('#RezervationTime').val(new Date().toLocaleTimeString("en-GB", { hour12: false }));
 
         const data = {
             destinationId: $('#DestinationId').val(),

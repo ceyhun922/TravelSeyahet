@@ -19,8 +19,9 @@ namespace TravelWeb.Controllers
         private readonly IDestinationService _destinationService;
         private readonly IRezervationService _rezervationService;
         private readonly Context _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public WritterController(UserManager<Writer> userManager, SignInManager<Writer> signInManager, ITourService tourService, IDestinationService destinationService, Context context, IRezervationService rezervationService)
+        public WritterController(UserManager<Writer> userManager, SignInManager<Writer> signInManager, ITourService tourService, IDestinationService destinationService, Context context, IRezervationService rezervationService, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -28,6 +29,7 @@ namespace TravelWeb.Controllers
             _destinationService = destinationService;
             _context = context;
             _rezervationService = rezervationService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public IActionResult NewRezervations()
@@ -52,32 +54,39 @@ namespace TravelWeb.Controllers
                 return BadRequest($"Bu turda yalnız {tour.TourCountLimit} yer var.");
 
             double total = tour.TourPrice * model.CountPerson;
-
+            var userId = _userManager.GetUserId(User);
             var rez = new Rezervation
             {
                 DestinationId = model.DestinationId,
                 TourId = model.TourId,
                 RezervationCountPerson = model.CountPerson,
-                RezervationDate = model.RezervationDate,
-                RezervationTime = model.RezervationTime,
+                RezervationDate = DateTime.Now.Date,
+                RezervationTime = TimeOnly.FromDateTime(DateTime.Now),
                 RezervationDescription = model.Description,
                 TotalPrice = total,
+                RezervationStatus = RezervationStatus.Pending,
                 RemainderCapaCity = tour.TourCountLimit - model.CountPerson,
-                rezervationStatus = Rezervation.RezervationStatus.Pending,
-                UserId = User.Identity.Name
+                UserId = userId
             };
 
-            _rezervationService.InsertService(rez);
-    
 
-            // Turu yeniləyirik (yer qalığını azalt)
+            _rezervationService.InsertService(rez);
+
             tour.TourCountLimit -= model.CountPerson;
             _tourService.UpdateService(tour);
 
             return Ok(new { success = true, message = "Rezervasiya uğurla əlavə edildi!" });
         }
 
+        public async Task<IActionResult> ActiveRezervatons()
+        {
+            var userId = _userManager.GetUserId(User);
 
+
+            var result = _rezervationService.ListAllService(x => x.UserId == userId && x.RezervationStatus == RezervationStatus.Approved);
+            
+            return View(result);
+        }
 
         public IActionResult Index()
         {
