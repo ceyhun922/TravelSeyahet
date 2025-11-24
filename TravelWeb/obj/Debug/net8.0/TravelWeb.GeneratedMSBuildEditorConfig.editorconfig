@@ -9,83 +9,83 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = TravelWeb
 build_property.RootNamespace = TravelWeb
-build_property.ProjectDir = /Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/
+build_property.ProjectDir = /Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb
+build_property.MSBuildProjectDirectory = /Users/ceyhunyusif/Desktop/TravelAze/TravelWeb
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Home/Index.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Login/Index.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9naW4vSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Register/Index.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Register/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVnaXN0ZXIvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Shared/Components/Notification/Default.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Shared/Components/Notification/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvTm90aWZpY2F0aW9uL0RlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Shared/Components/Slider/Default.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Shared/Components/Slider/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvU2xpZGVyL0RlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Shared/_Navbar.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Shared/_Navbar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19OYXZiYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Shared/_SideBar.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Shared/_SideBar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19TaWRlQmFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Shared/_ValidationScriptsPartial.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Shared/_WritterLayout.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Shared/_WritterLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19Xcml0dGVyTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Tour/Index.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Tour/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVG91ci9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Writter/ActiveRezervatons.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Writter/ActiveRezervatons.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV3JpdHRlci9BY3RpdmVSZXplcnZhdG9ucy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Writter/ChangePassword.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Writter/ChangePassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV3JpdHRlci9DaGFuZ2VQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Writter/Index.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Writter/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV3JpdHRlci9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Writter/NewRezervations.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Writter/NewRezervations.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV3JpdHRlci9OZXdSZXplcnZhdGlvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Writter/Profile.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Writter/Profile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV3JpdHRlci9Qcm9maWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/_ViewImports.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/_ViewStart.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/ceyhunyusif/Desktop/OTHER/TravelAze/TravelWeb/Views/Shared/_Layout.cshtml]
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-ej27sv6qp6
