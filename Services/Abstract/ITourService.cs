@@ -4,7 +4,7 @@ namespace Services.Abstract
 {
     public interface ITourService : IGenericService<Tour>
     {
-        public List<Tour> AllToursWithDestinationsService();
+        public List<Tour> AllToursWithRotasionsService(int rotasionId);
         
     }
 }

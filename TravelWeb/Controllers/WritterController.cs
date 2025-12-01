@@ -78,12 +78,12 @@ namespace TravelWeb.Controllers
             return Ok(new { success = true, message = "Rezervasiya uğurla əlavə edildi!" });
         }
 
-        public async Task<IActionResult> ActiveRezervatons()
+        public async Task<IActionResult> AllRezervatons()
         {
             var userId = _userManager.GetUserId(User);
 
 
-            var result = _rezervationService.ListAllService(x => x.UserId == userId && x.RezervationStatus == RezervationStatus.Approved);
+            var result = _rezervationService.GetAllRezervationWithDestinationsService(userId);
             
             return View(result);
         }

@@ -12,7 +12,6 @@ namespace Entities.Concrete
         public bool RotasionStatus { get; set; }
         public int TourId { get; set; }
         
-        [JsonIgnore]   
         public Tour? Tour { get; set; }
     }
 }

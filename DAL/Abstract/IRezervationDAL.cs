@@ -4,6 +4,6 @@ namespace DAL.Abstract
 {
     public interface IRezervationDAL : IGenericDAL<Rezervation>
     {
-        
+        List<Rezervation> GetAllRezervationWithDestinationsDAL(string userId);
     }
 }

@@ -1,0 +1,61 @@
+@model List<Rezervation>
+
+@{
+    Layout = "_WritterLayout";
+}
+
+<h2 class="mt-3 mb-4">Rezervasiyalarım</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Hazırda aktiv rezervasiyanız yoxdur.</div>
+}
+else
+{
+    <td>
+    <span class="badge text-bg-warning">Gözləyir</span>
+</td>
+<td>
+    <span class="badge text-bg-success">Qəbul olundu</span>
+</td>
+
+<td>
+    <span class="badge text-bg-danger">Ləğv olundu</span>
+</td>
+
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>City</th>
+                <th>Price</th>
+                <th>Statu</th>
+                <th>Etraflı</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.RezervationID</td>
+                    <td>@item.Destination.DestinationCity</td>
+                    <td>@item.TotalPrice</td>
+                    @if (item.RezervationStatus == RezervationStatus.Pending)
+                    {
+                        <td class="badge text-bg-warning">Gözləyir</td>
+
+                    }
+                    else if (item.RezervationStatus == RezervationStatus.Approved)
+                    {
+                        <td class="badge text-bg-success">Qebul olundu</td>
+                    }
+                    else
+                    {
+                        <td class="badge text-bg-danger">Leğv olundu</td>
+                    }
+                    <td><a asp-controller="Tour" asp-action="TourDetail" asp-route-id="@item.Tour.TourId"> Bax</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

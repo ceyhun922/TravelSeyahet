@@ -44,6 +44,8 @@ builder.Services.AddScoped<ITourDAL, EFTourRepository>();
 builder.Services.AddScoped<ITourService, TourManager>();
 builder.Services.AddScoped<IRezervationDAL, EFRezervationRepository>();
 builder.Services.AddScoped<IRezervationService, RezervationManager>();
+builder.Services.AddScoped<IRotasionDAL, EFRotasionRepository>();
+builder.Services.AddScoped<IRotasionService, RotasionManager>();
 
 builder.Services.AddDbContext<Context>(opt =>
 {

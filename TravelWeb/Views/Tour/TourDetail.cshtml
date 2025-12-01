@@ -1,0 +1,33 @@
+@model List<Tour>
+
+@{
+    Layout = "_WritterLayout";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Location</th>
+                        <th>Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.First().TourId</td>
+                        <td>@Model.First().TourLocaion</td>
+                        <td>
+                            <a asp-action="Rotasions"
+                               asp-controller="Rotasion"
+                               asp-route-id="@Model.First().TourId">
+                               Show Rotasions
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

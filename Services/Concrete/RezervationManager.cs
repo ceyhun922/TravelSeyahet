@@ -1,6 +1,8 @@
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using DAL.Abstract;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Identity;
 using Services.Abstract;
 
 namespace ServicesLayer.Concrete
@@ -8,10 +10,17 @@ namespace ServicesLayer.Concrete
     public class RezervationManager : IRezervationService
     {
         private readonly IRezervationDAL _rezervationDAL;
+        private readonly UserManager<Writer> _userManager;
 
-        public RezervationManager(IRezervationDAL rezervationDAL)
+        public RezervationManager(IRezervationDAL rezervationDAL, UserManager<Writer> userManager)
         {
             _rezervationDAL = rezervationDAL;
+            _userManager = userManager;
+        }
+
+        public List<Rezervation> GetAllRezervationWithDestinationsService(string userId)
+        {
+            return _rezervationDAL.GetAllRezervationWithDestinationsDAL(userId);
         }
 
         public Rezervation GetFindIdService(int id)
@@ -43,5 +52,7 @@ namespace ServicesLayer.Concrete
         {
             _rezervationDAL.Update(t);
         }
+
+
     }
 }

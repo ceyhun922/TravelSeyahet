@@ -14,9 +14,9 @@ namespace Services.Concrete
             _tourDAL = tourDAL;
         }
 
-        public List<Tour> AllToursWithDestinationsService()
+        public List<Tour> AllToursWithRotasionsService(int rotasionId)
         {
-            return _tourDAL.AllToursWithDestinationsDAL();
+            return _tourDAL.AllToursWithRotasionsDAL(rotasionId);
         }
 
         public Tour GetFindIdService(int id)
