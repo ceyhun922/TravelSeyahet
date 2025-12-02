@@ -1,5 +1,6 @@
 
 
+using System.Threading.Tasks;
 using DAL.Concrete;
 using Entities.Concrete;
 using Entities.ViewModel;
@@ -40,7 +41,7 @@ namespace TravelWeb.Controllers
             return View(values);
         }
         [HttpPost]
-        public IActionResult NewRezervations(RezervationViewModel model)
+        public async Task<IActionResult> NewRezervations(RezervationViewModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Məlumat düzgün deyil.");
@@ -54,7 +55,7 @@ namespace TravelWeb.Controllers
                 return BadRequest($"Bu turda yalnız {tour.TourCountLimit} yer var.");
 
             double total = tour.TourPrice * model.CountPerson;
-            var userId = _userManager.GetUserId(User);
+            var user = await _userManager.GetUserAsync(User);
             var rez = new Rezervation
             {
                 DestinationId = model.DestinationId,
@@ -66,7 +67,7 @@ namespace TravelWeb.Controllers
                 TotalPrice = total,
                 RezervationStatus = RezervationStatus.Pending,
                 RemainderCapaCity = tour.TourCountLimit - model.CountPerson,
-                UserId = userId
+                UserId = user.Id
             };
 
 
@@ -80,13 +81,30 @@ namespace TravelWeb.Controllers
 
         public async Task<IActionResult> AllRezervatons()
         {
-            var userId = _userManager.GetUserId(User);
+            var user = await _userManager.GetUserAsync(User);
+            ViewBag.UserId = user.Id; 
 
+            var result = _rezervationService.GetAllRezervationWithDestinationsService(user.Id);
 
-            var result = _rezervationService.GetAllRezervationWithDestinationsService(userId);
-            
             return View(result);
         }
+
+        public async Task<IActionResult> FilterRezervation(int status, int userID)
+        {
+            var rezervation = _rezervationService.GetMyAllRezervationService(userID);
+            Console.WriteLine(userID);
+            if (status >= 0)
+            {
+                rezervation = rezervation
+                    .Where(x => (int)x.RezervationStatus == status)
+                    .ToList();
+            }
+
+            return PartialView("_RezervationTable", rezervation);
+        }
+
+
+
 
         public IActionResult Index()
         {
@@ -153,23 +171,6 @@ namespace TravelWeb.Controllers
             }
             return View(model);
         }
-
-
-
-        /*         public IActionResult NewRezervations()
-                {
-
-
-                    //var destinations = _destinationService.AllDestinationSubTourService();
-
-                                foreach (var item in destinations)
-                                {
-                                    foreach (var tour in item.Tours)
-                                    {
-                                        System.Console.WriteLine($"{tour.TourLocaion}");
-                                    }
-                                } 
-                } */
 
 
 

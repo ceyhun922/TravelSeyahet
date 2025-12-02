@@ -4,6 +4,7 @@ using DAL.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TravelWeb.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20251201230635_mig2")]
+    partial class mig2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,7 +104,7 @@ namespace TravelWeb.Migrations
                     b.Property<int?>("TourId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int?>("WriterId")
@@ -438,7 +441,7 @@ namespace TravelWeb.Migrations
                     b.Property<int>("TourId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int?>("WriterId")
@@ -953,7 +956,7 @@ namespace TravelWeb.Migrations
                     b.Property<bool>("TourStatus")
                         .HasColumnType("bit");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int?>("WriterId")
@@ -987,8 +990,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g1.jpg",
                             TourLocaion = "İçərişəhər tarixi turu",
                             TourPrice = 40.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1005,8 +1007,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g2.jpg",
                             TourLocaion = "Flame Towers və Bulvar turu",
                             TourPrice = 85.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1023,8 +1024,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g3.jpg",
                             TourLocaion = "Tufandağ xizək turu",
                             TourPrice = 190.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1041,8 +1041,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g4.jpg",
                             TourLocaion = "Nohur gölü gəzintisi",
                             TourPrice = 50.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1059,8 +1058,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g5.jpg",
                             TourLocaion = "Şəki xan sarayı və karvansaray turu",
                             TourPrice = 110.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1077,8 +1075,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g6.jpg",
                             TourLocaion = "Qəçrəş meşə turu",
                             TourPrice = 60.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1095,8 +1092,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g7.jpg",
                             TourLocaion = "Xınalıq kəndi turu",
                             TourPrice = 220.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1113,8 +1109,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g8.jpg",
                             TourLocaion = "Şuşa qalası və Cıdır düz turu",
                             TourPrice = 160.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1131,8 +1126,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g9.jpg",
                             TourLocaion = "Hirkan Milli Parkı turu",
                             TourPrice = 130.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1149,8 +1143,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g10.jpg",
                             TourLocaion = "Naftalan sanatoriya istirahəti",
                             TourPrice = 200.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1167,8 +1160,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g1.jpg",
                             TourLocaion = "Lahıc kəndi sənətkarlıq turu",
                             TourPrice = 55.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1185,8 +1177,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g2.jpg",
                             TourLocaion = "Şahdağ xizək kompleksi turu",
                             TourPrice = 250.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1203,8 +1194,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g3.jpg",
                             TourLocaion = "Zaqatala qalası və mədəni tur",
                             TourPrice = 140.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1221,8 +1211,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g4.jpg",
                             TourLocaion = "Göyəzən dağı turu",
                             TourPrice = 60.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1239,8 +1228,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g5.jpg",
                             TourLocaion = "Qazax tarixi abidələr turu",
                             TourPrice = 125.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1257,8 +1245,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g6.jpg",
                             TourLocaion = "Sınıq Körpü turu",
                             TourPrice = 45.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1275,8 +1262,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g7.jpg",
                             TourLocaion = "Şuşa şəhər panoraması",
                             TourPrice = 70.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1293,8 +1279,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g8.jpg",
                             TourLocaion = "İsmayıllı meşə yürüşü",
                             TourPrice = 120.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1311,8 +1296,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g9.jpg",
                             TourLocaion = "Qusar dağ yürüşü",
                             TourPrice = 210.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         },
                         new
                         {
@@ -1329,8 +1313,7 @@ namespace TravelWeb.Migrations
                             TourImage = "/web/assets/images/g10.jpg",
                             TourLocaion = "Lənkəran çay və qala turu",
                             TourPrice = 135.0,
-                            TourStatus = true,
-                            UserId = 0
+                            TourStatus = true
                         });
                 });
 

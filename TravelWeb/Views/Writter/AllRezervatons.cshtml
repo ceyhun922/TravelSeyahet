@@ -1,61 +1,53 @@
 @model List<Rezervation>
-
 @{
     Layout = "_WritterLayout";
 }
 
 <h2 class="mt-3 mb-4">Rezervasiyalarım</h2>
 
-@if (!Model.Any())
-{
-    <div class="alert alert-info">Hazırda aktiv rezervasiyanız yoxdur.</div>
-}
-else
-{
-    <td>
-    <span class="badge text-bg-warning">Gözləyir</span>
-</td>
-<td>
-    <span class="badge text-bg-success">Qəbul olundu</span>
-</td>
+<div class="btn-group mb-3" role="group">
+    <button class="btn btn-primary mx-1" data-filter="-1">Hamısı</button>
+    <button class="btn btn-warning mx-1" data-filter="0">Gözləyənlər</button>
+    <button class="btn btn-success mx-1" data-filter="1">Aktivlər</button>
+    <button class="btn btn-danger mx-1" data-filter="2">Ləğv edilənlər</button>
 
-<td>
-    <span class="badge text-bg-danger">Ləğv olundu</span>
-</td>
+</div>
 
-    <table class="table table-bordered table-hover align-middle">
-        <thead class="table-dark">
-            <tr>
-                <th>ID</th>
-                <th>City</th>
-                <th>Price</th>
-                <th>Statu</th>
-                <th>Etraflı</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.RezervationID</td>
-                    <td>@item.Destination.DestinationCity</td>
-                    <td>@item.TotalPrice</td>
-                    @if (item.RezervationStatus == RezervationStatus.Pending)
-                    {
-                        <td class="badge text-bg-warning">Gözləyir</td>
+<table class="table table-bordered table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>City</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Bax</th>
+        </tr>
+    </thead>
 
-                    }
-                    else if (item.RezervationStatus == RezervationStatus.Approved)
-                    {
-                        <td class="badge text-bg-success">Qebul olundu</td>
-                    }
-                    else
-                    {
-                        <td class="badge text-bg-danger">Leğv olundu</td>
-                    }
-                    <td><a asp-controller="Tour" asp-action="TourDetail" asp-route-id="@item.Tour.TourId"> Bax</a></td>
-                </tr>
+    <tbody>
+        @await Html.PartialAsync("_RezervationTable", Model)
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(".btn-group button").click(function () {
+
+        let status = parseInt($(this).data("filter"));
+        let userID = parseInt("@ViewBag.UserId");
+
+
+
+        $.ajax({
+            type: "GET",
+            url: "/Writter/FilterRezervation",
+            data: { status: status, userID: userID },
+            success: function (result) {
+                $("tbody").html(result);
+
             }
-        </tbody>
-    </table>
-}
+        });
+
+    });
+</script>

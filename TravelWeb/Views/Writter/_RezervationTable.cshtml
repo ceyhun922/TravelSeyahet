@@ -1,0 +1,14 @@
+@model List<Rezervation>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.RezervationID</td>
+        <td>@item.Destination.DestinationCity</td>
+        <td>@item.TotalPrice</td>
+        <td>@item.RezervationStatus</td>
+        <td>
+            <a asp-controller="Tour" asp-action="TourDetail" asp-route-id="@item.TourId">Bax</a>
+        </td>
+    </tr>
+}
