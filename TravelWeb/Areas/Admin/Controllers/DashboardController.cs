@@ -4,9 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 namespace TravelWeb.Areas.Admin.Controllers
 {
     [AllowAnonymous]
+    [Area("Admin")]
     public class DashboardController : Controller
     {
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Cities()
         {
             return View();
         }
