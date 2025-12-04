@@ -69,10 +69,10 @@ builder.Services.AddIdentity<Writer, Role>(opt =>
 
 builder.Services.ConfigureApplicationCookie(opt =>
 {
-    opt.Cookie.Name ="MyCookie";
-    opt.LoginPath ="/Login/Index";
-    opt.LogoutPath ="/Login/Logout";
-    opt.AccessDeniedPath ="/Login/Index";
+    opt.Cookie.Name = "MyCookie";
+    opt.LoginPath = "/Login/Index";
+    opt.LogoutPath = "/Login/Logout";
+    opt.AccessDeniedPath = "/Login/Index";
 });
 
 var app = builder.Build();
@@ -93,8 +93,19 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseEndpoints(endpoint =>
+{
+    endpoint.MapControllerRoute(
+     name: "default",
+     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    endpoint.MapAreaControllerRoute(
+        name: "admin",
+        areaName: "admin",
+        pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}"
+        
+    );
+
+});
 
 app.Run();
