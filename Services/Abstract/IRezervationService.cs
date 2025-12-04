@@ -4,6 +4,8 @@ namespace Services.Abstract
 {
     public interface IRezervationService : IGenericService<Rezervation>
     {
-       List<Rezervation> GetAllRezervationWithDestinationsService(string userId);
+       List<Rezervation> GetAllRezervationWithDestinationsService(int userId);
+
+       List<Rezervation> GetMyAllRezervationService(int userId);
     }
 }

@@ -21,7 +21,9 @@
                 <option value="">Seçin</option>
                 @foreach (var d in Model)
                 {
-                    <option value="@d.DestinationId">@d.DestinationCity</option>
+                    <option value="@d.DestinationId">
+                    @(ViewBag.SelectedCity == d.DestinationId ? "selected" : "")
+                    @d.DestinationCity</option>
                 }
             </select>
         </div>
@@ -30,6 +32,7 @@
         <div class="form-group mb-3">
             <label>Tur</label>
             <select id="TourId" class="form-control">
+            
                 <option value="">Əvvəlcə şəhər seçin</option>
             </select>
         </div>

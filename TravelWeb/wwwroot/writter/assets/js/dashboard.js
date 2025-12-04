@@ -25,10 +25,15 @@
     const bgColor2 = ["rgba(54, 215, 232, 1"];
     const bgColor3 = ["rgba(255, 191, 150, 1)"];
 
+    fetch("/Writter/TrafficMounth")
+      .then(x=>x.json())
+      .then(data=>{
+        console.log(data.key);
+      });
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG'],
+        labels: ['JAN2', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG'],
         datasets: [{
           label: "CHN",
           borderColor: gradientStrokeViolet,
@@ -150,12 +155,19 @@
     // const bgColor2 = ["rgba(255, 191, 150, 1"];
     // const bgColor3 = ["rgba(6, 185, 157, 1)"];
 
-    new Chart(ctx, {
+    fetch("/Writter/Traffichart")
+    .then(x=>x.json())
+    .then(data =>{
+     /*  console.log(data.pending);
+      console.log(data.approved);
+      console.log(data.cancelled); */
+
+      new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: ['Search Engines 30%', 'Direct Click 30%', 'Bookmarks Click 40%'],
+        labels: [` Qəbul olunanlar ${data.approved} %`, ` Gözləyənlər ${data.pending} %`,` Qəbul olunmayanlar ${data.cancelled} %` ],
         datasets: [{
-          data: [30, 30, 40],
+          data: [data.approved, data.pending, data.cancelled],
           backgroundColor: [gradientStrokeBlue, gradientStrokeGreen, gradientStrokeRed],
           hoverBackgroundColor: [
             gradientStrokeBlue,
@@ -207,7 +219,13 @@
         }
       }]
     });
+      
+    })
+
+    
   }
+
+  /*  */
 
 
 

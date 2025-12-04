@@ -14,7 +14,7 @@ namespace DAL.Entityframework
         {
             _context = context;
         }
-        public List<Rezervation> GetAllRezervationWithDestinationsDAL(string userId)
+        public List<Rezervation> GetAllRezervationWithDestinationsDAL(int userId)
         {
             return _context.Rezervations
                     .Where(r => r.UserId == userId)
@@ -22,6 +22,11 @@ namespace DAL.Entityframework
                         .ThenInclude(d => d.Tours)
                     .ToList();
 
+        }
+
+        public List<Rezervation> GetMyAllRezervationDAL(int userId)
+        {
+            return _context.Rezervations.Where(x=>x.UserId ==userId).Include(x=>x.Destination).ThenInclude(x=>x.Tours).ThenInclude(x=>x.Rotasions).ToList();
         }
     }
 }

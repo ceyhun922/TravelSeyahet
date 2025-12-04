@@ -1,0 +1,36 @@
+@{
+    Layout = "_WritterLayout";
+}
+
+@model List<Comment>
+
+@if (Model == null || !Model.Any())
+{
+    <p>Şerh Yazmadınız</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.CommentID
+                    </td>
+                    <td>
+                        @item.CommentUserComment
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}

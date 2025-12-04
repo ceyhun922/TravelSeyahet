@@ -16,7 +16,7 @@
                   <div class="card-body">
                     <h4 class="card-title">Default form</h4>
                     <p class="card-description"> Basic form layout </p>
-                    @using(Html.BeginForm("Profile",controllerName: "Writter",FormMethod.Post, new {@class="forms-sample"}))
+                    @using(Html.BeginForm("Profile",controllerName: "Writter",FormMethod.Post, new {enctype = "multipart/form-data",@class="forms-sample"}))
                     {
                       <div class="form-group">
                         <label for="exampleInputUsername1">Username</label>
@@ -27,12 +27,12 @@
                         @Html.TextBoxFor(x=>x.Email, new {@class="form-control",placeholder="İstifadeçi Email"})
                       </div>
                       <div class="form-group">
-                      <input type="file" name="image" id="" class="form-control">
+                      <input type="file" name="file" id="" class="form-control">
                       </div>
                       <div class="form-group">
                          @if (!string.IsNullOrEmpty(Model.WriterImage))
                       {
-                      <img src="@Model.WriterImage" alt="">
+                      <img src="@Model.WriterImage" width="80" alt="">
                       }else{
                         <p class="text-primary">Şekil Yüklenmeyib</p>
                       }

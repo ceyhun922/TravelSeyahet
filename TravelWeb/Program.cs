@@ -47,6 +47,10 @@ builder.Services.AddScoped<IRezervationService, RezervationManager>();
 builder.Services.AddScoped<IRotasionDAL, EFRotasionRepository>();
 builder.Services.AddScoped<IRotasionService, RotasionManager>();
 
+builder.Services.AddScoped<IWriterDAL, EFWriterRepository>();
+builder.Services.AddScoped<IWriterService, WriterManager>();
+
+
 builder.Services.AddDbContext<Context>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("AzTourConnect"), m => m.MigrationsAssembly("TravelWeb"));

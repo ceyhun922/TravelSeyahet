@@ -20,7 +20,7 @@ namespace Entities.Concrete
         public Destination? Destination { get; set; }
         public List<Rotasion>? Rotasions { get; set; }
 
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
         public Writer? Writer { get; set; }
 
         public int GuideID { get; set; }

@@ -1,0 +1,223 @@
+@model List<Tour>
+
+@{
+    Layout = "_WritterLayout";
+}
+
+<div class="card">
+    <div class="card-body">
+
+        <h4 class="card-title mb-3">Rezervasiya Formu</h4>
+
+        <!-- Tur seçimi -->
+        <div class="form-group mb-3">
+            <label>Tur</label>
+             <select id="TourId" class="form-control">
+                @foreach (var d in Model)
+                {
+                    if (ViewBag.Tour == d.TourId)
+                    {
+                        <option value="@d.TourId" selected>@d.TourLocaion</option>
+                    }
+                    else
+                    {
+                        <option value="@d.TourId">@d.TourLocaion</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <input type="hidden" id="TourPrice" />
+
+        <div class="form-group mb-3">
+           <input type="hidden" id="CityId" class="form-control" readonly />
+        </div>
+        <div class="form-group mb-3">
+            <label>Gün / Gecə</label>
+            <input id="TourDayNight" class="form-control" readonly />
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Başlama Saatı</label>
+            <input id="TourClock" class="form-control" readonly />
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Tur haqqında</label>
+            <textarea id="TourDetail" class="form-control" rows="2" readonly></textarea>
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Qalan Yer</label>
+            <input id="RemainderCapaCity" class="form-control" readonly />
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Neçə nəfər?</label>
+            <input id="CountPerson" type="number" class="form-control" min="1" />
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Ümumi Qiymət</label>
+            <input id="TotalPrice" class="form-control" readonly />
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Qeyd</label>
+            <textarea id="RezervationDescription" class="form-control"></textarea>
+        </div>
+
+        <button id="SaveBtn" class="btn btn-success w-100 mt-2">Rezervasiya Et</button>
+
+        <div id="CapacityAlert" class="alert d-none mt-2" style="font-weight:600;"></div>
+
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    // Serialize bütün turları JS-də istifadə üçün
+    const allTours = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+        Model,
+        new System.Text.Json.JsonSerializerOptions {
+            PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase
+        }
+    ));
+
+    function fillTourDetails(tourId) {
+        const t = allTours.find(x => x.tourId == tourId);
+        if (!t) {
+            clearDetails();
+            return;
+        }
+
+        $('#TourPrice').val(t.tourPrice);
+       
+        $('#TourDayNight').val(t.dTourDayNight || '');
+        $('#TourClock').val(t.tourClock);
+        $('#TourDetail').val(t.tourDetail);
+        $('#RemainderCapaCity').val(t.tourCountLimit);
+
+        $('#CountPerson').val(''); 
+        $('#TotalPrice').val('');
+        $('#CapacityAlert').addClass('d-none').removeClass('alert-danger alert-success');
+    }
+
+    function clearDetails() {
+        $('#TourPrice,#TourDayNight,#TourClock,#TourDetail,#RemainderCapaCity,#TotalPrice').val('');
+        $('#CountPerson').val('');
+    }
+
+    function updateTotal() {
+        const count = Number($('#CountPerson').val());
+        const price = Number($('#TourPrice').val());
+        $('#TotalPrice').val((count > 0 && price > 0) ? count * price : '');
+    }
+
+    $(document).ready(function () {
+        // ⭐ Hal-hazırda seçilmiş turu avtomatik doldur
+        const selectedTourId = $('#TourId').val();
+        if (selectedTourId) {
+            fillTourDetails(selectedTourId);
+        }
+
+        // Tur seçimi dəyişəndə məlumatları doldur
+        $('#TourId').change(function () {
+            fillTourDetails($(this).val());
+        });
+
+        // Nəfər sayı və total price
+        $('#CountPerson').on('input', function () {
+            const count = Number($(this).val());
+            const remain = Number($('#RemainderCapaCity').val());
+            const alertBox = $('#CapacityAlert');
+
+            alertBox.addClass('d-none').removeClass('alert-danger alert-success');
+
+            if (!remain || remain <= 0) {
+                alertBox.removeClass('d-none')
+                        .addClass('alert alert-danger')
+                        .text("Bu turda boş yer yoxdur!");
+                $(this).val(0);
+                $('#TotalPrice').val('');
+                return;
+            }
+
+            if (count > remain) {
+                alertBox.removeClass('d-none')
+                        .addClass('alert alert-danger')
+                        .text(`Bu turda yalnız ${remain} yer var!`);
+                $(this).val(remain);
+            }
+
+            updateTotal();
+        });
+
+        // Rezervasiya Et düyməsi
+        $('#SaveBtn').click(function (e) {
+            e.preventDefault();
+
+            const data = {
+                tourId: $('#TourId').val(),
+                countPerson: $('#CountPerson').val(),
+                description: $('#RezervationDescription').val(),
+                rezervationDate: new Date().toISOString().split('T')[0],
+                rezervationTime: new Date().toLocaleTimeString('en-GB', { hour12: false })
+            };
+
+            $.ajax({
+                url: '/Writter/Tours', // POST metodu controller-da olmalıdır
+                method: 'POST',
+                data: data,
+                success: function(res) {
+                    $('#CapacityAlert')
+                        .removeClass('d-none alert-danger')
+                        .addClass('alert alert-success')
+                        .text(res.message);
+
+                    clearDetails();
+                    $('#TourId').val('');
+                },
+                error: function(err) {
+                    $('#CapacityAlert')
+                        .removeClass('d-none alert-success')
+                        .addClass('alert alert-danger')
+                        .text(err.responseText || "Xəta baş verdi");
+                }
+            });
+        });
+    });
+
+
+    function fillTourDetails(tourId) {
+    const t = allTours.find(x => x.tourId == tourId);
+    if (!t) {
+        clearDetails();
+        return;
+    }
+
+    $('#TourPrice').val(t.tourPrice);
+    $('#TourDayNight').val(t.dTourDayNight || '');
+    $('#TourClock').val(t.tourClock);
+    $('#TourDetail').val(t.tourDetail);
+    $('#RemainderCapaCity').val(t.tourCountLimit);
+
+    $('#CountPerson').val('');
+    $('#TotalPrice').val('');
+
+    const alertBox = $('#CapacityAlert');
+    alertBox.addClass('d-none').removeClass('alert-danger alert-success');
+
+    // ✅ Turda yer 0-dırsa error göstərin və CountPerson inputu disable edin
+    if (!t.tourCountLimit || t.tourCountLimit <= 0) {
+        alertBox.removeClass('d-none')
+                .addClass('alert alert-danger')
+                .text("Bu turda boş yer yoxdur!");
+        $('#CountPerson').prop('disabled', true);
+    } else {
+        $('#CountPerson').prop('disabled', false);
+    }
+}
+
+</script>
+}

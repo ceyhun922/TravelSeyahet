@@ -13,7 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        *,
+    /* GLOBAL RESET */
+*,
 *::before,
 *::after {
   margin: 0;
@@ -21,45 +22,32 @@
   box-sizing: border-box;
 }
 
-a {
-  color: inherit;
-}
-
 body {
   font: normal 16px/1.5 "Helvetica Neue", sans-serif;
-  background: #456990;
-  color: #fff;
+  background: #f3f0f9; /* ultra soft */
+  color: #444;
   overflow-x: hidden;
   padding-bottom: 50px;
 }
 
-
-/* INTRO SECTION
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
+/* INTRO */
 .intro {
-  background: #f45b69;
+  background: #ddd6f3; /* soft lavender */
   padding: 100px 0;
-}
-
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
 }
 
 h1 {
   font-size: 2.5rem;
+  color: #4c3f7f;
+  font-weight: bold;
 }
 
-
-/* TIMELINE
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
+/* TIMELINE */
 .timeline ul {
-  background: #456990;
+  background: #e9e3f8; /* pastel purple */
   padding: 50px 0;
+  border-top: 1px solid #d8d2eb;
+  border-bottom: 1px solid #d8d2eb;
 }
 
 .timeline ul li {
@@ -68,7 +56,8 @@ h1 {
   width: 6px;
   margin: 0 auto;
   padding-top: 50px;
-  background: #fff;
+  background: #cfc9df; /* soft line */
+  border-radius: 10px;
 }
 
 .timeline ul li::after {
@@ -77,67 +66,69 @@ h1 {
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  background: inherit;
-  z-index: 1;
+  background: #bfb7d8; /* pastel dot */
+  border: 3px solid #f6f4fb;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  transition: background .3s;
 }
 
+/* CARD BOXES (very soft) */
 .timeline ul li div {
   position: relative;
   bottom: 0;
-  width: 400px;
-  padding: 15px;
-  background: #f45b69;
+  width: 420px;
+  padding: 18px;
+  color: #4a4266;
+  background: #f8f6fc; /* white-lavender */
+  border-radius: 10px;
+  border: 1px solid #e4def1;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
 }
 
-.timeline ul li div::before {
-  content: "";
-  position: absolute;
-  bottom: 7px;
-  width: 0;
-  height: 0;
-  border-style: solid;
-}
-
+/* ODD */
 .timeline ul li:nth-child(odd) div {
   left: 45px;
 }
 
 .timeline ul li:nth-child(odd) div::before {
-  left: -15px;
-  border-width: 8px 16px 8px 0;
-  border-color: transparent #f45b69 transparent transparent;
+  content: "";
+  position: absolute;
+  left: -12px;
+  bottom: 10px;
+  border-width: 8px 12px 8px 0;
+  border-style: solid;
+  border-color: transparent #f8f6fc transparent transparent;
 }
 
+/* EVEN */
 .timeline ul li:nth-child(even) div {
-  left: -439px;
+  left: -459px;
 }
 
 .timeline ul li:nth-child(even) div::before {
-  right: -15px;
-  border-width: 8px 0 8px 16px;
-  border-color: transparent transparent transparent #f45b69;
+  content: "";
+  position: absolute;
+  right: -12px;
+  bottom: 10px;
+  border-width: 8px 0 8px 12px;
+  border-style: solid;
+  border-color: transparent transparent transparent #f8f6fc;
 }
 
 time {
   display: block;
   font-size: 1.2rem;
   font-weight: bold;
+  color: #594f7c;
   margin-bottom: 8px;
 }
 
-
-/* EFFECTS
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-.timeline ul li::after {
-  transition: background 0.5s ease-in-out;
-}
-
+/* EFFECTS */
 .timeline ul li.in-view::after {
-  background: #f45b69;
+  background: #d9d2ee; /* slightly darker on view */
 }
 
 .timeline ul li div {
@@ -147,11 +138,11 @@ time {
 }
 
 .timeline ul li:nth-child(odd) div {
-  transform: translate3d(200px, 0, 0);
+  transform: translate3d(120px, 0, 0);
 }
 
 .timeline ul li:nth-child(even) div {
-  transform: translate3d(-200px, 0, 0);
+  transform: translate3d(-120px, 0, 0);
 }
 
 .timeline ul li.in-view div {
@@ -160,84 +151,23 @@ time {
   opacity: 1;
 }
 
-
-/* GENERAL MEDIA QUERIES
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-
-
-/* EXTRA/CLIP PATH STYLES
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-.timeline-clippy ul li::after {
-  width: 40px;
-  height: 40px;
-  border-radius: 0;
-}
-
-.timeline-rhombus ul li::after {
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-}
-
-.timeline-rhombus ul li div::before {
-  bottom: 12px;
-}
-
-.timeline-star ul li::after {
-  clip-path: polygon(
-    50% 0%,
-    61% 35%,
-    98% 35%,
-    68% 57%,
-    79% 91%,
-    50% 70%,
-    21% 91%,
-    32% 57%,
-    2% 35%,
-    39% 35%
-  );
-}
-
-.timeline-heptagon ul li::after {
-  clip-path: polygon(
-    50% 0%,
-    90% 20%,
-    100% 60%,
-    75% 100%,
-    25% 100%,
-    0% 60%,
-    10% 20%
-  );
-}
-
-.timeline-infinite ul li::after {
-  animation: scaleAnimation 2s infinite;
-}
-
-
-
-/* FOOTER STYLES
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* FOOTER */
 .page-footer {
   position: fixed;
   right: 0;
   bottom: 20px;
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  color: black;
-  background: rgba(255, 255, 255, 0.65);
+  padding: 6px 10px;
+  background: rgba(255,255,255,0.65);
+  border-radius: 6px;
+  font-size: 14px;
 }
 
-.page-footer a {
-  display: flex;
-  margin-left: 4px;
-}
     </style>
 </head>
 <body>
     <section class="intro">
   <div class="container">
-    <h1>Vertical Timeline &darr;</h1>
-    <p>Timeline v2 <a href="https://codepen.io/tutsplus/pen/zYQqPYG" target="_blank">here</a></p>
+    <h1 class="text-center">Tur Məntəqələri &darr;</h1>
   </div>
 </section>
 <section class="timeline">
@@ -248,7 +178,7 @@ time {
 
     <li>
       <div>
-        <time>1934</time> @rota.RotasionName
+        <time>@rota.RotasionName</time> @rota.RotasionDescription
       </div>
     </li>
     }
@@ -257,7 +187,6 @@ time {
 <footer class="page-footer">
   <span>made by </span>
   <a href="https://georgemartsoukos.com/" target="_blank">
-    <img width="24" height="24" src="https://assets.codepen.io/162656/george-martsoukos-small-logo.svg" alt="George Martsoukos logo">
   </a>
 </footer>
 <script>

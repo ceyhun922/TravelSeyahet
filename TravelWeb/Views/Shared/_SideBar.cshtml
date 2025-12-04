@@ -3,7 +3,7 @@
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="nav-profile-image">
-                  <img src="assets/images/faces/face1.jpg" alt="profile" />
+                  <img src="@ViewBag.Image" alt="@ViewBag.Name" />
                   <span class="login-status online"></span>
                   <!--change to offline or busy as needed-->
                 </div>
@@ -11,7 +11,7 @@
                   <span class="font-weight-bold mb-2">@User.Identity?.Name</span>
                   <span class="text-secondary text-small">Müştəri</span>
                 </div>
-                <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+                <i class="mdi mdi-bookmark-check @(ViewBag.Status == true ? "text-success" : "text-danger") nav-profile-badge"></i>
               </a>
             </li>
             <li class="nav-item">
@@ -23,37 +23,43 @@
             <li class="nav-item">
               <a class="nav-link" asp-action="Index" asp-controller="Home">
                 <span class="menu-title">Sayta Get</span>
-                <i class="mdi mdi-home menu-icon"></i>
+                <i class="mdi mdi mdi-web menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" asp-action="Profile" asp-controller="Writter">
                 <span class="menu-title">Profilim</span>
-                <i class="mdi mdi-home menu-icon"></i>
+                <i class="mdi mdi-face-man-profile menu-icon"></i>
               </a>
             </li>
            <li class="nav-item">
               <a class="nav-link" asp-action="ChangePassword" asp-controller="Writter">
                 <span class="menu-title">Şifrə Əməliyyatı</span>
-                <i class="mdi mdi-home menu-icon"></i>
+                <i class="mdi mdi mdi-cog menu-icon"></i>
+              </a>
+            </li>
+           <li class="nav-item">
+              <a class="nav-link" asp-action="MyComments" asp-controller="Writter">
+                <span class="menu-title">Şərhlərim</span>
+                <i class="mdi mdi-comment menu-icon"></i>
               </a>
             </li>
            <li class="nav-item">
               <a class="nav-link" asp-action="NewRezervations" asp-controller="Writter">
                 <span class="menu-title">Yeni Rezervasiyalar</span>
-                <i class="mdi mdi-home menu-icon"></i>
+                <i class="mdi mdi-invoice-plus menu-icon"></i>
               </a>
             </li>
            <li class="nav-item">
               <a class="nav-link" asp-action="AllRezervatons" asp-controller="Writter">
                 <span class="menu-title">Rezervasiyalarım</span>
-                <i class="mdi mdi-home menu-icon"></i>
+                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
               </a>
             </li>
            <li class="nav-item">
               <a class="nav-link" asp-action="#" asp-controller="#">
                 <span class="menu-title">Çıxış Et</span>
-                <i class="mdi mdi-home menu-icon"></i>
+                <i class="mdi mdi-location-exit menu-icon"></i>
               </a>
             </li>
           </ul>

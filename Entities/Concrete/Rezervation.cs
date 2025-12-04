@@ -20,7 +20,7 @@ namespace Entities.Concrete
         public double TotalPrice { get; set; }
         public int RemainderCapaCity { get; set; }
 
-        public string? UserId { get; set; }
+        public int UserId { get; set; }
         public Writer? Writer { get; set; }
 
         public int DestinationId { get; set; }

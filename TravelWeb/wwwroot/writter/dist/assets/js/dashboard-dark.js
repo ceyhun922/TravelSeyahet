@@ -153,9 +153,9 @@
     new Chart(ctx, {
       type: 'doughnut',
       data: {
-        labels: ['Search Engines 30%', 'Direct Click 30%', 'Bookmarks Click 40%'],
+        labels: ['Search 50%', 'Direct Click 20%', 'Bookmarks Click 30%'],
         datasets: [{
-          data: [30, 30, 40],
+          data: [50, 20, 30],
           backgroundColor: [gradientStrokeBlue, gradientStrokeGreen, gradientStrokeRed],
           hoverBackgroundColor: [
             gradientStrokeBlue,

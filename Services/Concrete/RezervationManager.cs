@@ -18,15 +18,22 @@ namespace ServicesLayer.Concrete
             _userManager = userManager;
         }
 
-        public List<Rezervation> GetAllRezervationWithDestinationsService(string userId)
+        public List<Rezervation> GetAllRezervationWithDestinationsService(int userId)
         {
             return _rezervationDAL.GetAllRezervationWithDestinationsDAL(userId);
         }
+
 
         public Rezervation GetFindIdService(int id)
         {
             return _rezervationDAL.GetFindId(id);
         }
+
+        public List<Rezervation> GetMyAllRezervationService(int userId)
+        {
+            return _rezervationDAL.GetMyAllRezervationDAL(userId);
+        }
+
 
         public void InsertService(Rezervation t)
         {

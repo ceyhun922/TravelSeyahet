@@ -1,6 +1,4 @@
 
-
-using System.Threading.Tasks;
 using DAL.Concrete;
 using Entities.Concrete;
 using Entities.ViewModel;
@@ -21,8 +19,10 @@ namespace TravelWeb.Controllers
         private readonly IRezervationService _rezervationService;
         private readonly Context _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IWebHostEnvironment _env;
+        private readonly IWriterService _writerService;
 
-        public WritterController(UserManager<Writer> userManager, SignInManager<Writer> signInManager, ITourService tourService, IDestinationService destinationService, Context context, IRezervationService rezervationService, IHttpContextAccessor httpContextAccessor)
+        public WritterController(UserManager<Writer> userManager, SignInManager<Writer> signInManager, ITourService tourService, IDestinationService destinationService, Context context, IRezervationService rezervationService, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env, IWriterService writerService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -31,6 +31,8 @@ namespace TravelWeb.Controllers
             _context = context;
             _rezervationService = rezervationService;
             _httpContextAccessor = httpContextAccessor;
+            _env = env;
+            _writerService = writerService;
         }
 
         public IActionResult NewRezervations()
@@ -45,6 +47,8 @@ namespace TravelWeb.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest("Məlumat düzgün deyil.");
+
+
 
             var tour = _tourService.GetFindIdService(model.TourId);
 
@@ -70,6 +74,7 @@ namespace TravelWeb.Controllers
                 UserId = user.Id
             };
 
+            ViewBag.SelectedCity = rez.DestinationId;
 
             _rezervationService.InsertService(rez);
 
@@ -79,10 +84,27 @@ namespace TravelWeb.Controllers
             return Ok(new { success = true, message = "Rezervasiya uğurla əlavə edildi!" });
         }
 
+        public IActionResult Tours(int id)
+        {
+        var allTours = _context.Tours!
+        .Include(x => x.Destination) 
+        .ToList();           
+        
+         var selectedTour = _context.Tours
+        .Include(x => x.Destination)
+        .FirstOrDefault(x => x.TourId == id);
+
+            ViewBag.Tour = selectedTour?.TourId; 
+            ViewBag.CityName = selectedTour?.Destination?.DestinationCity;
+
+            return View(allTours); 
+        }
+
+
         public async Task<IActionResult> AllRezervatons()
         {
             var user = await _userManager.GetUserAsync(User);
-            ViewBag.UserId = user.Id; 
+            ViewBag.UserId = user.Id;
 
             var result = _rezervationService.GetAllRezervationWithDestinationsService(user.Id);
 
@@ -103,11 +125,65 @@ namespace TravelWeb.Controllers
             return PartialView("_RezervationTable", rezervation);
         }
 
-
-
-
-        public IActionResult Index()
+        public async Task<IActionResult> MyComments()
         {
+            var user = await _userManager.GetUserAsync(User);
+
+            var values = _context.Comments.Where(x => x.UserId == user.Id).ToList();
+            return View(values);
+        }
+
+        [HttpGet]
+        public IActionResult Traffichart()
+        {
+            var all = _rezervationService.ListAllService();
+            var total = all.Count();
+
+            if (total == 0)
+                return Json(new { approved = 0, pending = 0, cancelled = 0 });
+
+            var approved = all.Count(x => x.RezervationStatus == RezervationStatus.Approved);
+            var pending = all.Count(x => x.RezervationStatus == RezervationStatus.Pending);
+            var cancelled = all.Count(x => x.RezervationStatus == RezervationStatus.Cancelled);
+
+            var data = new
+            {
+                approved = (approved * 100) / total,
+                pending = (pending * 100) / total,
+                cancelled = (cancelled * 100) / total
+            };
+            Console.WriteLine(data);
+            return Json(data);
+        }
+
+        public IActionResult TrafficMounth()
+        {
+            var rezByMonth = _rezervationService.ListAllService()
+                      .GroupBy(r => r.RezervationDate.Month)
+                      .Select(g => new
+                      {
+                          Month = g.Key,
+                          Count = g.Count()
+                      })
+                      .OrderBy(x => x.Month)
+                      .ToList();
+
+            return Json(rezByMonth);
+        }
+        public async Task<IActionResult> Index()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            ViewBag.Name = user.UserName;
+            ViewBag.Image = user.WriterImage;
+            ViewBag.Status = user.WriterStatus;
+            var rez = _rezervationService.ListAllService(x => x.UserId == user.Id && x.RezervationStatus == RezervationStatus.Approved).Count();
+            var totalPrice = _rezervationService.ListAllService(x => x.UserId == user.Id && x.RezervationStatus == RezervationStatus.Approved).Average(x => x.TotalPrice);
+            var topRez = _context.Tours.Include(x => x.Guide).ToList().Take(5);
+            ViewBag.TopRez = topRez;
+            ViewBag.Rezervations = rez;
+            ViewBag.TotalPrice = totalPrice;
+
             return View();
         }
 
@@ -123,18 +199,44 @@ namespace TravelWeb.Controllers
             return View(user);
         }
         [HttpPost]
-        public async Task<IActionResult> Profile(Writer writer)
+        public async Task<IActionResult> Profile(Writer writer, IFormFile file)
         {
             var user = await _userManager.GetUserAsync(User);
 
+            if (file != null && file.Length > 0)
+            {
+                var extension = Path.GetExtension(file.FileName).ToLower();
+                var allowed = new[] { ".jpg", ".png", ".jpeg", ".svg", ".webp" };
+
+                if (!allowed.Contains(extension))
+                    return Content("Yalnız .jpg, .png, .jpeg, .svg .webp faylları qebul edilir");
+
+                var FolderPath = Path.Combine(_env.WebRootPath, "uploads");
+
+                if (!Directory.Exists(FolderPath))
+                {
+                    Directory.CreateDirectory(FolderPath);
+                }
+
+                var fileName = Guid.NewGuid() + extension;
+                var fullPath = Path.Combine(FolderPath, fileName);
+
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+
+                user.WriterImage = "/uploads/" + fileName;
+
+            }
+
             user.UserName = writer.UserName;
             user.Email = writer.Email;
-            user.WriterImage = writer.WriterImage;
             user.WriterStatus = writer.WriterStatus;
 
             var result = await _userManager.UpdateAsync(user);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index","Writter");
         }
 
         public IActionResult ChangePassword()
@@ -171,6 +273,7 @@ namespace TravelWeb.Controllers
             }
             return View(model);
         }
+
 
 
 

@@ -13,7 +13,6 @@ namespace Entities.Concrete
         public string? GuideFacebookUrl { get; set; }
         public string? GuideXUrl { get; set; }
         public bool GuideStatus { get; set; }
-        [JsonIgnore]
 
         public List<Tour>? Tours { get; set; }
      }
