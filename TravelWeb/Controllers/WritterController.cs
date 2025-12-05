@@ -178,12 +178,12 @@ namespace TravelWeb.Controllers
             ViewBag.Image = user.WriterImage;
             ViewBag.Status = user.WriterStatus;
             var rez = _rezervationService.ListAllService(x => x.UserId == user.Id && x.RezervationStatus == RezervationStatus.Approved).Count();
-            var totalPrice = _rezervationService.ListAllService(x => x.UserId == user.Id && x.RezervationStatus == RezervationStatus.Approved).Average(x => x.TotalPrice);
-            var topRez = _context.Tours.Include(x => x.Guide).ToList().Take(5);
+/*             var totalPrice = _rezervationService.ListAllService(x => x.UserId == user.Id && x.RezervationStatus == RezervationStatus.Approved).Average(x => x.TotalPrice);
+ */            var topRez = _context.Tours.Include(x => x.Guide).ToList().Take(5);
             ViewBag.TopRez = topRez;
             ViewBag.Rezervations = rez;
-            ViewBag.TotalPrice = totalPrice;
-
+/*             ViewBag.TotalPrice = totalPrice;
+ */
             return View();
         }
 

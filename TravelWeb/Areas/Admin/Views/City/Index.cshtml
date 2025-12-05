@@ -1,0 +1,86 @@
+@model List<Destination>
+<div class="page-heading">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>DataTable</h3>
+                <p class="text-subtitle text-muted">For user to check they list</p>
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">DataTable</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-header">
+                Simple Datatable
+            </div>
+            <div class="card-body">
+
+                
+                @if (TempData.ContainsKey("success") || TempData["success"] != null)
+                {
+                    <div class="alert alert-success">
+                        @TempData["success"]
+                    </div>
+                }
+
+
+
+                <table class="table table-striped" id="table1">
+                    <thead>
+                       
+                        <tr>
+                            <th>ID</th>
+                            <th>City</th>
+                            <th>Status</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                            <th>ex</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <a asp-action="AddNewCity" asp-controller="City" class="btn btn-success">Add New City</a>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.DestinationId</td>
+                                <td>@item.DestinationCity</td>
+
+                                <td>
+                                    <span
+                                        class="badge bg-@(item.DestinationStatus == true ? "success" : "danger")">@(item.DestinationStatus
+                                                                            == true ? "Active" : "Passive")</span>
+                                </td>
+                                <td>
+                                    <a class="mx-1 btn btn-warning text-dark">Update</a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger">Delete</button>
+
+                                </td>
+                               
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+
+@section Scripts {
+    <script>
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
+}

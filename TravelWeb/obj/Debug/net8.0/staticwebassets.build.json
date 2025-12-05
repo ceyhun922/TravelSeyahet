@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "A5IgVj3tYf9l4R4bgWxdebTmE7ithuC1+KxWi6FVRHU=",
+  "Hash": "3pMVLDBwHXNyI1maCWeD9lo5RHF48poUcHSHVVROkwU=",
   "Source": "TravelWeb",
   "BasePath": "_content/TravelWeb",
   "Mode": "Default",
@@ -39613,6 +39613,25 @@
       "OriginalItemSpec": "wwwroot/project/scss/style.scss"
     },
     {
+      "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/uploads/20cb176d-df42-47fb-8e79-777ed18b05ef.jpg",
+      "SourceId": "TravelWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/",
+      "BasePath": "_content/TravelWeb",
+      "RelativePath": "uploads/20cb176d-df42-47fb-8e79-777ed18b05ef.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/20cb176d-df42-47fb-8e79-777ed18b05ef.jpg"
+    },
+    {
       "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/uploads/6f50142a-417f-4ee4-b9e9-5f8850e9a495.png",
       "SourceId": "TravelWeb",
       "SourceType": "Discovered",
@@ -39706,6 +39725,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/uploads/e14c2e4d-177d-42f0-aad6-fc62389d9dee.jpg"
+    },
+    {
+      "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/uploads/e6025348-ea86-4992-952a-3d1b4d6a2b5e.png",
+      "SourceId": "TravelWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/",
+      "BasePath": "_content/TravelWeb",
+      "RelativePath": "uploads/e6025348-ea86-4992-952a-3d1b4d6a2b5e.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/e6025348-ea86-4992-952a-3d1b4d6a2b5e.png"
     },
     {
       "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/about.html",

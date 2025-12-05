@@ -18,5 +18,10 @@ namespace DAL.Entityframework
         {
             return _context.Tours.Include(t=>t.Rotasions).Where(t=>t.TourId ==rotasionId).ToList();
         }
+
+        public List<Tour> AllToursWithRotasionsDAL()
+        {
+            return _context.Tours.Include(x=>x.Destination).Where(x=>x.TourStatus==true).ToList();
+        }
     }
 }

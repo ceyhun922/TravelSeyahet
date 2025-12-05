@@ -25,7 +25,7 @@ namespace TravelWeb.Controllers
 
         public IActionResult Index()
         {
-            var values = _tourService.ListAllService();
+            var values = _tourService.AllToursWithRotasionsService();
 
             if (values == null)
             {

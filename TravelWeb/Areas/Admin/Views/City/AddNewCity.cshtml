@@ -1,0 +1,60 @@
+@model Destination
+<section id="multiple-column-form">
+    <div class="row match-height">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Multiple Column</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+
+                    
+                    
+                    
+                        @using (Html.BeginForm("AddNewCity", "City", new { area = "Admin" }, FormMethod.Post,true,new {@class="form w-50"}))
+                        {
+                             @Html.AntiForgeryToken()
+                            <div class="row">
+
+                        @if(TempData.ContainsKey("error") || TempData["error"] != null)
+                        {
+                             <div class="alert alert-danger">
+                                @TempData["error"]
+                            </div>
+                        }
+                        @if(TempData.ContainsKey("warning"))
+                        {
+                             <div class="alert alert-warning">
+                                @TempData["warning"]
+                            </div>
+                        }
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.DestinationCity)
+                                        @Html.TextBoxFor(x => x.DestinationCity, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <div class='form-check'>
+                                        <div class="checkbox">
+                                            @Html.CheckBoxFor(x => x.DestinationStatus, new { @class = "form-check-input" })
+                                            @Html.LabelFor(x => x.DestinationStatus, "Remember Me")
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

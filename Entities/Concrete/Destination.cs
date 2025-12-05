@@ -12,6 +12,7 @@ namespace Entities.Concrete
         [Key]
         public int DestinationId { get; set; }
         public string? DestinationCity { get; set; }
+        public bool DestinationStatus { get; set; }
         public List<Tour>? Tours { get; set; }
     }
 }

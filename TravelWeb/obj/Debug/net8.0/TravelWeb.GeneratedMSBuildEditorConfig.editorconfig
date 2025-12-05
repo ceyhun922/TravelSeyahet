@@ -18,8 +18,12 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/ceyhunyusif/Desktop/TravelAze/TravelWeb
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Areas/Admin/Views/Dashboard/Cities.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvRGFzaGJvYXJkL0NpdGllcy5jc2h0bWw=
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Areas/Admin/Views/City/AddNewCity.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQ2l0eS9BZGROZXdDaXR5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Areas/Admin/Views/City/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXMvQWRtaW4vVmlld3MvQ2l0eS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Areas/Admin/Views/Dashboard/Index.cshtml]
