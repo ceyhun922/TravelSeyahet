@@ -27,6 +27,7 @@ namespace TravelWeb.Controllers
         {
             var values = _tourService.AllToursWithRotasionsService();
 
+
             if (values == null)
             {
                 values = new List<Tour>();

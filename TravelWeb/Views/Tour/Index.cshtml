@@ -118,13 +118,21 @@
                       <h3><a href="#">@item.Destination.DestinationCity</a></h3>
                       <h3><a href="#">@item.TourLocaion</a></h3>
                       <p class="rate">
-                        @for (var i =1; i <=5; i++)
+                        @for (int i = 1; i <= 5; i++)
                         {
-                          <i class="icon-star"></i>
-
+                          if (i <= item.TourRaiting)
+                          {
+                            <i class="icon-star"></i> @* dolu ulduz *@
+                          }
+                          else
+                          {
+                            <i class="icon-star-o"></i> @* boş ulduz *@
+                          }
                         }
-                        <span>8 Rating</span>
+
+                        <span>@item.TourRaiting Rating</span>
                       </p>
+
                     </div>
                     <div class="two">
                       <span class="price">@item.TourPrice azn</span>

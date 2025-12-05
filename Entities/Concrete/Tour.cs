@@ -12,6 +12,7 @@ namespace Entities.Concrete
         public string? TourImage { get; set; }
         public int TourCapaCity { get; set; }
         public int TourCountLimit { get; set; }
+        public int TourRaiting { get; set; }=0;
         public bool TourStatus { get; set; } = true;
         public string TourDetail { get; set; } = string.Empty;
         public DateTime TourClock { get; set; }
