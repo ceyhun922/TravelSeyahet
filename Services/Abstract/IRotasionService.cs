@@ -5,5 +5,6 @@ namespace Services.Abstract
 {
     public interface IRotasionService : IGenericService<Rotasion>
     {
+        List<Rotasion> AllRotasionsWithTourSerice();
     }
 }

@@ -57,6 +57,9 @@ builder.Services.AddScoped<IRotasionService, RotasionManager>();
 builder.Services.AddScoped<ICommentDAL, EFCommentRepository>();
 builder.Services.AddScoped<ICommentService, CommentManager>();
 
+builder.Services.AddScoped<ISliderDAL, EFSliderRepository>();
+builder.Services.AddScoped<ISliderService, SliderManager>();
+
 
 builder.Services.AddDbContext<Context>(opt =>
 {

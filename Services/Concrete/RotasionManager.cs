@@ -14,6 +14,11 @@ namespace ServicesLayer.Concrete
             _rotasionDAL = rotasionDAL;
         }
 
+        public List<Rotasion> AllRotasionsWithTourSerice()
+        {
+            return _rotasionDAL.AllRotasionsWithTour();
+        }
+
         public Rotasion GetFindIdService(int id)
         {
             return _rotasionDAL.GetFindId(id);

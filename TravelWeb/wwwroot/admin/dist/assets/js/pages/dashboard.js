@@ -43,7 +43,7 @@ fetch("/Admin/Dashboard/GetMonthlyStats")
       chartProfileVisit.render();
   });
 
-/* var optionsProfileVisit = {
+var optionsProfileVisit = {
 	annotations: {
 		position: 'back'
 	},
@@ -67,7 +67,7 @@ fetch("/Admin/Dashboard/GetMonthlyStats")
 	xaxis: {
 		categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul", "Aug","Sep","Oct","Nov","Dec"],
 	},
-} */
+}
 let optionsVisitorsProfile  = {
 	series: [70, 30],
 	labels: ['Male', 'Female'],
@@ -89,53 +89,56 @@ let optionsVisitorsProfile  = {
 	}
 }
 
-var optionsEurope = {
-	series: [{
-		name: 'series1',
-		data: [310, 800, 600, 430, 540, 340, 605, 805,430, 540, 340, 605]
-	}],
-	chart: {
-		height: 80,
-		type: 'area',
-		toolbar: {
-			show:false,
-		},
-	},
-	colors: ['#5350e9'],
-	stroke: {
-		width: 2,
-	},
-	grid: {
-		show:false,
-	},
-	dataLabels: {
-		enabled: false
-	},
-	xaxis: {
-		type: 'datetime',
-		categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z","2018-09-19T07:30:00.000Z","2018-09-19T08:30:00.000Z","2018-09-19T09:30:00.000Z","2018-09-19T10:30:00.000Z","2018-09-19T11:30:00.000Z"],
-		axisBorder: {
-			show:false
-		},
-		axisTicks: {
-			show:false
-		},
-		labels: {
-			show:false,
-		}
-	},
-	show:false,
-	yaxis: {
-		labels: {
-			show:false,
-		},
-	},
-	tooltip: {
-		x: {
-			format: 'dd/MM/yy HH:mm'
-		},
-	},
-};
+fetch("/mostmadereservation")
+    .then(res => res.json())
+    .then(data => {
+
+        console.log(data.tourLocaion); // İçərişəhər tarixi turu
+        console.log(data.count);       // 2
+
+        var optionsEurope = {
+            series: [{
+                name: 'Rezervasyon',
+                data: [data.count]   // [2]
+            }],
+            chart: {
+                height: 80,
+                type: 'area',
+                toolbar: { show: false }
+            },
+            colors: ['#5350e9'],
+            stroke: { width: 2 },
+            dataLabels: { enabled: false },
+            grid: { show: false },
+
+            xaxis: {
+                categories: [data.tourLocaion],  // ["İçərişəhər tarixi turu"]
+                labels: { show: true },
+                axisTicks: { show: false },
+                axisBorder: { show: false }
+            },
+
+            yaxis: {
+                min: 0,
+                max: Math.max(data.count * 2, 10),
+                labels: { show: true }
+            },
+
+            tooltip: {
+                y: {
+                    formatter: val => `${val} rezervasyon`
+                }
+            }
+        };
+
+        var chart = new ApexCharts(
+            document.querySelector("#chart-europe"),
+            optionsEurope
+        );
+
+        chart.render();
+    });
+
 
 let optionsAmerica = {
 	...optionsEurope,

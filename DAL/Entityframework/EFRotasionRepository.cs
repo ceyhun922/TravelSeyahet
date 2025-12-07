@@ -2,6 +2,7 @@ using DAL.Abstract;
 using DAL.Concrete;
 using DAL.GenericRepositories;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Entityframework
 {
@@ -13,5 +14,9 @@ namespace DAL.Entityframework
              _context = context;
         }
 
+        public List<Rotasion> AllRotasionsWithTour()
+        {
+            return _context.Rotasions.Include(x=>x.Tour).ToList();
+        }
     }
 }

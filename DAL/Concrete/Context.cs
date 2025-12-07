@@ -29,6 +29,7 @@ namespace DAL.Concrete
             // en son bağımsızlar
             builder.ApplyConfiguration(new NotificationCoreData());
             builder.ApplyConfiguration(new SliderCoreData());
+            builder.ApplyConfiguration(new CommentCoreData());
 
             // İlişkiyi zorla
             builder.Entity<Tour>()
