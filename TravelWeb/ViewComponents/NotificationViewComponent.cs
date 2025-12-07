@@ -14,7 +14,7 @@ namespace TravelWeb.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var result = _context.Notifications.ToList();
+            var result = _context.Notifications?.ToList();
             return View(result);
         }
     }

@@ -174,16 +174,20 @@ namespace TravelWeb.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
 
-            ViewBag.Name = user.UserName;
-            ViewBag.Image = user.WriterImage;
-            ViewBag.Status = user.WriterStatus;
+            if (user == null)
+    {
+        return RedirectToAction("Login","Writter");
+    }
+
+
+            ViewBag.Name = user?.UserName;
+            ViewBag.Image = user?.WriterImage;
+            ViewBag.Status = user?.WriterStatus;
             var rez = _rezervationService.ListAllService(x => x.UserId == user.Id && x.RezervationStatus == RezervationStatus.Approved).Count();
-/*             var totalPrice = _rezervationService.ListAllService(x => x.UserId == user.Id && x.RezervationStatus == RezervationStatus.Approved).Average(x => x.TotalPrice);
- */            var topRez = _context.Tours.Include(x => x.Guide).ToList().Take(5);
+             var topRez = _context.Tours?.Include(x => x.Guide).ToList().Take(5);
             ViewBag.TopRez = topRez;
             ViewBag.Rezervations = rez;
-/*             ViewBag.TotalPrice = totalPrice;
- */
+
             return View();
         }
 

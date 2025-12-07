@@ -1,0 +1,107 @@
+@model Tour
+
+<section id="multiple-column-form">
+    <div class="row match-height">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Multiple Column</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body">
+                        @using (Html.BeginForm("AddNewTour", "Tour", new { area = "Admin" }, FormMethod.Post, true, new
+                        { @class = "form w-50" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+
+
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.DestinationId, "Şəhər Seçin")
+                                        @Html.DropDownListFor(
+                                        x => x.DestinationId,
+                                                                        (SelectList)ViewBag.Tours as IEnumerable<SelectListItem>,
+                                                                        "Şehir Seç",
+                                                                        new { @class = "form-control" }
+                                                                        )
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.GuideID, "Tur Rəhbəri")
+                                    @Html.DropDownListFor(
+                                                                        x => x.GuideID,
+                                                                        (SelectList)ViewBag.Guides as IEnumerable<SelectListItem>,
+                                                                        "Tur Rehberi Seç",
+                                                                        new { @class = "form-control" }
+                                                                        )
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group col-12">
+                                    @Html.LabelFor(x => x.TourLocaion, "Tur Adı")
+                                    @Html.TextBoxFor(x => x.TourLocaion, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group col-12">
+                                    <label for="">Şekil</label>
+                                    <input type="file" name="file" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group col-12">
+                                    @Html.LabelFor(x => x.DTourDayNight, "Tarif")
+                                    @Html.TextBoxFor(x => x.DTourDayNight, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group col-12">
+                                    @Html.LabelFor(x => x.TourPrice, "Qiymeti")
+                                    @Html.TextBoxFor(x => x.TourPrice, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group col-12">
+                                    @Html.LabelFor(x => x.TourCountLimit, "Tura qatılacaq sayı")
+                                    @Html.TextBoxFor(x => x.TourCountLimit, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group col-12">
+                                    @Html.LabelFor(x => x.TourDetail, "Tura Haqqında")
+                                    @Html.TextAreaFor(x => x.TourCountLimit, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <div class="form-group col-12">
+                                    @Html.LabelFor(x => x.TourClock, "Tura Günü ve saatı")
+                                    @Html.TextBoxFor(x => x.TourClock, "{0:yyyy-MM-ddTHH:mm}", new
+                                                                        { @class = "form-control", type = "datetime-local"})
+                                </div>
+                            </div>
+                            <div class="form-group col-12">
+                                <div class='form-check'>
+                                    <div class="checkbox">
+                                        @Html.CheckBoxFor(x => x.TourStatus, new { @class = "form-check-input" })
+                                        @Html.LabelFor(x => x.TourStatus)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                </div>
+                            </div>
+
+                        </div>
+                                                }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

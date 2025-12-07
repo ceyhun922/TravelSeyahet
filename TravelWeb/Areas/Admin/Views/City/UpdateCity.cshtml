@@ -9,23 +9,10 @@
                 <div class="card-content">
                     <div class="card-body">
 
-                        @using (Html.BeginForm("AddNewCity", "City", new { area = "Admin" }, FormMethod.Post,true,new {@class="form w-50"}))
+                        @using (Html.BeginForm("UpdateCity", "City", new { area = "Admin" }, FormMethod.Post,true,new {@class="form w-50"}))
                         {
                              @Html.AntiForgeryToken()
                             <div class="row">
-
-                        @if(TempData.ContainsKey("error") || TempData["error"] != null)
-                        {
-                             <div class="alert alert-danger">
-                                @TempData["error"]
-                            </div>
-                        }
-                        @if(TempData.ContainsKey("warning"))
-                        {
-                             <div class="alert alert-warning">
-                                @TempData["warning"]
-                            </div>
-                        }
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         @Html.LabelFor(x => x.DestinationCity)

@@ -4,6 +4,7 @@ using DAL.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TravelWeb.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20251206210256_mig1")]
+    partial class mig1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,98 +117,6 @@ namespace TravelWeb.Migrations
                     b.HasIndex("WriterId");
 
                     b.ToTable("Comments");
-
-                    b.HasData(
-                        new
-                        {
-                            CommentID = 1,
-                            CommentStatus = true,
-                            CommentUserComment = "Tur çox gözəl təşkil olunmuşdu, təşəkkürlər!",
-                            CommentUserMail = "aylin@mail.com",
-                            CommentUserName = "Aylin Məmmədova",
-                            UserId = 1
-                        },
-                        new
-                        {
-                            CommentID = 2,
-                            CommentStatus = true,
-                            CommentUserComment = "Qidalanma zəif idi, amma ümumi xidmət yaxşı idi.",
-                            CommentUserMail = "elvin@mail.com",
-                            CommentUserName = "Elvin Quliyev",
-                            UserId = 2
-                        },
-                        new
-                        {
-                            CommentID = 3,
-                            CommentStatus = true,
-                            CommentUserComment = "Bələdçi çox məlumatlı idi, turdan çox razı qaldım.",
-                            CommentUserMail = "nermin@mail.com",
-                            CommentUserName = "Nərmin Həsənova",
-                            UserId = 3
-                        },
-                        new
-                        {
-                            CommentID = 4,
-                            CommentStatus = true,
-                            CommentUserComment = "Qiymət-Performans mükəmməldi, yenə gələcəm.",
-                            CommentUserMail = "murad@mail.com",
-                            CommentUserName = "Murad Əliyev",
-                            UserId = 4
-                        },
-                        new
-                        {
-                            CommentID = 5,
-                            CommentStatus = true,
-                            CommentUserComment = "Çox maraqlı yerləri gəzdik, hər şey super idi.",
-                            CommentUserMail = "gunel@mail.com",
-                            CommentUserName = "Günel Məmmədli",
-                            UserId = 5
-                        },
-                        new
-                        {
-                            CommentID = 6,
-                            CommentStatus = false,
-                            CommentUserComment = "Avtobus bir az gec gəldi amma yenə də xoş keçdi.",
-                            CommentUserMail = "resad@mail.com",
-                            CommentUserName = "Rəşad Əhmədov",
-                            UserId = 6
-                        },
-                        new
-                        {
-                            CommentID = 7,
-                            CommentStatus = true,
-                            CommentUserComment = "Foto zonalar möhtəşəm idi, təşəkkürlər!",
-                            CommentUserMail = "leman@mail.com",
-                            CommentUserName = "Ləman Əliyeva",
-                            UserId = 7
-                        },
-                        new
-                        {
-                            CommentID = 8,
-                            CommentStatus = true,
-                            CommentUserComment = "Tur rəhbəri əla idi, tam peşəkar yanaşma.",
-                            CommentUserMail = "kamran@mail.com",
-                            CommentUserName = "Kamran Məlikov",
-                            UserId = 8
-                        },
-                        new
-                        {
-                            CommentID = 9,
-                            CommentStatus = true,
-                            CommentUserComment = "Bir az yorucu idi, amma görməli yerlər gözəl idi.",
-                            CommentUserMail = "aysel@mail.com",
-                            CommentUserName = "Aysel Hüseyn",
-                            UserId = 9
-                        },
-                        new
-                        {
-                            CommentID = 10,
-                            CommentStatus = true,
-                            CommentUserComment = "Bu, iştirak etdiyim ən yaxşı turlardan biri oldu!",
-                            CommentUserMail = "faiq@mail.com",
-                            CommentUserName = "Faiq Rzayev",
-                            UserId = 10
-                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.Destination", b =>
@@ -1233,7 +1144,7 @@ namespace TravelWeb.Migrations
                     b.Property<int>("GuideID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TestimonialID")
+                    b.Property<int>("TestimonialID")
                         .HasColumnType("int");
 
                     b.Property<int>("TourCapaCity")
@@ -1784,7 +1695,9 @@ namespace TravelWeb.Migrations
 
                     b.HasOne("Entities.Concrete.Testimonial", "Testimonial")
                         .WithMany("Tours")
-                        .HasForeignKey("TestimonialID");
+                        .HasForeignKey("TestimonialID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Entities.Concrete.Writer", "Writer")
                         .WithMany()

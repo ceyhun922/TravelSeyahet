@@ -1,4 +1,49 @@
-var optionsProfileVisit = {
+fetch("/Admin/Dashboard/GetMonthlyStats")
+  .then(res => res.json())
+  .then(data => {
+
+      const labels = data.map(x => x.month);
+
+      const values = data.map(x => x.count);
+
+      console.log(labels);
+      console.log(values);
+
+      var optionsProfileVisit = {
+        annotations: {
+          position: 'back'
+        },
+        dataLabels: {
+          enabled: false
+        },
+        chart: {
+          type: 'bar',
+          height: 300
+        },
+        fill: {
+          opacity: 1
+        },
+        plotOptions: {},
+        series: [{
+          name: 'Rezervasyon',
+          data: values
+        }],
+        colors: '#435ebe',
+
+        xaxis: {
+          categories: labels
+        },
+      };
+
+      var chartProfileVisit = new ApexCharts(
+        document.querySelector("#chart-profile-visit"),
+        optionsProfileVisit
+      );
+
+      chartProfileVisit.render();
+  });
+
+/* var optionsProfileVisit = {
 	annotations: {
 		position: 'back'
 	},
@@ -16,13 +61,13 @@ var optionsProfileVisit = {
 	},
 	series: [{
 		name: 'sales',
-		data: [9,20,30,20,10,20,30,20,10,20,30,20]
+		data: [9,20,30,20,10,20,30,20,10,20]
 	}],
 	colors: '#435ebe',
 	xaxis: {
 		categories: ["Jan","Feb","Mar","Apr","May","Jun","Jul", "Aug","Sep","Oct","Nov","Dec"],
 	},
-}
+} */
 let optionsVisitorsProfile  = {
 	series: [70, 30],
 	labels: ['Male', 'Female'],

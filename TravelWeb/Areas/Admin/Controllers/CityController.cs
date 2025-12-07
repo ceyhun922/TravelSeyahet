@@ -37,28 +37,38 @@ namespace TravelWeb.Areas.Admin.Controllers
 
             if (string.IsNullOrEmpty(destination.DestinationCity))
             {
-                TempData["warning"]="Boş ola bilmez";
+                TempData["warning"] = "Boş ola bilmez";
             }
 
             var existsCity = _destinationService.ListAllService().FirstOrDefault(x => x.DestinationCity == destination.DestinationCity);
 
             if (existsCity != null)
             {
-                TempData["error"]="Bu qeyd artıq mövcuddur";
+                TempData["error"] = "Bu qeyd artıq mövcuddur";
 
                 return View(destination);
             }
 
-            if (true)
-            {
-                
-            }
-
-            TempData["success"]="Elave Edildi";
+            TempData["success"] = "Elave Edildi";
             _destinationService.InsertService(destination);
 
             return RedirectToAction(nameof(Index), new { area = "Admin" });
 
         }
+
+        [HttpGet]
+        public IActionResult UpdateCity(int id)
+        {
+            var value = _destinationService.GetFindIdService(id);
+            return View(value);
+        }
+        [HttpPost]
+        public IActionResult UpdateCity()
+        {
+            return RedirectToAction(nameof(Index), new { area = "Admin" });
+        }
+
+
+
     }
 }

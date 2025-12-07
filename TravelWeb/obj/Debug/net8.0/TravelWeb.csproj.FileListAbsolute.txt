@@ -285,9 +285,7 @@
 /Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.TravelWeb.props
 /Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.TravelWeb.props
 /Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/obj/Debug/net8.0/staticwebassets.pack.json
-/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/obj/Debug/net8.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 /Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/obj/Debug/net8.0/scopedcss/bundle/TravelWeb.styles.css
-/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/obj/Debug/net8.0/scopedcss/projectbundle/TravelWeb.bundle.scp.css
 /Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/obj/Debug/net8.0/TravelWeb.csproj.Up2Date
 /Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/obj/Debug/net8.0/TravelWeb.dll
 /Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/obj/Debug/net8.0/refint/TravelWeb.dll

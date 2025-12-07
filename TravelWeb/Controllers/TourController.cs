@@ -2,6 +2,7 @@
 
 using DAL.Concrete;
 using Entities.Concrete;
+using Entities.ViewModel;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,9 +36,23 @@ namespace TravelWeb.Controllers
             return View(values);
         }
 
+        /* [HttpPost]
+        public IActionResult LocationFilter([FromQuery] FilterLocationViewModel model)
+        {
+            var query =_tourService.AllToursWithRotasionsService().AsQueryable();
+
+            if (! string.IsNullOrWhiteSpace(model.Keyword))
+            {
+                query =query.Where(x=>x.TourLocaion.Contains(model.Keyword));
+            }
+
+        
+            return Json(false);
+        } */
+
         public IActionResult TourDetail(int id)
         {
-             var tour = _context.Tours
+             var tour = _context.Tours?
                        .Include(x => x.Rotasions)
                        .Where(x => x.TourId == id)
                        .ToList();

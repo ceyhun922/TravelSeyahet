@@ -50,6 +50,13 @@ builder.Services.AddScoped<IRotasionService, RotasionManager>();
 builder.Services.AddScoped<IWriterDAL, EFWriterRepository>();
 builder.Services.AddScoped<IWriterService, WriterManager>();
 
+builder.Services.AddScoped<IRotasionDAL, EFRotasionRepository>();
+builder.Services.AddScoped<IRotasionService, RotasionManager>();
+
+
+builder.Services.AddScoped<ICommentDAL, EFCommentRepository>();
+builder.Services.AddScoped<ICommentService, CommentManager>();
+
 
 builder.Services.AddDbContext<Context>(opt =>
 {

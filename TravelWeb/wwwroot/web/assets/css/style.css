@@ -1,0 +1,149 @@
+/* Tour Detail Page Custom CSS */
+.tour-detail h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #000000; /* primary color */
+    margin-bottom: 20px;
+}
+
+.tour-detail ul.list-unstyled li {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #212529;
+}
+
+.tour-detail .btn-primary {
+    background-color: #000000;
+    border: none;
+    padding: 10px 25px;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.tour-detail .btn-primary:hover {
+    background-color: #FF1654; /* secondary color */
+}
+
+.tour-description h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 15px;
+}
+
+.tour-description p {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    color: #212529;
+    line-height: 1.7;
+}
+
+.tour-gallery img {
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.tour-gallery img:hover {
+    transform: scale(1.05);
+}
+
+.tour-guide img {
+    border: 3px solid #FF1654;
+}
+
+.tour-guide h5 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.tour-guide p {
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    color: #6c757d;
+}
+
+.comments h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.comments .media {
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.comments .media h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.comments .media p {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    color: #212529;
+}
+
+.leave-comment-form h5 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.leave-comment-form textarea,
+.leave-comment-form input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: 'Lato', sans-serif;
+}
+
+.leave-comment-form button {
+    background-color: #000000;
+    border: none;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.leave-comment-form button:hover {
+    background-color: #FF1654;
+}
+
+footer {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    color: #fff;
+    background-color: #343a40;
+}
+
+footer a {
+    color: #FF1654;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+#tourGalleryCarousel .carousel-item {
+    display: flex;
+}
+
+#tourGalleryCarousel img {
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#tourGalleryCarousel img:hover {
+    transform: scale(1.05);
+}
