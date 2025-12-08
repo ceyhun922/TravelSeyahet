@@ -97,8 +97,8 @@ namespace TravelWeb.Areas.Admin.Controllers
      .GroupBy(x => x.Tour.TourLocaion)
      .Select(g => new
      {
-         TourLocaion = g.Key, // string
-         Count = g.Count()    // int
+         TourLocaion = g.Key, 
+         Count = g.Count()   
      })
      .OrderByDescending(x => x.Count)
      .FirstOrDefault();

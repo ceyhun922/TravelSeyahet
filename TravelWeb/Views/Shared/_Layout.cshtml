@@ -17,85 +17,13 @@
 </head>
 
 <body>
-  <!--header-->
-  <header id="site-header" class="fixed-top">
-    <div class="container">
-      <nav class="navbar navbar-expand-lg stroke">
-        <h1><a class="navbar-brand mr-lg-5" href="index.html">
-            Traversal
-          </a></h1>
-        <!-- if logo is image enable this   
-      <a class="navbar-brand" href="#index.html">
-          <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
-      </a> -->
-        <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
-          data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
-          <span class="navbar-toggler-icon fa icon-close fa-times"></span>
-          </span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="services.html">Destinations</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pricing.html">Packages</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Blog<span class="fa fa-angle-down"></span>
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                <a class="dropdown-item" href="blog.html">Blog Posts</a>
-                <a class="dropdown-item" href="blog-single.html">Blog single</a>
-                <a class="dropdown-item" href="landing-single.html">Landing Page</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
-            </li>
-
-          </ul>
-        </div>
-        <div class="d-lg-block d-none">
-          <a href="contact.html" class="btn btn-style btn-secondary">Get In Touch</a>
-        </div>
-        <!-- toggle switch for light and dark theme -->
-        <div class="mobile-position">
-          <nav class="navigation">
-            <div class="theme-switch-wrapper">
-              <label class="theme-switch" for="checkbox">
-                <input type="checkbox" id="checkbox">
-                <div class="mode-container">
-                  <i class="gg-sun"></i>
-                  <i class="gg-moon"></i>
-                </div>
-              </label>
-            </div>
-          </nav>
-        </div>
-        <!-- //toggle switch for light and dark theme -->
-      </nav>
-    </div>
-  </header>
-  <!-- //header -->
-  <!--banner-slider-->
-  <!-- main-slider -->
-    @await Component.InvokeAsync("Slider")
+  @await Html.PartialAsync("_Header")
   <!-- /main-slider -->
   <!-- //banner-slider-->
+    @await Component.InvokeAsync("Slider")
 
 @RenderBody()
+ 
   <!--/w3l-footer-29-main-->
   <footer>
     <!-- footer -->
@@ -106,19 +34,19 @@
             <div class="col-lg-6 column">
               <div class="row">
                 <div class="col-md-4 column">
-                  <h3>Company</h3>
+                  <h3>Şirkət<table></table></h3>
                   <ul class="footer-gd-16">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a asp-action="Index" asp-controller="Home">Ana Səhifə</a></li>
+                    <li><a asp-action="Index" asp-controller="About">Haqqımızda</a></li>
+                    <li><a asp-action="Index" asp-controller="Tour">Turlar</a></li>
+                    <li><a asp-action="Index" asp-controller="Blog">Bloqlar</a></li>
+                    <li><a asp-action="Index" asp-controller="Contact">Əlaqə</a></li>
                   </ul>
                 </div>
                 <div class="col-md-4 column mt-md-0 mt-4">
-                  <h3>Useful Links</h3>
+                  <h3>Faydalı Məlumatlar</h3>
                   <ul class="footer-gd-16">
-                    <li><a href="#url">Destinations</a></li>
+                    <li><a asp-action="Index" asp-controller="Destination">Destinations</a></li>
                     <li><a href="#url">Our Branches</a></li>
                     <li><a href="#url">Latest Media</a></li>
                     <li><a href="about.html">About Company</a></li>
@@ -126,13 +54,12 @@
                   </ul>
                 </div>
                 <div class="col-md-4 column mt-md-0 mt-4">
-                  <h3>Our Services</h3>
+                  <h3>Bizim Xidmətlər</h3>
                   <ul class="footer-gd-16">
-                    <li><a href="#url">Privacy Policy</a></li>
-                    <li><a href="#url">Our Terms</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="landing-single.html">Landing Page</a></li>
-                    <li><a href="#url">Our Guides</a></li>
+                    <li><a href="#url">Məxfilik Siyasəti</a></li>
+                    <li><a href="#url">Bizim Müştərilər</a></li>
+                    <li><a href="services.html">Xidmətlər</a></li>
+                    <li><a href="#url">Bizim Komanda</a></li>
                   </ul>
                 </div>
               </div>
@@ -152,7 +79,7 @@
           <div class="d-flex below-section justify-content-between align-items-center pt-4 mt-5">
             <div class="columns text-lg-left text-center">
               <p>&copy; 2020 Traversal. All rights reserved.Design by <a href="https://w3layouts.com/" target="_blank">
-               
+                 
               </p>
             </div>
             <div class="columns-2 mt-lg-0 mt-3">
@@ -172,7 +99,7 @@
           </div>
         </div>
       </div>
-  
+
       <!-- move top -->
       <button onclick="topFunction()" id="movetop" title="Go to top">
         <span class="fa fa-angle-up"></span>
@@ -182,7 +109,7 @@
         window.onscroll = function () {
           scrollFunction()
         };
-  
+
         function scrollFunction() {
           if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
             document.getElementById("movetop").style.display = "block";
@@ -190,7 +117,7 @@
             document.getElementById("movetop").style.display = "none";
           }
         }
-  
+
         // When the user clicks on the button, scroll to the top of the document
         function topFunction() {
           document.body.scrollTop = 0;
@@ -251,6 +178,45 @@
     $('.counter').countUp();
   </script>
   <!-- //stats number counter -->
+  <!-- video popup -->
+  <script src="~/web/assets/js/jquery.magnific-popup.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('.popup-with-zoom-anim').magnificPopup({
+        type: 'inline',
+
+        fixedContentPos: false,
+        fixedBgPos: true,
+
+        overflowY: 'auto',
+
+        closeBtnInside: true,
+        preloader: false,
+
+        midClick: true,
+        removalDelay: 300,
+        mainClass: 'my-mfp-zoom-in'
+      });
+
+      $('.popup-with-move-anim').magnificPopup({
+        type: 'inline',
+
+        fixedContentPos: false,
+        fixedBgPos: true,
+
+        overflowY: 'auto',
+
+        closeBtnInside: true,
+        preloader: false,
+
+        midClick: true,
+        removalDelay: 300,
+        mainClass: 'my-mfp-slide-bottom'
+      });
+    });
+  </script>
+  <!-- //video popup -->
+
   <!--/MENU-JS-->
   <script>
     $(window).on("scroll", function () {

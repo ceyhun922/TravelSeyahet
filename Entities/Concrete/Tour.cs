@@ -14,6 +14,7 @@ public class Tour
     public bool TourStatus { get; set; } = true;
     public string TourDetail { get; set; } = string.Empty;
     public DateTime TourClock { get; set; }
+    public DateTime TourDateTime {get;set;}
 
     public int DestinationId { get; set; }
 

@@ -60,6 +60,9 @@ builder.Services.AddScoped<ICommentService, CommentManager>();
 builder.Services.AddScoped<ISliderDAL, EFSliderRepository>();
 builder.Services.AddScoped<ISliderService, SliderManager>();
 
+builder.Services.AddScoped<ITestimonialDAL, EFTestimonialRepository>();
+builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
+
 
 builder.Services.AddDbContext<Context>(opt =>
 {

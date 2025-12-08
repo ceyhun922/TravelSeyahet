@@ -1,6 +1,8 @@
 
+using Entities.Concrete;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Services.Abstract;
 
 namespace TravelWeb.Areas.Admin.Controllers
@@ -20,6 +22,16 @@ namespace TravelWeb.Areas.Admin.Controllers
         {
             var values =_sliderService.ListAllService();
             return View(values);
+        }
+
+        public IActionResult AddNewSlider()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddNewSlider(Slider slider)
+        {
+            return View();
         }
     }
 }

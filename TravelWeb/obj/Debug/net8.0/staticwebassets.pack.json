@@ -7565,6 +7565,18 @@
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
     },
     {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/logo.jpg",
+      "PackagePath": "staticwebassets/logo.jpg"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/logo2.png",
+      "PackagePath": "staticwebassets/logo2.png"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/uploads/04734bce-5533-413a-830c-078ba8afc5be.jpg",
+      "PackagePath": "staticwebassets/uploads/04734bce-5533-413a-830c-078ba8afc5be.jpg"
+    },
+    {
       "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/uploads/20cb176d-df42-47fb-8e79-777ed18b05ef.jpg",
       "PackagePath": "staticwebassets/uploads/20cb176d-df42-47fb-8e79-777ed18b05ef.jpg"
     },
