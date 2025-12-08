@@ -50,22 +50,52 @@ namespace TravelWeb.Controllers
             return Json(false);
         } */
 
+        public IActionResult TourDetailWritter(int id)
+        {
+            var tour = _context.Tours?
+                      .Include(x => x.Rotasions)
+                      .Where(x => x.TourId == id)
+                      .ToList();
+            return View(tour);
+
+        }
         public IActionResult TourDetail(int id)
         {
-             var tour = _context.Tours?
-                       .Include(x => x.Rotasions)
-                       .Where(x => x.TourId == id)
-                       .ToList();
+            var tour = _tourService.AllToursWithDestinationAndGuideService(id);
+            if (tour == null)
+            {
+                return NotFound("Sehife tapılmadı");
+            }
+
+            ViewBag.Comments = _context.Comments
+            .Where(c => c.TourId == tour.TourId)
+            .ToList();
+            ViewBag.CommentCount = _context.Comments
+            .Where(c => c.TourId == tour.TourId).Count();
+
             return View(tour);
 
         }
         public IActionResult TourWithRotasion(int id)
         {
-            var tour =_tourService.AllToursWithRotasionsService(id);
+            var tour = _tourService.AllToursWithRotasionsService(id);
 
             return View(tour);
 
         }
-        
+
+        [HttpPost]
+        public IActionResult PostComment(Comment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Comments.Add(comment);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("TourDetail", new { id = comment.TourId });
+        }
+
+
     }
 }

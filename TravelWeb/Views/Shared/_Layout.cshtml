@@ -10,17 +10,18 @@
   <link href="//fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link href="//fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap"
     rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- google fonts -->
   <!-- Template CSS -->
   <link rel="stylesheet" href="~/web/assets/css/style-liberty.css">
   <!-- Template CSS -->
+  @RenderSection("Styles",required: false)
 </head>
 
 <body>
   @await Html.PartialAsync("_Header")
   <!-- /main-slider -->
   <!-- //banner-slider-->
-    @await Component.InvokeAsync("Slider")
 
 @RenderBody()
  
@@ -144,6 +145,8 @@
   <script src="~/web/assets/js/jquery.zoomslider.min.js"></script>
   <!--//slider-js-->
   <script src="~/web/assets/js/owl.carousel.js"></script>
+
+  
   <!-- script for tesimonials carousel slider -->
   <script>
     $(document).ready(function () {
@@ -247,6 +250,7 @@
   <!--//MENU-JS-->
 
   <script src="~/web/assets/js/bootstrap.min.js"></script>
+    @RenderSection("Scripts", required: false)
 
 </body>
 

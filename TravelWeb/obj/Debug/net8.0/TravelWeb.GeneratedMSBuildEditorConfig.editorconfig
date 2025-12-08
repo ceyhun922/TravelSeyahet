@@ -102,6 +102,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm90YXNpb24vUm90YXNpb25zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Shared/Components/Comments/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvQ29tbWVudHMvRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Shared/Components/Slider/Default.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0NvbXBvbmVudHMvU2xpZGVyL0RlZmF1bHQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -140,6 +144,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Tour/TourDetail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVG91ci9Ub3VyRGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Tour/TourDetailWritter.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVG91ci9Ub3VyRGV0YWlsV3JpdHRlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Writter/AllRezervatons.cshtml]

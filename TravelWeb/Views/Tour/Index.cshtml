@@ -1,0 +1,40 @@
+ @model List<Tour> 
+  <!-- about breadcrumb -->
+  <section class="w3l-about-breadcrumb text-left">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+      <div class="container">
+        <h2 class="title">Turlar </h2>
+        <ul class="breadcrumbs-custom-path mt-2">
+          <li><a href="#url">Home</a></li>
+          <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Destinations </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <!-- //about breadcrumb -->
+ <!--  Work gallery section -->
+ <section class="grids-1 py-5">
+  <div class="grids py-lg-5 py-md-4">
+      <div class="container">
+          <h3 class="hny-title mb-5">Turlar</h3>
+          <div class="row">
+              @foreach(var item in Model)
+              {
+              <div class="col-lg-4 col-md-4 col-6">
+                  <div class="column">
+                      <a asp-action="TourDetail" asp-controller="Tour" asp-route-id="@item.TourId"><img src="@item.TourImage" alt="@item.TourLocaion" class="img-fluid"></a>
+                      <div class="info">
+                          <h4><a asp-action="TourDetail" asp-controller="Tour" asp-route-id="@item.TourId">@item.TourLocaion</a></h4>
+                          <p>@item.DTourDayNight </p>
+                          <div class="dst-btm">
+                            <span>@item.TourPrice</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              }
+          </div>
+      </div>
+</div></section>
+<!--  //Work gallery section -->
+<!-- grids block 5 -->
