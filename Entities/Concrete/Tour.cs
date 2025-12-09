@@ -16,7 +16,7 @@ public class Tour
     public DateTime TourClock { get; set; }
     public DateTime TourDateTime {get;set;}
 
-    public int DestinationId { get; set; }
+    public int? DestinationId { get; set; }
 
     [JsonIgnore]
     public Destination? Destination { get; set; }

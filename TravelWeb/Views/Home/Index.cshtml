@@ -13,34 +13,46 @@
       <!--/row-grids-->
       @foreach (var item in ViewBag.PopularTour)
       {
-        <div class="col-lg-6 subject-card mt-lg-0 mt-4">
-          <div class="subject-card-header p-4">
-            <a href="#" class="card_title p-lg-4d-block">
-              <div class="row align-items-center">
+        <div class="col-lg-6 subject-card mt-lg-0 mt-4 mb-2">
+    <div class="subject-card-header p-4">
+        <a asp-action="TourDetail" asp-controller="Tour" asp-route-id="@item.TourId" class="d-block text-decoration-none text-dark">
+            <div class="row align-items-center">
                 <div class="col-sm-5 subject-img">
-                  <img src="assets/images/g1.jpg" class="img-fluid" alt="">
+                    <img src="@item.TourImage" class="img-fluid" alt="@item.TourLocaion">
                 </div>
                 <div class="col-sm-7 subject-content mt-sm-0 mt-4">
-                  <h4>Paris</h4>
-                  <p>3Days, 4 Nights</p>
-                  <div class="dst-btm">
-                    <h6 class=""> Start From </h6>
-                    <span>$1650</span>
-                  </div>
-                  <p class="sub-para">Per person on twin sharing</p>
+                    <h4 class="mb-1">@item.Destination.DestinationCity</h4>
+                    <h5 class="mb-2">@item.TourLocaion</h5>
+                    <p>@item.DTourDayNight</p>
+                    <div class="dst-btm d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">Etraflı</h6>
+                        <span>@item.TourPrice AZN</span>
+                    </div>
+                    <p class="sub-para mb-0">İki nəfərlik otaqda adambaşına</p>
                 </div>
-              </div>
-            </a>
-          </div>
-        </div>
+            </div>
+        </a>
+    </div>
+</div>
+
       }
 
       <!--//row-grids-->
-      <div class="col-lg-6 subject-card mt-lg-0 mt-4">
-        <div class="title-content text-left mb-lg-5 mb-4"><a asp-action="Index" asp-controller="Tour"
-            class="text-center">Hamıısna bax</a></div>
-      </div>
+
     </div>
+    <div class="row">
+        <div class="col-4"></div>
+<div class="col-lg-4 subject-card mt-lg-0 mt-4 d-flex justify-content-center">
+    <div class="title-content mb-lg-5 mb-4">
+        <a asp-action="Index" asp-controller="Tour" class="btn btn-primary">
+            Hamısına bax
+        </a>
+    </div>
+</div>
+    <div class="col-4"></div>
+
+    </div>
+
   </div>
 </section>
 <!--//grids-->
@@ -200,7 +212,7 @@
     <div class="container py-lg-4 py-md-3 pb-lg-0">
       <div class="heading text-center mx-auto">
         <h6 class="sub-title text-center">Müştərilərin Gözündə Biz</h6>
-        <h3 class="hny-title mb-md-5 mb-4">Müştəri şərhləri</h3>
+        <h3 class="hny-title mb-md-5 mb-4">Müştəri rəyləri</h3>
       </div>
       <!-- /grids -->
       <div class="testimonial-width">

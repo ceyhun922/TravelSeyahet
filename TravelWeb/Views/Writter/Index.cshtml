@@ -2,6 +2,8 @@
 @{
   Layout = "_WritterLayout";
 }
+     
+
 
 <div class="page-header">
   <h3 class="page-title">
@@ -35,7 +37,7 @@
         <h4 class="font-weight-normal mb-3">Xərclənən Miqdar <i class="mdi mdi-bookmark-outline mdi-24px float-end"></i>
         </h4>
         <h2 class="mb-5">
-@*           @ViewBag.TotalPrice.ToString("C2", new CultureInfo("az-AZ"))
+          @*           @ViewBag.TotalPrice.ToString("C2", new CultureInfo("az-AZ"))
  *@        </h2>
       </div>
     </div>
@@ -57,7 +59,7 @@
     <div class="card">
       <div class="card-body">
         <div class="clearfix">
-          <h4 class="card-title float-start">Visit And Sales Statistics</h4>
+          <h4 class="card-title float-start">Rezervasiya Məlumatları</h4>
           <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-end"></div>
         </div>
         <canvas id="visit-sale-chart" class="mt-4"></canvas>
@@ -86,6 +88,7 @@
             <thead>
               <tr>
                 <th> Tur </th>
+                <th> Şeher </th>
                 <th> Tur Rəhbəri </th>
                 <th> Açıqlama </th>
                 <th> Qiymet </th>
@@ -100,6 +103,7 @@
               {
                 <tr>
                   <td>@item.TourLocaion</td>
+                  <td>@item.Destination.DestinationCity</td>
                   <td>@item.Guide.GuideName</td>
                   <td>@item.TourDetail</td>
                   <td>@item.TourPrice AZN</td>
@@ -109,6 +113,7 @@
                     <a class="btn btn-success" asp-action="Tours" asp-controller="Writter" asp-route-id="@item.TourId">
                       Rezerv Et
                     </a>
+
                   </td>
                 </tr>
               }

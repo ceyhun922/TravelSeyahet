@@ -17,7 +17,7 @@ namespace DAL.Concrete
         {
             base.OnModelCreating(builder);
 
-            // önce bağımsızlar
+           // önce bağımsızlar
             builder.ApplyConfiguration(new GuideCoreData());
             builder.ApplyConfiguration(new DestinationCoreData());
             builder.ApplyConfiguration(new TestimontalCoreData());
@@ -29,8 +29,8 @@ namespace DAL.Concrete
             // en son bağımsızlar
             builder.ApplyConfiguration(new NotificationCoreData());
             builder.ApplyConfiguration(new SliderCoreData());
-            builder.ApplyConfiguration(new CommentCoreData());
-
+/*             builder.ApplyConfiguration(new CommentCoreData()); 
+ */
             // İlişkiyi zorla
             builder.Entity<Tour>()
                 .HasOne(t => t.Destination)

@@ -25,10 +25,16 @@
     const bgColor2 = ["rgba(54, 215, 232, 1"];
     const bgColor3 = ["rgba(255, 191, 150, 1)"];
 
+    fetch("/api/getrezervationformonth")
+      .then(x=>x.json())
+      .then(data =>{
+        console.log(data);
+      })
+      
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG'],
+        labels: ['FEB22'],
         datasets: [{
           label: "CHN",
           borderColor: gradientStrokeViolet,
@@ -39,7 +45,7 @@
           fill: false,
           borderWidth: 1,
           fill: 'origin',
-          data: [20, 40, 15, 35, 25, 50, 30, 20],
+          data: [20],
           barPercentage: 0.5,
           categoryPercentage: 0.5,
         },
@@ -53,7 +59,7 @@
           fill: false,
           borderWidth: 1,
           fill: 'origin',
-          data: [40, 30, 20, 10, 50, 15, 35, 40],
+          data: [40],
           barPercentage: 0.5,
           categoryPercentage: 0.5,
         },

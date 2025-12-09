@@ -6,5 +6,6 @@ namespace DAL.Abstract
     {
         public List<Tour> AllToursWithRotasionsDAL(int rotasionId);
         public List<Tour> AllToursWithRotasionsDAL();
+        public Tour AllToursWithDestinationAndGuideDAL(int id);
     }
 }

@@ -1,7 +1,7 @@
 @model Comment
 @using (Html.BeginForm("PostComment", "Tour", FormMethod.Post))
 {
- @Html.HiddenFor(x => x.TourId)
+        @Html.HiddenFor(x => x.TourId)
         <div class="mb-3">
             @Html.TextAreaFor(x => x.CommentUserComment, new { @class = "form-control", placeholder = "Şərhin*" })
         </div>

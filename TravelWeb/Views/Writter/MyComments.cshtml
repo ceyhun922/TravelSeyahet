@@ -4,6 +4,8 @@
 
 @model List<Comment>
 
+
+
 @if (Model == null || !Model.Any())
 {
     <p>Şerh Yazmadınız</p>
@@ -14,7 +16,10 @@ else
         <thead>
             <tr>
                 <th>ID</th>
-                <th>ID</th>
+                <th>Şerhim</th>
+                <td>Yenile</td>
+                <td>Sil</td>
+                <td>Get</td>
             </tr>
         </thead>
         <tbody>
@@ -22,12 +27,25 @@ else
             {
                 <tr>
                     <td>
-                        @item.CommentID
+                        <b>
+                            @item.CommentID
+                        </b>
                     </td>
                     <td>
-                        @item.CommentUserComment
+                        <strong>
+                            @item.CommentUserComment
+                        </strong>
                     </td>
-
+                    <td>
+                        <a class="btn btn-warning text-dark">Yenile</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger">Sil</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-info" asp-action="TourDetail" asp-controller="Tour" asp-route-id="@item.TourId">Şerhe
+                            Get</a>
+                    </td>
                 </tr>
             }
         </tbody>

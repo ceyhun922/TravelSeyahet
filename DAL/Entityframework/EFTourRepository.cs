@@ -14,14 +14,21 @@ namespace DAL.Entityframework
             _context = context;
         }
 
+        public Tour AllToursWithDestinationAndGuideDAL(int id)
+        {
+            return
+            _context.Tours.Where(t => t.TourStatus == true).Include(t => t.Destination).Include(t => t.Guide).FirstOrDefault(t=>t.TourId == id);
+
+        }
+
         public List<Tour> AllToursWithRotasionsDAL(int rotasionId)
         {
-            return _context.Tours.Include(t=>t.Rotasions).Where(t=>t.TourId ==rotasionId).ToList();
+            return _context.Tours.Include(t => t.Rotasions).Where(t => t.TourStatus == true && t.TourId == rotasionId).ToList();
         }
 
         public List<Tour> AllToursWithRotasionsDAL()
         {
-            return _context.Tours.Include(x=>x.Destination).Where(x=>x.TourStatus==true).ToList();
+            return _context.Tours.Include(x => x.Destination).Where(x => x.TourStatus == true && x.TourCountLimit > 0).ToList();
         }
     }
 }

@@ -25,17 +25,21 @@
     const bgColor2 = ["rgba(54, 215, 232, 1"];
     const bgColor3 = ["rgba(255, 191, 150, 1)"];
 
-    fetch("/Writter/TrafficMounth")
-      .then(x=>x.json())
-      .then(data=>{
-        console.log(data.key);
-      });
-    new Chart(ctx, {
+    fetch("/api/getrezervationformonth")
+    .then(res =>res.json())
+    .then(data =>{
+      
+      
+      var location =data.map(x=>x.location)
+      var dataCount =data.map(c=>c.count);
+      var dataAmount =data.map(c=>c.amount);
+console.log(dataCount);
+      new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['JAN2', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG'],
+        labels: location,
         datasets: [{
-          label: "CHN",
+          label: "Rezervasiya Sayı",
           borderColor: gradientStrokeViolet,
           backgroundColor: gradientStrokeViolet,
           fillColor: bgColor1,
@@ -44,35 +48,21 @@
           fill: false,
           borderWidth: 1,
           fill: 'origin',
-          data: [20, 40, 15, 35, 25, 50, 30, 20],
+          data: dataCount,
           barPercentage: 0.5,
           categoryPercentage: 0.5,
         },
         {
-          label: "USA",
+          label: "Ümumi Mebleğ",
           borderColor: gradientStrokeRed,
           backgroundColor: gradientStrokeRed,
-          hoverBackgroundColor: gradientStrokeRed,
           fillColor: bgColor2,
+          hoverBackgroundColor: gradientStrokeRed,
           pointRadius: 0,
           fill: false,
           borderWidth: 1,
           fill: 'origin',
-          data: [40, 30, 20, 10, 50, 15, 35, 40],
-          barPercentage: 0.5,
-          categoryPercentage: 0.5,
-        },
-        {
-          label: "UK",
-          borderColor: gradientStrokeBlue,
-          backgroundColor: gradientStrokeBlue,
-          hoverBackgroundColor: gradientStrokeBlue,
-          fillColor: bgColor3,
-          pointRadius: 0,
-          fill: false,
-          borderWidth: 1,
-          fill: 'origin',
-          data: [70, 10, 30, 40, 25, 50, 15, 30],
+          data: dataAmount,
           barPercentage: 0.5,
           categoryPercentage: 0.5,
         }
@@ -127,6 +117,9 @@
         }
       }]
     });
+    })
+  
+    
   }
 
   if ($("#traffic-chart").length) {

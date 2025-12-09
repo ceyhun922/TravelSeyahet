@@ -91,17 +91,17 @@ namespace TravelWeb.Areas.Admin.Controllers
                 .ToList();
 
             if (!reservations.Any())
-                return Json(new { message = "Hiç rezervasyon yok" });
+                return Json(new { message = "Rezervasya tapılmadı" });
 
             var mostMadeReservation = reservations
-     .GroupBy(x => x.Tour.TourLocaion)
-     .Select(g => new
-     {
-         TourLocaion = g.Key, 
-         Count = g.Count()   
-     })
-     .OrderByDescending(x => x.Count)
-     .FirstOrDefault();
+                    .GroupBy(x => x.Tour.TourLocaion)
+                    .Select(g => new
+                    {
+                        TourLocaion = g.Key, 
+                        Count = g.Count()   
+                    })
+                    .OrderByDescending(x => x.Count)
+                    .FirstOrDefault();
 
             return Ok(mostMadeReservation);
 

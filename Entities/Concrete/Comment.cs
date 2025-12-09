@@ -12,6 +12,8 @@ namespace Entities.Concrete
         public bool? CommentStatus { get; set; }
         public int UserId { get; set; }
         public Writer? Writer { get; set; }
+        public int TourId { get; set; }
+
         public Tour? Tour { get; set; }
     }
 }

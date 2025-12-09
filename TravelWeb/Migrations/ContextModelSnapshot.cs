@@ -114,108 +114,6 @@ namespace TravelWeb.Migrations
                     b.HasIndex("WriterId");
 
                     b.ToTable("Comments");
-
-                    b.HasData(
-                        new
-                        {
-                            CommentID = 1,
-                            CommentStatus = true,
-                            CommentUserComment = "Tur çox gözəl təşkil olunmuşdu, təşəkkürlər!",
-                            CommentUserMail = "aylin@mail.com",
-                            CommentUserName = "Aylin Məmmədova",
-                            TourId = 0,
-                            UserId = 1
-                        },
-                        new
-                        {
-                            CommentID = 2,
-                            CommentStatus = true,
-                            CommentUserComment = "Qidalanma zəif idi, amma ümumi xidmət yaxşı idi.",
-                            CommentUserMail = "elvin@mail.com",
-                            CommentUserName = "Elvin Quliyev",
-                            TourId = 0,
-                            UserId = 2
-                        },
-                        new
-                        {
-                            CommentID = 3,
-                            CommentStatus = true,
-                            CommentUserComment = "Bələdçi çox məlumatlı idi, turdan çox razı qaldım.",
-                            CommentUserMail = "nermin@mail.com",
-                            CommentUserName = "Nərmin Həsənova",
-                            TourId = 0,
-                            UserId = 3
-                        },
-                        new
-                        {
-                            CommentID = 4,
-                            CommentStatus = true,
-                            CommentUserComment = "Qiymət-Performans mükəmməldi, yenə gələcəm.",
-                            CommentUserMail = "murad@mail.com",
-                            CommentUserName = "Murad Əliyev",
-                            TourId = 0,
-                            UserId = 4
-                        },
-                        new
-                        {
-                            CommentID = 5,
-                            CommentStatus = true,
-                            CommentUserComment = "Çox maraqlı yerləri gəzdik, hər şey super idi.",
-                            CommentUserMail = "gunel@mail.com",
-                            CommentUserName = "Günel Məmmədli",
-                            TourId = 0,
-                            UserId = 5
-                        },
-                        new
-                        {
-                            CommentID = 6,
-                            CommentStatus = false,
-                            CommentUserComment = "Avtobus bir az gec gəldi amma yenə də xoş keçdi.",
-                            CommentUserMail = "resad@mail.com",
-                            CommentUserName = "Rəşad Əhmədov",
-                            TourId = 0,
-                            UserId = 6
-                        },
-                        new
-                        {
-                            CommentID = 7,
-                            CommentStatus = true,
-                            CommentUserComment = "Foto zonalar möhtəşəm idi, təşəkkürlər!",
-                            CommentUserMail = "leman@mail.com",
-                            CommentUserName = "Ləman Əliyeva",
-                            TourId = 0,
-                            UserId = 7
-                        },
-                        new
-                        {
-                            CommentID = 8,
-                            CommentStatus = true,
-                            CommentUserComment = "Tur rəhbəri əla idi, tam peşəkar yanaşma.",
-                            CommentUserMail = "kamran@mail.com",
-                            CommentUserName = "Kamran Məlikov",
-                            TourId = 0,
-                            UserId = 8
-                        },
-                        new
-                        {
-                            CommentID = 9,
-                            CommentStatus = true,
-                            CommentUserComment = "Bir az yorucu idi, amma görməli yerlər gözəl idi.",
-                            CommentUserMail = "aysel@mail.com",
-                            CommentUserName = "Aysel Hüseyn",
-                            TourId = 0,
-                            UserId = 9
-                        },
-                        new
-                        {
-                            CommentID = 10,
-                            CommentStatus = true,
-                            CommentUserComment = "Bu, iştirak etdiyim ən yaxşı turlardan biri oldu!",
-                            CommentUserMail = "faiq@mail.com",
-                            CommentUserName = "Faiq Rzayev",
-                            TourId = 0,
-                            UserId = 10
-                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.Destination", b =>
@@ -1237,7 +1135,7 @@ namespace TravelWeb.Migrations
                     b.Property<string>("DTourDayNight")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DestinationId")
+                    b.Property<int?>("DestinationId")
                         .HasColumnType("int");
 
                     b.Property<int>("GuideID")
@@ -1808,8 +1706,7 @@ namespace TravelWeb.Migrations
                     b.HasOne("Entities.Concrete.Destination", "Destination")
                         .WithMany("Tours")
                         .HasForeignKey("DestinationId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Entities.Concrete.Guide", "Guide")
                         .WithMany("Tours")

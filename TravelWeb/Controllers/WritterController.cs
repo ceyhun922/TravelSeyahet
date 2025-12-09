@@ -1,7 +1,10 @@
 
+using System.Globalization;
+using System.Threading.Tasks;
 using DAL.Concrete;
 using Entities.Concrete;
 using Entities.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +12,7 @@ using Services.Abstract;
 
 namespace TravelWeb.Controllers
 {
+    [Authorize]
 
     public class WritterController : Controller
     {
@@ -21,6 +25,7 @@ namespace TravelWeb.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IWebHostEnvironment _env;
         private readonly IWriterService _writerService;
+
 
         public WritterController(UserManager<Writer> userManager, SignInManager<Writer> signInManager, ITourService tourService, IDestinationService destinationService, Context context, IRezervationService rezervationService, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env, IWriterService writerService)
         {
@@ -60,6 +65,7 @@ namespace TravelWeb.Controllers
 
             double total = tour.TourPrice * model.CountPerson;
             var user = await _userManager.GetUserAsync(User);
+
             var rez = new Rezervation
             {
                 DestinationId = model.DestinationId,
@@ -84,22 +90,41 @@ namespace TravelWeb.Controllers
             return Ok(new { success = true, message = "Rezervasiya uğurla əlavə edildi!" });
         }
 
-        public IActionResult Tours(int id)
+
+
+        [HttpPost]
+        public async Task<IActionResult> QuickRezervation(int tourId, int? destinationId, int countPerson)
         {
-        var allTours = _context.Tours!
-        .Include(x => x.Destination) 
-        .ToList();           
-        
-         var selectedTour = _context.Tours
-        .Include(x => x.Destination)
-        .FirstOrDefault(x => x.TourId == id);
+            var tour = _tourService.GetFindIdService(tourId);
+            if (tour == null)
+                return BadRequest("Tur tapılmadı.");
 
-            ViewBag.Tour = selectedTour?.TourId; 
-            ViewBag.CityName = selectedTour?.Destination?.DestinationCity;
+            if (countPerson > tour.TourCountLimit)
+                return BadRequest($"Bu turda yalnız {tour.TourCountLimit} yer var.");
 
-            return View(allTours); 
+            var user = await _userManager.GetUserAsync(User);
+
+            var rez = new Rezervation
+            {
+                DestinationId = destinationId ?? 0,
+                TourId = tourId,
+                RezervationCountPerson = countPerson,
+                RezervationDate = DateTime.Now.Date,
+                RezervationTime = TimeOnly.FromDateTime(DateTime.Now),
+                RezervationDescription = "Popüler tur rezervasyonu",
+                TotalPrice = tour.TourPrice * countPerson,
+                RezervationStatus = RezervationStatus.Pending,
+                RemainderCapaCity = tour.TourCountLimit - countPerson,
+                UserId = user.Id
+            };
+
+            _rezervationService.InsertService(rez);
+
+            tour.TourCountLimit -= countPerson;
+            _tourService.UpdateService(tour);
+
+            return Ok(new { message = "Rezervasiya uğurla əlavə edildi!" });
         }
-
 
         public async Task<IActionResult> AllRezervatons()
         {
@@ -175,16 +200,13 @@ namespace TravelWeb.Controllers
             var user = await _userManager.GetUserAsync(User);
 
             if (user == null)
-    {
-        return RedirectToAction("Login","Writter");
-    }
+            {
+                return RedirectToAction("Login", "Writter");
+            }
 
 
-            ViewBag.Name = user?.UserName;
-            ViewBag.Image = user?.WriterImage;
-            ViewBag.Status = user?.WriterStatus;
             var rez = _rezervationService.ListAllService(x => x.UserId == user.Id && x.RezervationStatus == RezervationStatus.Approved).Count();
-             var topRez = _context.Tours?.Include(x => x.Guide).ToList().Take(5);
+            var topRez = _context.Tours?.Include(x => x.Guide).Include(x => x.Destination).Include(x => x.Destination).ToList().Take(5);
             ViewBag.TopRez = topRez;
             ViewBag.Rezervations = rez;
 
@@ -240,7 +262,7 @@ namespace TravelWeb.Controllers
 
             var result = await _userManager.UpdateAsync(user);
 
-            return RedirectToAction("Index","Writter");
+            return RedirectToAction("Index", "Writter");
         }
 
         public IActionResult ChangePassword()
@@ -279,6 +301,86 @@ namespace TravelWeb.Controllers
         }
 
 
+        public IActionResult Tours(int id)
+        {
+            var tour = _context.Tours
+                               .Include(t => t.Destination)
+                               .FirstOrDefault(t => t.TourId == id);
+
+            if (tour == null)
+                return NotFound();
+
+            return View(tour);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Tours([FromBody] Rezervation model)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(new { message = "Məlumat düzgün deyil." });
+
+            var tour = _tourService.GetFindIdService(model.TourId);
+            if (tour == null)
+                return BadRequest(new { message = "Tur tapılmadı." });
+
+            if (model.RezervationCountPerson > tour.TourCountLimit)
+                return BadRequest(new { message = $"Bu turda yalnız {tour.TourCountLimit} yer var." });
+
+            double total = tour.TourPrice * model.RezervationCountPerson;
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+                return BadRequest(new { message = "İstifadəçi tapılmadı." });
+
+            var rez = new Rezervation
+            {
+                DestinationId = model.DestinationId,
+                TourId = model.TourId,
+                RezervationCountPerson = model.RezervationCountPerson,
+                RezervationDate = DateTime.Now.Date,
+                RezervationTime = TimeOnly.FromDateTime(DateTime.Now),
+                RezervationDescription = model.RezervationDescription,
+                TotalPrice = total,
+                RezervationStatus = RezervationStatus.Pending,
+                RemainderCapaCity = tour.TourCountLimit - model.RezervationCountPerson,
+                UserId = user.Id
+            };
+
+            _rezervationService.InsertService(rez);
+
+            tour.TourCountLimit -= model.RezervationCountPerson;
+            _tourService.UpdateService(tour);
+
+            return Ok(new { success = true, message = "Rezervasiya uğurla əlavə edildi!" });
+        }
+
+
+        [HttpGet("/api/getrezervationformonth")]
+        public IActionResult GetRezervationForMonth()
+        {
+            var rezervasyon = _context.Rezervations.Include(x => x.Tour).Where(x => x.Tour != null).ToList();
+
+            if (!rezervasyon.Any())
+                return Json(new { message = "Rezervasiya Tapılmadı" });
+
+            var culture =new CultureInfo("az-AZ");
+
+            var mostRezervation = rezervasyon
+                .GroupBy(x => new
+                {
+                    x.Tour.TourLocaion,
+                    Month =x.RezervationDate.Month
+                })
+                .Select(g => new
+                {
+                    Location = g.Key.TourLocaion,
+                    Month =culture.DateTimeFormat.GetMonthName(g.Key.Month),
+                    Count = g.Count(),
+                    Amount = g.Sum(x => x.TotalPrice)
+                })
+                .ToList();
+            return Ok(mostRezervation);
+        }
 
 
     }
