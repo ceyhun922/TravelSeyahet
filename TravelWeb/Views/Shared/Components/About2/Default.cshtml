@@ -1,26 +1,17 @@
+@model List<About2>
 <section class="w3l-grids1">
   <div class="hny-three-grids py-5">
     <div class="container py-lg-5">
       <div class="row">
-        <div class="col-md-4 col-sm-6 mt-0 grids5-info">
-          <a href="#url"><img src="~/web/assets/images/g1.jpg" class="img-fluid" alt=""></a>
-          <h5>Lorem</h5>
-          <h4><a href="#url">Investor Relations</a></h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam esse? dolores impedit doloremque.</p>
-        </div>
-        <div class="col-md-4 col-sm-6 mt-sm-0 mt-5 grids5-info">
-          <a href="#url"><img src="~/web/assets/images/g2.jpg" class="img-fluid" alt=""></a>
-          <h5>Lorem</h5>
-          <h4><a href="#url"> 
-            Partner With Care</a></h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam esse? dolores impedit doloremque.</p>
-        </div>
-        <div class="col-md-4 col-sm-6 mt-md-0 mt-5 grids5-info">
-          <a href="#url"><img src="~/web/assets/images/g3.jpg" class="img-fluid" alt=""></a>
-          <h5>Lorem</h5>
-          <h4><a href="#url">Customer Care</a></h4>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam esse? dolores impedit doloremque.</p>
-        </div>
+        @foreach (var item in Model)
+        {
+          <div class="col-md-4 col-sm-6 mt-0 grids5-info">
+            <a href="#url"><img src="@item.About2Image" class="img-fluid" alt="@item.About2Title1"></a>
+            <h5>@item.About2Title1</h5>
+            <h4><a href="#url">@item.About2Title2</a></h4>
+            <p>@item.About2Description</p>
+          </div>
+        }
       </div>
     </div>
   </div>
