@@ -72,6 +72,8 @@ builder.Services.AddScoped<IAboutService, AboutManager>();
 builder.Services.AddScoped<IAbout2DAL, EFAbout2Repository>();
 builder.Services.AddScoped<IAbout2Service, About2Manager>();
 
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 
 builder.Services.AddDbContext<Context>(opt =>
 {

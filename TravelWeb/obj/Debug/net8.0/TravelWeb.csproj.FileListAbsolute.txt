@@ -292,3 +292,8 @@
 /Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/obj/Debug/net8.0/TravelWeb.pdb
 /Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/obj/Debug/net8.0/TravelWeb.genruntimeconfig.cache
 /Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/obj/Debug/net8.0/ref/TravelWeb.dll
+/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/bin/Debug/net8.0/BouncyCastle.Cryptography.dll
+/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/bin/Debug/net8.0/MailKit.dll
+/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/bin/Debug/net8.0/MimeKit.dll
+/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/bin/Debug/net8.0/System.Security.Cryptography.Pkcs.dll
+/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Security.Cryptography.Pkcs.dll

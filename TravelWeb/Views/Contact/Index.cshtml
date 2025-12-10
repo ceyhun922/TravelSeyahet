@@ -1,7 +1,7 @@
-@Model Contact
+@model ContactViewModel
 
 @await Component.InvokeAsync("Breadcrump",new List<BreadcrumpItemViewModel>{
-  new BreadcrumpItemViewModel{ Title="Əlaqə",Status=false}
+new BreadcrumpItemViewModel { Title = "Əlaqə", Status = false }
 })
 
 
@@ -14,13 +14,14 @@
           <div class="partners">
             <div class="cont-details">
               <h5>Get in touch</h5>
-              <p class="mt-3 mb-4">Hi there, We are available 24/7 by fax, e-mail or by phone. Drop us line so we can talk
+              <p class="mt-3 mb-4">Hi there, We are available 24/7 by fax, e-mail or by phone. Drop us line so we can
+                talk
                 futher about that.</p>
             </div>
             <div class="hours">
               <h6 class="mt-4">Email:</h6>
               <p> <a href="mailto:mail@traversal.com">
-                mail@traversal.com</a></p>
+                  mail@traversal.com</a></p>
               <h6 class="mt-4">Visit Us:</h6>
               <p> 78-80 Upper St Giles St. Norwich NR2 1LT United Kingdom.</p>
               <h6 class="mt-4">Contact:</h6>
@@ -29,25 +30,29 @@
           </div>
         </div>
         <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
-          <form action="https://sendmail.w3layouts.com/submitForm" method="post" class="signin-form">
+          @using (Html.BeginForm("Index", "Contact", FormMethod.Post, new { @class = "signin-form" }))
+          {
             <div class="input-grids">
               <div class="form-group">
-                <input type="text" name="w3lName" id="w3lName" placeholder="Your Name*" class="contact-input" />
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "Your Name*" })
               </div>
               <div class="form-group">
-                <input type="email" name="w3lSender" id="w3lSender" placeholder="Your Email*" class="contact-input" required="" />
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Your Email*" })
+
               </div>
               <div class="form-group">
-                <input type="text" name="w3lSubect" id="w3lSubect" placeholder="Subject*" class="contact-input" />
+                @Html.TextBoxFor(x => x.Subject, new { @class = "form-control", placeholder = "Your Email*" })
+
               </div>
             </div>
             <div class="form-group">
-              <textarea name="w3lMessage" id="w3lMessage" placeholder="Type your message here*" required=""></textarea>
+              @Html.TextAreaFor(x => x.Message, new { @class = "form-control", placeholder = "Your Email*" })
+
             </div>
             <div class="text-right">
-              <button class="btn btn-style btn-primary">Send Message</button>
+              <button type="submit" class="btn btn-style btn-primary">Send Message</button>
             </div>
-          </form>
+          }
         </div>
 
       </div>
