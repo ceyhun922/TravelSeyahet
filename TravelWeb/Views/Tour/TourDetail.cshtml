@@ -17,17 +17,9 @@
 </style>
 }
 <!-- Breadcrumb -->
-<section class="w3l-about-breadcrumb text-left mt-5 pt-5">
-    <div class="breadcrumb-bg py-4">
-        <div class="container">
-            <h2 class="title">Amazing Istanbul Tour</h2>
-            <ul class="breadcrumbs-custom-path mt-2">
-                <li><a href="#">Home</a></li>
-                <li class="active"><span class="fa fa-arrow-right mx-2"></span> Amazing Istanbul Tour </li>
-            </ul>
-        </div>
-    </div>
-</section>
+@await Component.InvokeAsync("Breadcrump", new List<BreadcrumpItemViewModel>{
+    new BreadcrumpItemViewModel{ Title="Tur Detail", Status=false}
+})
 
 <!-- Tour Detail -->
 <section class="tour-detail py-5">

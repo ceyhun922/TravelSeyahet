@@ -1,6 +1,8 @@
  @model List<Tour> 
   <!-- about breadcrumb -->
-@await Component.InvokeAsync("Breadcrump")
+@await Component.InvokeAsync("Breadcrump", new List<BreadcrumpItemViewModel>{
+    new BreadcrumpItemViewModel{Title ="Turlar",Status=false}
+})
 
   <!-- //about breadcrumb -->
  <!--  Work gallery section -->
