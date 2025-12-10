@@ -30,7 +30,6 @@ public class HomeController : Controller
         ViewBag.TravelCount =_destinationService.ListAllService().Count();
         ViewBag.GuideCount =_guideService.ListAllService().Count();
         ViewBag.PopularTour =_tourService.ListAllService(x=>x.TourRaiting ==5);
-        ViewBag.Guides =_guideService.ListAllService(x=>x.GuideStatus==true).Take(4);
         ViewBag.Testimontals=_testimonialService.ListAllService();
         ViewBag.LatestTours =_tourService.ListAllService().OrderByDescending(x=>x.TourId).TakeLast(5).ToList();
 

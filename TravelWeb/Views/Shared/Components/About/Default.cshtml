@@ -1,0 +1,19 @@
+@model About 
+ @if(Model != null)
+{
+    <section class="w3l-cta4 py-5">
+        <div class="container py-lg-5">
+            <div class="ab-section text-center">
+                <h6 class="sub-title">@Model.AboutTitle</h6>
+                <h3 class="hny-title">@Model.AboutTitle2</h3>
+                <p class="py-3 mb-3">@Model.AboutDetail</p>
+                <a href="services.html" class="btn btn-style btn-primary">Read More</a>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-9 mx-auto">
+                    <img src="@Model.AboutImage" class="img-fluid" alt="@Model.AboutTitle">
+                </div>
+            </div>
+        </div>
+    </section>
+}

@@ -80,66 +80,9 @@
   </div>
 </section>
 <!-- //stats -->
-<!-- /content-6-->
-<section class="w3l-content-6 py-5">
-  <div class="container py-lg-5">
-    <div class="row">
-      <div class="col-lg-6 content-6-left pr-lg-5">
-        <h6 class="sub-title">Nə üçün biz ?</h6>
-        <h3 class="hny-title">Həyat, sərhədlərini aşanda başlayır.</h3>
-      </div>
-      <div class="col-lg-6 content-6-right mt-lg-0 mt-4">
-        <p class="mb-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum labore sed, veniam nisi sunt
-          laboriosam ducimus, odio
-          aspernatur fugiat minima blanditiis dignissimos.</p>
-        <p class="mb-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum labore sed, veniam nisi sunt
-          laboriosam ducimus, odio
-          aspernatur fugiat minima blanditiis dignissimos.</p>
-        <a href="services.html" class="btn btn-style btn-primary mt-4">Read More</a>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- //content-6-->
+@await Component.InvokeAsync("Feature")
 
-<!-- team -->
-<section class="w3l-team" id="team">
-  <div class="team-block py-5">
-    <div class="container py-lg-5">
-      <div class="title-content text-center mb-lg-3 mb-4">
-        <h6 class="sub-title">Bizim komanda</h6>
-        <h3 class="hny-title">Bələdçilərimizlə tanış olun</h3>
-      </div>
-      <div class="row">
-        @foreach (var item in ViewBag.Guides)
-        {
-          <div class="col-lg-3 col-6 mt-lg-5 mt-4">
-            <div class="box16">
-              <a href="#url"><img src="@item.GuideImage" alt="" class="img-fluid" /></a>
-              <div class="box-content">
-                <h3 class="title"><a href="#url">@item.GuideName</a></h3>
-                <span class="post">@item.GuideDescription</span>
-                <ul class="social">
-                  <li>
-                    <a href="#" class="facebook">
-                      <span class="fa fa-facebook-f"></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" class="twitter">
-                      <span class="fa fa-twitter"></span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        }
-      </div>
-    </div>
-  </div>
-</section>
-<!-- //team -->
+@await Component.InvokeAsync("Guides")
 <!--/-->
 <div class="best-rooms py-5">
   <div class="container py-md-5">
@@ -186,25 +129,7 @@
 </div>
 <!-- //stats -->
 
-<!--/w3l-bottom-->
-<section class="w3l-bottom py-5">
-  <div class="container py-md-4 py-3 text-center">
-    <div class="row my-lg-4 mt-4">
-      <div class="col-lg-9 col-md-10 ml-auto">
-        <div class="bottom-info ml-auto">
-          <div class="header-section text-left">
-            <h3 class="hny-title two">Traveling makes a man wiser, but less happy.</h3>
-            <p class="mt-3 pr-lg-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit beatae laudantium
-              voluptate rem ullam dolore nisi voluptatibus esse quasi. Integer sit amet .Lorem ipsum dolor sit
-              amet adipisicing elit.</p>
-            <a href="about.html" class="btn btn-style btn-secondary mt-5">Read More</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!--//w3l-bottom-->
+@await Component.InvokeAsync("Feature2")
 <!-- testimonials -->
 <section class="w3l-clients" id="clients">
   <!-- /grids -->

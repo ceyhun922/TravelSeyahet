@@ -63,6 +63,15 @@ builder.Services.AddScoped<ISliderService, SliderManager>();
 builder.Services.AddScoped<ITestimonialDAL, EFTestimonialRepository>();
 builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
 
+builder.Services.AddScoped<IGuideDAL, EFGuideRepository>();
+builder.Services.AddScoped<IGuideService, GuideManager>();
+
+builder.Services.AddScoped<IAboutDAL, EFAboutRepository>();
+builder.Services.AddScoped<IAboutService, AboutManager>();
+
+builder.Services.AddScoped<IAbout2DAL, EFAbout2Repository>();
+builder.Services.AddScoped<IAbout2Service, About2Manager>();
+
 
 builder.Services.AddDbContext<Context>(opt =>
 {

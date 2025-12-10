@@ -30,20 +30,20 @@ namespace TravelWeb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AboutID"));
 
-                    b.Property<int>("AboutDetail")
-                        .HasColumnType("int");
+                    b.Property<string>("AboutDetail")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AboutImage1")
-                        .HasColumnType("int");
+                    b.Property<string>("AboutImage")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AboutStatus")
-                        .HasColumnType("int");
+                    b.Property<bool>("AboutStatus")
+                        .HasColumnType("bit");
 
                     b.Property<string>("AboutTitle")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AboutTitle2")
-                        .HasColumnType("int");
+                    b.Property<string>("AboutTitle2")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AboutID");
 
@@ -58,11 +58,11 @@ namespace TravelWeb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("About2ID"));
 
-                    b.Property<int>("About2Description")
-                        .HasColumnType("int");
+                    b.Property<string>("About2Description")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("About2Image")
-                        .HasColumnType("int");
+                    b.Property<string>("About2Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("About2Title1")
                         .HasColumnType("nvarchar(max)");
@@ -70,8 +70,8 @@ namespace TravelWeb.Migrations
                     b.Property<string>("About2Title2")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AboutStatus")
-                        .HasColumnType("int");
+                    b.Property<bool>("AboutStatus")
+                        .HasColumnType("bit");
 
                     b.HasKey("About2ID");
 
@@ -1013,6 +1013,9 @@ namespace TravelWeb.Migrations
                     b.Property<string>("SubAboutTitle")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SubAboutTitleII")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("SubAboutID");
 
                     b.ToTable("SubAbouts");
@@ -1204,7 +1207,7 @@ namespace TravelWeb.Migrations
                             GuideID = 1,
                             TestimonialID = 1,
                             TourCapaCity = 25,
-                            TourClock = new DateTime(2025, 12, 8, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 9, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 5,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Bakı İçərişəhərin qədim küçələri və Qız qalası ziyarəti.",
@@ -1224,7 +1227,7 @@ namespace TravelWeb.Migrations
                             GuideID = 2,
                             TestimonialID = 2,
                             TourCapaCity = 30,
-                            TourClock = new DateTime(2025, 12, 8, 15, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 15, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 8,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Panorama mənzərələri və Xəzər dənizi sahilində gəzinti.",
@@ -1244,7 +1247,7 @@ namespace TravelWeb.Migrations
                             GuideID = 3,
                             TestimonialID = 3,
                             TourCapaCity = 20,
-                            TourClock = new DateTime(2025, 12, 8, 10, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 10, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 5,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Dağ-xizək istirahəti və Qəbələnin təbiəti.",
@@ -1264,7 +1267,7 @@ namespace TravelWeb.Migrations
                             GuideID = 4,
                             TestimonialID = 4,
                             TourCapaCity = 35,
-                            TourClock = new DateTime(2025, 12, 8, 14, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 14, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 10,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Göl ətrafında rahat gəzinti və piknik.",
@@ -1284,7 +1287,7 @@ namespace TravelWeb.Migrations
                             GuideID = 5,
                             TestimonialID = 5,
                             TourCapaCity = 25,
-                            TourClock = new DateTime(2025, 12, 8, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 9, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 7,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Tarixi abidələr və Şəki mətbəxi.",
@@ -1304,7 +1307,7 @@ namespace TravelWeb.Migrations
                             GuideID = 6,
                             TestimonialID = 6,
                             TourCapaCity = 40,
-                            TourClock = new DateTime(2025, 12, 8, 8, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 8, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 10,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Meşəlikdə yürüş və istirahət.",
@@ -1324,7 +1327,7 @@ namespace TravelWeb.Migrations
                             GuideID = 7,
                             TestimonialID = 7,
                             TourCapaCity = 20,
-                            TourClock = new DateTime(2025, 12, 8, 12, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 12, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 5,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Qafqazın ən qədim dağ kəndinə səyahət.",
@@ -1344,7 +1347,7 @@ namespace TravelWeb.Migrations
                             GuideID = 8,
                             TestimonialID = 8,
                             TourCapaCity = 20,
-                            TourClock = new DateTime(2025, 12, 8, 10, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 10, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 6,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Qarabağın simvolu olan şəhərdə tarixi gəzinti.",
@@ -1364,7 +1367,7 @@ namespace TravelWeb.Migrations
                             GuideID = 9,
                             TestimonialID = 9,
                             TourCapaCity = 25,
-                            TourClock = new DateTime(2025, 12, 8, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 9, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 8,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Ekoturizm və meşə yürüşləri.",
@@ -1384,7 +1387,7 @@ namespace TravelWeb.Migrations
                             GuideID = 10,
                             TestimonialID = 10,
                             TourCapaCity = 30,
-                            TourClock = new DateTime(2025, 12, 8, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 9, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 10,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Müalicəvi neft vannaları və spa xidmətləri.",
@@ -1404,7 +1407,7 @@ namespace TravelWeb.Migrations
                             GuideID = 3,
                             TestimonialID = 1,
                             TourCapaCity = 30,
-                            TourClock = new DateTime(2025, 12, 8, 8, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 8, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 10,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Əl işləri və misgərlik sənəti ilə tanışlıq.",
@@ -1424,7 +1427,7 @@ namespace TravelWeb.Migrations
                             GuideID = 4,
                             TestimonialID = 2,
                             TourCapaCity = 25,
-                            TourClock = new DateTime(2025, 12, 8, 11, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 11, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 5,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Xizək, dağ yürüşü və qış istirahəti.",
@@ -1444,7 +1447,7 @@ namespace TravelWeb.Migrations
                             GuideID = 5,
                             TestimonialID = 3,
                             TourCapaCity = 25,
-                            TourClock = new DateTime(2025, 12, 8, 10, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 10, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 6,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Tarixi qala və təbiət birləşməsi.",
@@ -1464,7 +1467,7 @@ namespace TravelWeb.Migrations
                             GuideID = 6,
                             TestimonialID = 4,
                             TourCapaCity = 30,
-                            TourClock = new DateTime(2025, 12, 8, 8, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 8, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 10,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Göyəzən dağının zirvəsinə yürüş və piknik.",
@@ -1484,7 +1487,7 @@ namespace TravelWeb.Migrations
                             GuideID = 7,
                             TestimonialID = 5,
                             TourCapaCity = 20,
-                            TourClock = new DateTime(2025, 12, 8, 12, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 12, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 5,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Qazaxın qədim məscid və qalaları ilə tanışlıq.",
@@ -1504,7 +1507,7 @@ namespace TravelWeb.Migrations
                             GuideID = 8,
                             TestimonialID = 6,
                             TourCapaCity = 25,
-                            TourClock = new DateTime(2025, 12, 8, 9, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 9, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 8,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Qazaxın simvolik Sınıq Körpüsünü ziyarət.",
@@ -1524,7 +1527,7 @@ namespace TravelWeb.Migrations
                             GuideID = 9,
                             TestimonialID = 7,
                             TourCapaCity = 25,
-                            TourClock = new DateTime(2025, 12, 8, 13, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 13, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 7,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Şuşanın mədəni irsi və mənzərələri.",
@@ -1544,7 +1547,7 @@ namespace TravelWeb.Migrations
                             GuideID = 10,
                             TestimonialID = 8,
                             TourCapaCity = 30,
-                            TourClock = new DateTime(2025, 12, 8, 16, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 16, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 8,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Təbiət gəzintiləri və kamp fəaliyyəti.",
@@ -1564,7 +1567,7 @@ namespace TravelWeb.Migrations
                             GuideID = 3,
                             TestimonialID = 9,
                             TourCapaCity = 20,
-                            TourClock = new DateTime(2025, 12, 8, 17, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 17, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 5,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Qusar dağları boyunca yürüş və düşərgə.",
@@ -1584,7 +1587,7 @@ namespace TravelWeb.Migrations
                             GuideID = 2,
                             TestimonialID = 10,
                             TourCapaCity = 25,
-                            TourClock = new DateTime(2025, 12, 8, 18, 0, 0, 0, DateTimeKind.Local),
+                            TourClock = new DateTime(2025, 12, 10, 18, 0, 0, 0, DateTimeKind.Local),
                             TourCountLimit = 8,
                             TourDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             TourDetail = "Lənkəran çayı və qədim qalaları ziyarət.",
