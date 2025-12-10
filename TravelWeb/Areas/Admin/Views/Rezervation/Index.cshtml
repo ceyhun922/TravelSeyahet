@@ -18,6 +18,8 @@
                         <th>ID</th>
                         <th>Status</th>
                         <th>Actions</th>
+                        <th>Actions</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,13 +27,19 @@
                     {
                         <tr data-id="@item.RezervationID">
                             <td>@item.RezervationID</td>
+
                             <td class="status">
-                                @(item.RezervationStatus == RezervationStatus.Approved ? "Aktif" : 
+                                @(item.RezervationStatus == RezervationStatus.Approved ? "Aktif" :
                                   item.RezervationStatus == RezervationStatus.Pending ? "Gözleyir" : "İmtina")
                             </td>
+
                             <td>
                                 <button class="btn btn-status" data-status="0">Gözleyir</button>
+                            </td>
+                            <td>
                                 <button class="btn btn-status" data-status="1">Aktif</button>
+                            </td>
+                            <td>
                                 <button class="btn btn-status" data-status="2">İmtina</button>
                             </td>
                         </tr>
@@ -43,49 +51,61 @@
 </section>
 
 @section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        function updateButtonColors(row, status) {
-            row.find(".btn-status").removeClass("btn-warning btn-success btn-danger");
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-            if(status === 0) row.find('.btn-status[data-status="0"]').addClass("btn-warning");
-            if(status === 1) row.find('.btn-status[data-status="1"]').addClass("btn-success");
-            if(status === 2) row.find('.btn-status[data-status="2"]').addClass("btn-danger");
-        }
+<script>
 
-        $(document).ready(function () {
-            $("#table1").find("tr").each(function() {
-                var row = $(this);
-                var statusText = row.find(".status").text();
-                var status = statusText === "Aktif" ? 1 : statusText === "Gözleyir" ? 0 : 2;
+function updateButtonColors(row, status) {
+    row.find(".btn-status").removeClass("btn-warning btn-success btn-danger");
+
+    if (status === 0) row.find('[data-status="0"]').addClass("btn-warning");
+    if (status === 1) row.find('[data-status="1"]').addClass("btn-success");
+    if (status === 2) row.find('[data-status="2"]').addClass("btn-danger");
+}
+
+$(document).ready(function () {
+
+    $("#table1 tr").each(function () {
+        var row = $(this);
+        var statusText = row.find(".status").text().trim(); 
+
+        var status = statusText === "Aktif" ? 1 :
+                     statusText === "Gözleyir" ? 0 : 2;
+
+        updateButtonColors(row, status);
+    });
+
+
+    $(document).on("click", ".btn-status", function () {
+        var btn = $(this);
+        var row = btn.closest("tr");
+        var rezId = row.data("id");
+        var status = parseInt(btn.data("status"));
+        var token = $('input[name="__RequestVerificationToken"]').val();
+
+        $.ajax({
+            url: "/Admin/Rezervation/UpdateStatus",
+            type: "POST",
+            contentType: "application/json",
+            headers: { "RequestVerificationToken": token },
+            data: JSON.stringify({ RezervationId: rezId, Status: status }),
+
+            success: function () {
+
+                var statusText = status === 0 ? "Gözleyir" :
+                                 status === 1 ? "Aktif" : "İmtina";
+
+                row.find(".status").text(statusText);
+
                 updateButtonColors(row, status);
-            });
+            },
 
-            $(document).on("click", ".btn-status", function () {
-                var btn = $(this);
-                var row = btn.closest("tr");
-                var rezId = row.data("id");
-                var status = parseInt(btn.data("status"));
-                var token = $('input[name="__RequestVerificationToken"]').val();
-
-                $.ajax({
-                    url: "/Admin/Rezervation/UpdateStatus",
-                    type: "POST",
-                    contentType: "application/json",
-                    headers: { "RequestVerificationToken": token },
-                    data: JSON.stringify({ RezervationId: rezId, Status: status }),
-                    success: function () {
-                        var statusText = status === 0 ? "Gözleyir" : status === 1 ? "Aktif" : "İmtina";
-                        row.find(".status").text(statusText);
-
-                        updateButtonColors(row, status);
-                    },
-                    error: function (xhr) {
-                        console.log(xhr.responseText);
-                        alert("Xəta baş verdi!");
-                    }
-                });
-            });
+            error: function () {
+                alert("Xəta baş verdi!");
+            }
         });
-    </script>
+    });
+
+});
+</script>
 }
