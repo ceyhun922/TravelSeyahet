@@ -1,12 +1,15 @@
 using DAL.Concrete;
 using Entities.Concrete;
 using Entities.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstract;
 
 namespace TravelWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles ="Admin")]
+
     public class RezervationController : Controller
     {
         private readonly IRezervationService _rezervationService;

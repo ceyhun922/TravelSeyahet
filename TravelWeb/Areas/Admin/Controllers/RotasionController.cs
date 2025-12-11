@@ -5,7 +5,8 @@ using Services.Abstract;
 namespace TravelWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [AllowAnonymous]
+    [Authorize(Roles ="Admin")]
+
     public class RotasionController : Controller
     {
         private readonly IRotasionService _rotasionService;

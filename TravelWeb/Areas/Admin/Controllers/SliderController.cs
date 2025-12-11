@@ -8,7 +8,8 @@ using Services.Abstract;
 namespace TravelWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [AllowAnonymous]
+    [Authorize(Roles ="Admin")]
+
     public class SliderController : Controller
     {
         private readonly ISliderService _sliderService;

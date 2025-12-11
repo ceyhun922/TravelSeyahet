@@ -10,8 +10,8 @@ using Services.Abstract;
 
 namespace TravelWeb.Areas.Admin.Controllers
 {
-    [AllowAnonymous]
     [Area("Admin")]
+    [Authorize(Roles ="Admin")]
     public class DashboardController : Controller
     {
         private readonly IWriterService _writerService;

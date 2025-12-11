@@ -45,8 +45,11 @@ namespace TravelWeb.Controllers
                     Email = model.Mail,
                     WriterStatus = true
                 };
+                
 
                 var result = await _manager.CreateAsync(writer, model.Password);
+
+
 
                 if (result.Succeeded)
                 {
