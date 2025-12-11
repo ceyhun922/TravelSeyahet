@@ -29,6 +29,7 @@ namespace TravelWeb.Controllers
             if (ModelState.IsValid)
             {
                 await _emailService.SendEmailAsync(model.Email,model.Subject,model.Message);
+                TempData["success"] ="Mailiz Gönderildi! 24 saat içində sizinlə əlaqə saxlanılacaq";
             }
             return View(model);
         }

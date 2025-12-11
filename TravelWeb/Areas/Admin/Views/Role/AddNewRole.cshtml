@@ -1,0 +1,11 @@
+@model RoleViewModel
+
+@using(Html.BeginForm("AddNewRole","Role",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.TextBoxFor(x=>x.Name)
+    @Html.TextBoxFor(x=>x.Description)
+
+    <button type="submit">Elave Et</button>
+}
