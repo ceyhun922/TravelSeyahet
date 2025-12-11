@@ -100,6 +100,7 @@ namespace TravelWeb.Controllers
                 if (user != null)
                 {
                     comment.UserId = user.Id;
+                    comment.CommentUserName = user.UserName;
                 }
 
                 _commentService.InsertService(comment);
@@ -111,9 +112,9 @@ namespace TravelWeb.Controllers
 
         public IActionResult Tours(int? tourId)
         {
-            var tours = _tourService.ListAllService(); // bütün turlar
-            ViewBag.SelectedTour = tourId; // seçilmiş tur varsa saxla
-            return View(tours); // model = List<Tour>
+            var tours = _tourService.ListAllService(); 
+            ViewBag.SelectedTour = tourId; 
+            return View(tours);
         }
 
 

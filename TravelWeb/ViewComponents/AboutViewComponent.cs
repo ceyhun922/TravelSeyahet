@@ -15,9 +15,8 @@ namespace TravelWeb.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync(int id)
         {
-            var value = _aboutService.GetFindIdService(id);
-            if (value == null)
-                value = new About();
+            var value = _aboutService.ListAllService().OrderByDescending(x=>x.AboutID).Take(1).ToList();
+
             return View(value);
         }
     }

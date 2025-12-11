@@ -93,23 +93,13 @@
         <!-- Comments -->
         <div class="comments mt-5">
             <h4 class="mb-4">Şərhlər (@ViewBag.CommentCount )</h4>
-            @foreach(var item in ViewBag.Comments)
-            {
-            <div class="media mb-3">
-            <i class="fa-solid fa-user" style="width:50px;">
-                </i>
-                <div class="media-body">
-                    <h6>@item.CommentUserName</h6>
-                    <p>@item.CommentUserComment</p>
-                </div>
-            </div>
-            }
+@await Component.InvokeAsync("CommentsForm", new { tourId = Model.TourId })
         </div>
 
         <!-- Leave Comment -->
         <div class="leave-comment-form mt-5">
             <h5 class="mb-2">Şərh Yaz</h5>
-           @await Component.InvokeAsync("Comments",new { tourId = Model.TourId })
+           @await Component.InvokeAsync("CommentsList",new { tourId = Model.TourId })
         </div>
     </div>
 </section>

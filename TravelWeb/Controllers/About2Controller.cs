@@ -9,7 +9,7 @@ namespace TravelWeb.Controllers
     {
         public IActionResult Index()
         {
-         
+           
             return View();
         }   
     }
