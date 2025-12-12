@@ -55,6 +55,8 @@ namespace DAL.Concrete
         public DbSet<Slider>? Sliders { get; set; }
         public DbSet<Notification>? Notifications { get; set; }
 
+        public DbSet<Contact>? Contacts { get; set; }
+
     }
 
 }

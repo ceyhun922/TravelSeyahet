@@ -7,6 +7,8 @@ namespace Entities.Concrete
     public string? Email { get; set; }
     public string? Subject { get; set; }
     public string? Message { get; set; }
+
+    public bool ContactStatus { get; set; } = false;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
 }
 
