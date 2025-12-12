@@ -5,18 +5,11 @@ namespace TravelWeb.ViewComponents
 {
     public class CommentsFormViewComponent : ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync(int tourId)
-        {
+       public async Task<IViewComponentResult> InvokeAsync(int tourId)
+{
+    var comment = new Comment { TourId = tourId };
+    return View(comment);
+}
 
-            var user = HttpContext.User.Identity;
-            if (user != null && user.IsAuthenticated)
-            {
-                return Content("");
-            }
-
-            var comment = new Comment { TourId = tourId };
-
-            return View(comment);
-        }
     }
 }

@@ -36,15 +36,20 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidation>();
 builder.Services.AddValidatorsFromAssemblyContaining<LoginValidation>();
 builder.Services.AddValidatorsFromAssemblyContaining<ChangePassword>();
+builder.Services.AddValidatorsFromAssemblyContaining<ContactValidation>();
 
 builder.Services.AddScoped<IDestinationDAL, EFDestinationRepository>();
 builder.Services.AddScoped<IDestinationService, DestinationManager>();
+
 builder.Services.AddScoped<IGuideDAL, EFGuideRepository>();
 builder.Services.AddScoped<IGuideService, GuideManager>();
+
 builder.Services.AddScoped<ITourDAL, EFTourRepository>();
 builder.Services.AddScoped<ITourService, TourManager>();
+
 builder.Services.AddScoped<IRezervationDAL, EFRezervationRepository>();
 builder.Services.AddScoped<IRezervationService, RezervationManager>();
+
 builder.Services.AddScoped<IRotasionDAL, EFRotasionRepository>();
 builder.Services.AddScoped<IRotasionService, RotasionManager>();
 
@@ -74,6 +79,15 @@ builder.Services.AddScoped<IAbout2DAL, EFAbout2Repository>();
 builder.Services.AddScoped<IAbout2Service, About2Manager>();
 
 builder.Services.AddScoped<IEmailService, EmailService>();
+
+builder.Services.AddScoped<ITestimonialDAL, EFTestimonialRepository>();
+builder.Services.AddScoped<ITestimonialService, TestimonialManager>();
+
+builder.Services.AddScoped<IDestinationDAL, EFDestinationRepository>();
+builder.Services.AddScoped<IDestinationService, DestinationManager>();
+
+builder.Services.AddScoped<IContactDAL, EFContactRepositpry>();
+builder.Services.AddScoped<IContactService, ContactManager>();
 
 
 builder.Services.AddDbContext<Context>(opt =>

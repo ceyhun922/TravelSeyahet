@@ -16,7 +16,11 @@
     <link rel="stylesheet" href="~/admin/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="~/admin/dist/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="~/admin/dist/assets/css/app.css">
-    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="~/admin/dist/assets/css/pages/email.css">
+
+    <link rel="shortcut icon" href="~/admin/assets/images/favicon.svg" type="image/x-icon">
+
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 
 <body>
@@ -52,6 +56,7 @@
     <script src="~/admin/dist/assets/js/pages/dashboard.js?v20"></script>
 
     <script src="~/admin/dist/assets/js/main.js"></script>
+
 
     @await RenderSectionAsync("Scripts",required: false)
 </body>

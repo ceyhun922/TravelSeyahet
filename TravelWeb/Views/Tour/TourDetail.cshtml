@@ -64,36 +64,11 @@
             <p>@Model.TourDetail</p>
         </div>
 
-        <!-- Tour Gallery -->
-        <!-- Tour Gallery Carousel -->
-        <!-- Horizontal Tour Gallery Carousel -->
-       @*  <div class="swiper mySwiper mt-4">
-            <div class="swiper-wrapper">
-                @foreach (var img in Model.TourImage)
-                {
-                    <div class="swiper-slide">
-                        <img src="@img" alt="Tour Image" />
-                    </div>
-                }
-            </div>
-            <!-- Navigation buttons -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-        </div> *@
 
-      @*   <div class="tour-guide mt-5 d-flex align-items-center">
-            <img src="assets/images/guide1.jpg" class="rounded-circle me-3" style="width:80px;height:80px;" />
-            <div>
-                <h5>John Doe</h5>
-                <p>John is an experienced tour guide with 10 years of experience leading groups around Istanbul,
-                    sharing local history and hidden gems.</p>
-            </div>
-        </div>
- *@
         <!-- Comments -->
         <div class="comments mt-5">
             <h4 class="mb-4">Şərhlər (@ViewBag.CommentCount )</h4>
-@await Component.InvokeAsync("CommentsForm", new { tourId = Model.TourId })
+        @await Component.InvokeAsync("CommentsForm", new { tourId = Model.TourId })
         </div>
 
         <!-- Leave Comment -->
@@ -131,3 +106,31 @@
 
 }
 
+
+
+        <!-- Tour Gallery -->
+        <!-- Tour Gallery Carousel -->
+        <!-- Horizontal Tour Gallery Carousel -->
+       @*  <div class="swiper mySwiper mt-4">
+            <div class="swiper-wrapper">
+                @foreach (var img in Model.TourImage)
+                {
+                    <div class="swiper-slide">
+                        <img src="@img" alt="Tour Image" />
+                    </div>
+                }
+            </div>
+            <!-- Navigation buttons -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div> *@
+
+      @*   <div class="tour-guide mt-5 d-flex align-items-center">
+            <img src="assets/images/guide1.jpg" class="rounded-circle me-3" style="width:80px;height:80px;" />
+            <div>
+                <h5>John Doe</h5>
+                <p>John is an experienced tour guide with 10 years of experience leading groups around Istanbul,
+                    sharing local history and hidden gems.</p>
+            </div>
+        </div>
+ *@

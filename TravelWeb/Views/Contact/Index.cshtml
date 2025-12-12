@@ -5,7 +5,6 @@ new BreadcrumpItemViewModel { Title = "Əlaqə", Status = false }
 })
 
 
-<!-- contact-form -->
 <section cla ss="w3l-contact" id="contact">
   <div class="contact-infubd py-5">
     <div class="container py-lg-3">
@@ -42,19 +41,23 @@ new BreadcrumpItemViewModel { Title = "Əlaqə", Status = false }
             <div class="input-grids">
               <div class="form-group">
                 @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "Adınız*" })
+                @Html.ValidationMessageFor(x=>x.Name,"",new { @class ="text-danger"})
               </div>
               <div class="form-group">
                 @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "E-poçtunuz*" })
+                @Html.ValidationMessageFor(x=>x.Email,"",new { @class ="text-danger"})
 
               </div>
               <div class="form-group">
                 @Html.TextBoxFor(x => x.Subject, new { @class = "form-control", placeholder = "Movzu*" })
-
+                @Html.ValidationMessageFor(x=>x.Subject,"",new { @class ="text-danger"})
+                
               </div>
             </div>
             <div class="form-group">
               @Html.TextAreaFor(x => x.Message, new { @class = "form-control", placeholder = "Mesajınız*" })
-
+                @Html.ValidationMessageFor(x=>x.Message,"",new { @class ="text-danger"})
+              
             </div>
             <div class="text-right">
               <button type="submit" class="btn btn-style btn-primary">Göndər</button>

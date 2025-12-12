@@ -34,11 +34,14 @@
     <div class="card bg-gradient-info card-img-holder text-white">
       <div class="card-body">
         <img src="~/writter/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-        <h4 class="font-weight-normal mb-3">Xərclənən Miqdar <i class="mdi mdi-bookmark-outline mdi-24px float-end"></i>
+        <h4 class="font-weight-normal mb-3">Turun Qiyməti <i class="mdi mdi-bookmark-outline mdi-24px float-end"></i>
         </h4>
         <h2 class="mb-5">
           @*           @ViewBag.TotalPrice.ToString("C2", new CultureInfo("az-AZ"))
- *@        </h2>
+          
+ *@     
+      @ViewBag.RezAmount.ToString("C2", new CultureInfo("az-AZ"))
+    </h2>
       </div>
     </div>
   </div>
@@ -46,10 +49,9 @@
     <div class="card bg-gradient-success card-img-holder text-white">
       <div class="card-body">
         <img src="~/writter/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-        <h4 class="font-weight-normal mb-3">Visitors Online <i class="mdi mdi-diamond mdi-24px float-end"></i>
+        <h4 class="font-weight-normal mb-3">Ümumi Qiymət (ƏDV daxil %10)<i class="mdi mdi-diamond mdi-24px float-end"></i>
         </h4>
-        <h2 class="mb-5">95,5741</h2>
-        <h6 class="card-text">Increased by 5%</h6>
+        <h2 class="mb-5">@ViewBag.RezAmountAvg.ToString("C", new CultureInfo("az-AZ"))</h2>
       </div>
     </div>
   </div>
