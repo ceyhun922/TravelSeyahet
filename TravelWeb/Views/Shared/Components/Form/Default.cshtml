@@ -1,25 +1,35 @@
-  <form action="#" method="post" class="booking-form">
-                  <div class="row book-form">
-                    <div class="form-input col-md-4 mt-md-0 mt-3">
+@model RezerFormViewModel
 
-                      <select name="selectpicker" class="selectpicker">
-                        <option value="">Destinaion</option>
-                        <option value="africa">Africa</option>
-                        <option value="america">America</option>
-                        <option value="asia">Asia</option>
-                        <option value="eastern-europe">Eastern Europe</option>
-                        <option value="europe">Europe</option>
-                        <option value="south-america">South America</option>
-                      </select>
+@using (Html.BeginForm("Index", "Form", FormMethod.Post, new { @class = "booking-form" }))
+{
+    <div class="row book-form">
+        <div class="form-input col-md-3 mt-md-0 mt-3">
 
-                    </div>
-                    <div class="form-input col-md-4 mt-md-0 mt-3">
+            <select name="SelectedDestination" class="selectpicker">
+                <option value="">Seçin</option>
+      @if (Model.Destinations != null)
+                  {
+                      @foreach (var item in Model.Destinations)
+                      {
+                          <option value="@item.DestinationId">@item.DestinationCity</option>
+                      }
+                  }
+            </select>
 
-                      <input type="date" name="" placeholder="Date" required="">
-                    </div>
-                    <div class="bottom-btn col-md-4 mt-md-0 mt-3">
-                      <button class="btn btn-style btn-secondary"><span class="fa fa-search mr-3"
-                          aria-hidden="true"></span> Search</button>
-                    </div>
-                  </div>
-                </form>
+        </div>
+
+        <div class="form-input col-md-3 mt-md-0 mt-3">
+            @Html.TextBoxFor(x => x.StartDate, new { @type = "date" })
+        </div>
+
+        <div class="form-input col-md-3 mt-md-0 mt-3">
+            @Html.TextBoxFor(x => x.EndDate, new { @type = "date" })
+        </div>
+
+        <div class="bottom-btn col-md-3 mt-md-0 mt-3">
+            <button class="btn btn-style btn-secondary" type="submit">
+                <span class="fa fa-search mr-3" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+}
