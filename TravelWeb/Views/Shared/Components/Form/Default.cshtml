@@ -1,6 +1,6 @@
 @model RezerFormViewModel
 
-@using (Html.BeginForm("Index", "Form", FormMethod.Post, new { @class = "booking-form" }))
+@using (Html.BeginForm("RezervSeach", "Home", FormMethod.Post, new { @class = "booking-form" }))
 {
     <div class="row book-form">
         <div class="form-input col-md-3 mt-md-0 mt-3">
@@ -11,7 +11,7 @@
                   {
                       @foreach (var item in Model.Destinations)
                       {
-                          <option value="@item.DestinationId">@item.DestinationCity</option>
+                          <option value="@item.DestinationCity">@item.DestinationCity</option>
                       }
                   }
             </select>

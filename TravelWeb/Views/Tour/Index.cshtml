@@ -1,32 +1,49 @@
- @model List<Tour> 
-  <!-- about breadcrumb -->
-@await Component.InvokeAsync("Breadcrump", new List<BreadcrumpItemViewModel>{
-    new BreadcrumpItemViewModel{Title ="Turlar",Status=false}
-})
+@model List<Tour>
 
-  <!-- //about breadcrumb -->
- <!--  Work gallery section -->
- <section class="grids-1 py-5">
-  <div class="grids py-lg-5 py-md-4">
-      <div class="container">
-          <h3 class="hny-title mb-5">Turlar</h3>
-          <div class="row">
-              @foreach(var item in Model)
-              {
-              <div class="col-lg-4 col-md-4 col-6">
-                  <div class="column">
-                      <a asp-action="TourDetail" asp-controller="Tour" asp-route-id="@item.TourId"><img src="@item.TourImage" alt="@item.TourLocaion" class="img-fluid"></a>
-                      <div class="info">
-                          <h4><a asp-action="TourDetail" asp-controller="Tour" asp-route-id="@item.TourId">@item.TourLocaion</a></h4>
-                          <p>@item.DTourDayNight </p>
-                          <div class="dst-btm">
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              }
-          </div>
-      </div>
-</div></section>
-<!--  //Work gallery section -->
-<!-- grids block 5 -->
+<!-- breadcrumb veya başka üst içerik buraya gelebilir -->
+
+<section class="grids-1 py-5">
+    <div class="grids py-lg-5 py-md-4">
+        <div class="container">
+            <h3 class="hny-title mb-5">
+                @if (ViewBag.City != null)
+                {
+                    <text>@ViewBag.City Şəhərinə Aid Turlar</text>
+                }
+                else
+                {
+                    <text>Turlar</text>
+                }
+            </h3>
+
+            <div class="row">
+                @if (!Model.Any())
+                {
+                    <p>Seçilən Tarix aralığında @ViewBag.City şəhərində tur yoxdur.</p>
+                }
+                else
+                {
+                    @foreach(var item in Model)
+                    {
+                        <div class="col-lg-4 col-md-4 col-6 mb-4">
+                            <div class="column">
+                                <a asp-action="TourDetail" asp-controller="Tour" asp-route-id="@item.TourId">
+                                    <img src="@item.TourImage" alt="@item.TourLocaion" class="img-fluid">
+                                </a>
+                                <div class="info">
+                                    <h4>
+                                        <a asp-action="TourDetail" asp-controller="Tour" asp-route-id="@item.TourId">
+                                            @item.TourLocaion
+                                        </a>
+                                    </h4>
+                                    <p>@item.DTourDayNight</p>
+                                    <div class="dst-btm"></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</section>

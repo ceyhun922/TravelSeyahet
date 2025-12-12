@@ -31,10 +31,16 @@ namespace TravelWeb.Controllers
             _commentService = commentService;
         }
 
-
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(string city)
         {
             var values = _tourService.AllToursWithRotasionsService();
+
+            if (! string.IsNullOrEmpty(city))
+            {
+                values =values.Where(x=>x.Destination.DestinationCity==city).ToList();
+                ViewBag.City = city;
+            }
 
 
             if (values == null)

@@ -20,7 +20,6 @@ namespace TravelWeb.ViewComponents
 
             if (destinations == null || !destinations.Any())
             {
-                // Konsolda yoxla
                 Console.WriteLine("Destinations boşdur!");
             }
 
