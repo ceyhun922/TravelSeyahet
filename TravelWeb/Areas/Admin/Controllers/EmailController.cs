@@ -15,8 +15,14 @@ namespace TravelWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        [HttpGet("api/inbox")]
+        public IActionResult Inbox()
+        {
             var values = _contactService.ListAllService(x =>x.ContactStatus ==false);
-            return View(values);
+            return Ok(values);
         }
     }
 }

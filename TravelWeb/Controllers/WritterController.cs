@@ -248,7 +248,7 @@ namespace TravelWeb.Controllers
 
             var rez = _rezervationService.ListAllService(x => x.UserId == user.Id && x.RezervationStatus == RezervationStatus.Approved).Count();
             var topRez = _context.Tours?.Include(x => x.Guide).Include(x => x.Destination).Include(x => x.Destination).ToList().Take(5);
-            ViewBag.RezAmount = _rezervationService.ListAllService(x => x.RezervationStatus == RezervationStatus.Approved).Sum(x => x.TotalPrice);
+            ViewBag.RezAmount = _rezervationService.ListAllService(x =>   x.UserId == user.Id && x.RezervationStatus == RezervationStatus.Approved).Sum(x => x.TotalPrice);
             ViewBag.RezAmountAvg = Math.Round((decimal)ViewBag.RezAmount * 1.10m);
             ViewBag.TopRez = topRez;
             ViewBag.Rezervations = rez;

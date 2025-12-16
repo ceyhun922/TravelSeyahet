@@ -1,769 +1,653 @@
 @model List<Contact>
-
-@section Styles{
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
+@{
+    ViewData["Title"] = "Email";
 }
-<div class="page-heading email-application">
-    <div class="page-title">
-        <div class="row">
-            <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Email Application</h3>
-                <p class="text-subtitle text-muted">An application for user to check email inbox</p>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <style>
+        .tw-mail-row { cursor: pointer; }
+        .tw-mail-row:hover { background: rgba(0,0,0,.04); }
+        .tw-star { cursor:pointer; user-select:none; font-size:18px; }
+        .tw-unread b { font-weight: 800; }
+        .tw-muted { opacity: .75; }
+        .tw-badge { font-size: .75rem; }
+        .tw-panel { border: 1px solid rgba(0,0,0,.12); border-radius: 12px; background:#fff; }
+        .tw-panel-header { border-bottom: 1px solid rgba(0,0,0,.08); }
+        .tw-hidden { display:none !important; }
+    </style>
+}
+
+<div class="container-fluid py-3" id="twMailApp">
+
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <h4 class="mb-0">Email</h4>
+        <button class="btn btn-primary" id="twComposeBtn">
+            <i class="bi bi-plus-lg me-1"></i> Compose
+        </button>
+    </div>
+
+    <div class="row g-3">
+        <!-- LEFT: FOLDERS -->
+        <div class="col-12 col-lg-3">
+            <div class="tw-panel p-2">
+                <div class="list-group" id="twFolders">
+                    <a href="#" class="list-group-item list-group-item-action active d-flex justify-content-between align-items-center" data-box="inbox">
+                        <span><i class="bi bi-inbox me-2"></i>Inbox</span>
+                        <span class="badge text-bg-primary tw-badge" id="twCountInbox">0</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-box="sent">
+                        <span><i class="bi bi-send me-2"></i>Sent</span>
+                        <span class="badge text-bg-secondary tw-badge" id="twCountSent">0</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-box="draft">
+                        <span><i class="bi bi-pencil-square me-2"></i>Draft</span>
+                        <span class="badge text-bg-warning tw-badge" id="twCountDraft">0</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-box="starred">
+                        <span><i class="bi bi-star me-2"></i>Starred</span>
+                        <span class="badge text-bg-info tw-badge" id="twCountStarred">0</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-box="spam">
+                        <span><i class="bi bi-shield-exclamation me-2"></i>Spam</span>
+                        <span class="badge text-bg-danger tw-badge" id="twCountSpam">0</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-box="trash">
+                        <span><i class="bi bi-trash me-2"></i>Trash</span>
+                        <span class="badge text-bg-dark tw-badge" id="twCountTrash">0</span>
+                    </a>
+                </div>
             </div>
-            <div class="col-12 col-md-6 order-md-2 order-first">
-                <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Email Application</li>
-                    </ol>
-                </nav>
+        </div>
+
+        <!-- MIDDLE: LIST -->
+        <div class="col-12 col-lg-9" id="twListCol">
+            <div class="tw-panel">
+                <div class="p-2 tw-panel-header">
+                    <div class="d-flex gap-2 align-items-center">
+                        <input class="form-control" id="twSearch" placeholder="Search..." />
+                        <button class="btn btn-outline-secondary" id="twPrev" type="button" title="Prev">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary" id="twNext" type="button" title="Next">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-between mt-2">
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <input type="checkbox" id="twSelectAll" />
+
+                            <button class="btn btn-sm btn-outline-danger" id="twDeleteSelected" title="Move to Trash">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+
+                            <button class="btn btn-sm btn-outline-primary" id="twToggleReadSelected">
+                                <i class="bi bi-envelope"></i> Read/Unread
+                            </button>
+
+                            <!-- Restore only visible when Trash -->
+                            <button class="btn btn-sm btn-outline-success tw-hidden" id="twRestoreSelected" title="Restore selected">
+                                <i class="bi bi-arrow-counterclockwise"></i> Restore Selected
+                            </button>
+
+                            <button class="btn btn-sm btn-outline-success tw-hidden" id="twRestoreAll" title="Restore all">
+                                <i class="bi bi-arrow-counterclockwise"></i> Restore All
+                            </button>
+
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+                                    <i class="bi bi-folder"></i> Move
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" data-move="inbox">Inbox</a></li>
+                                    <li><a class="dropdown-item" href="#" data-move="sent">Sent</a></li>
+                                    <li><a class="dropdown-item" href="#" data-move="draft">Draft</a></li>
+                                    <li><a class="dropdown-item" href="#" data-move="spam">Spam</a></li>
+                                    <li><a class="dropdown-item" href="#" data-move="trash">Trash</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <small class="text-muted" id="twPageInfo">0-0 of 0</small>
+                    </div>
+                </div>
+
+                <div class="list-group list-group-flush" id="twMailList"></div>
+            </div>
+        </div>
+
+        <!-- RIGHT: DETAIL -->
+        <div class="col-12 col-lg-5 tw-hidden" id="twDetailCol">
+            <div class="tw-panel">
+                <div class="p-2 tw-panel-header d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-2">
+                        <button class="btn btn-outline-secondary" id="twBackBtn" type="button" title="Back">
+                            <i class="bi bi-arrow-left"></i>
+                        </button>
+                        <div>
+                            <div class="fw-bold" id="twDetailTitle">(Select a mail)</div>
+                            <small class="text-muted" id="twDetailMeta">—</small>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <!-- ✅ Reply -->
+                        <button class="btn btn-outline-secondary" id="twReplyBtn" type="button" title="Reply">
+                            <i class="bi bi-reply"></i>
+                        </button>
+
+                        <button class="btn btn-outline-danger" id="twDetailDelete" type="button" title="Move to Trash">
+                            <i class="bi bi-trash"></i>
+                        </button>
+
+                        <button class="btn btn-outline-success tw-hidden" id="twDetailRestore" type="button" title="Restore from Trash">
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                        </button>
+
+                        <button class="btn btn-outline-primary" id="twDetailToggleRead" type="button" title="Read/Unread">
+                            <i class="bi bi-envelope"></i>
+                        </button>
+                        <button class="btn btn-outline-warning" id="twDetailToggleStar" type="button" title="Star">
+                            <i class="bi bi-star"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="p-3">
+                    <p class="mb-0 text-muted" id="twDetailBody">Select a mail from the list.</p>
+                </div>
             </div>
         </div>
     </div>
-    <section class="section content-area-wrapper">
-        <div class="sidebar-left">
-            <div class="sidebar">
-                <div class="sidebar-content email-app-sidebar d-flex">
-                    <!-- sidebar close icon -->
-                    <span class="sidebar-close-icon">
-                        <i class="bx bx-x"></i>
-                    </span>
-                    <!-- sidebar close icon -->
-                    <div class="email-app-menu">
-                        <div class="form-group form-group-compose">
-                            <!-- compose button  -->
-                            <button type="button" class="btn btn-primary btn-block my-4 compose-btn">
-                                <i class="bx bx-plus"></i>
-                                Compose
-                            </button>
-                        </div>
-                        <div class="sidebar-menu-list ps">
-                            <!-- sidebar menu  -->
-                            <div class="list-group list-group-messages">
-                                <a href="#" class="list-group-item pt-0 active" id="inbox-menu">
-                                    <div class="fonticon-wrap d-inline me-3">
+</div>
 
-                                        <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                            <use
-                                                xlink:href="~/admin/dist/assets/vendors/bootstrap-icons/bootstrap-icons.svg#envelope" />
-                                        </svg>
-                                        </i>
-                                    </div>
-                                    Inbox
-                                    <span
-                                        class="badge badge-light-primary badge-pill badge-round float-right mt-50">5</span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="fonticon-wrap d-inline me-3">
-
-                                        <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                            <use
-                                                xlink:href="~/admin/dist/assets/vendors/bootstrap-icons/bootstrap-icons.svg#archive" />
-                                        </svg>
-                                    </div>
-                                    Sent
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="fonticon-wrap d-inline me-3">
-
-                                        <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                            <use
-                                                xlink:href="~/admin/dist/assets/vendors/bootstrap-icons/bootstrap-icons.svg#pencil" />
-                                        </svg>
-                                    </div> Draft
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="fonticon-wrap d-inline me-3">
-
-                                        <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                            <use
-                                                xlink:href="~/admin/dist/assets/vendors/bootstrap-icons/bootstrap-icons.svg#star" />
-                                        </svg>
-                                    </div>
-                                    Starred
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="fonticon-wrap d-inline me-3">
-
-                                        <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                            <use
-                                                xlink:href="~/admin/dist/assets/vendors/bootstrap-icons/bootstrap-icons.svg#info-circle" />
-                                        </svg>
-                                    </div>
-                                    Spam
-                                    <span
-                                        class="badge badge-light-danger badge-pill badge-round float-right mt-50">3</span>
-                                </a>
-                                <a href="#" class="list-group-item">
-                                    <div class="fonticon-wrap d-inline me-3">
-                                        <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                            <use
-                                                xlink:href="~/admin/dist/assets/vendors/bootstrap-icons/bootstrap-icons.svg#trash" />
-                                        </svg>
-                                    </div>
-                                    Trash
-                                </a>
-                            </div>
-                         
-                        </div>
-                    </div>
-                </div>
+<!-- Compose Modal -->
+<div class="modal fade" id="twComposeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input class="form-control mb-2" id="twComposeTo" placeholder="To">
+                <input class="form-control mb-2" id="twComposeSubject" placeholder="Subject">
+                <textarea class="form-control" rows="8" id="twComposeBody" placeholder="Message"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
+                <button class="btn btn-primary" type="button" id="twComposeSend">
+                    <i class="bi bi-send me-2"></i> Send
+                </button>
             </div>
         </div>
-        <div class="content-right">
-            <div class="content-overlay"></div>
-            <div class="content-wrapper">
-                <div class="content-header row">
-                </div>
-                <div class="content-body">
-                    <!-- email app overlay -->
-                    <div class="app-content-overlay"></div>
-                    <div class="email-app-area">
-                        <!-- Email list Area -->
-                        <div class="email-app-list-wrapper">
-                            <div class="email-app-list">
-                                <div class="email-action">
-                                    <!-- action left start here -->
-                                    <div class="action-left d-flex align-items-center">
-                                        <!-- select All checkbox -->
-                                        <div class="checkbox checkbox-shadow checkbox-sm selectAll me-3">
-                                            <input type="checkbox" id="checkboxsmall" class='form-check-input'>
-                                            <label for="checkboxsmall"></label>
-                                        </div>
-                                        <!-- delete unread dropdown -->
-                                        <ul class="list-inline m-0 d-flex">
-                                            <li class="list-inline-item mail-delete">
-                                                <button type="button" class="btn btn-icon action-icon"
-                                                    data-toggle="tooltip">
-                                                    <span class="fonticon-wrap">
-                                                        <svg class="bi" width="1.5em" height="1.5em"
-                                                            fill="currentColor">
-                                                            <use
-                                                                xlink:href="~/admin/dist/assets/vendors/bootstrap-icons/bootstrap-icons.svg#trash" />
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                            </li>
-                                            <li class="list-inline-item mail-unread">
-                                                <button type="button" class="btn btn-icon action-icon">
-                                                    <span class="fonticon-wrap d-inline">
-
-                                                        <svg class="bi" width="1.5em" height="1.5em"
-                                                            fill="currentColor">
-                                                            <use
-                                                                xlink:href="~/admin/dist/assets/vendors/bootstrap-icons/bootstrap-icons.svg#envelope" />
-                                                        </svg>
-                                                    </span>
-                                                </button>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <div class="dropdown">
-                                                    <button type="button"
-                                                        class="dropdown-toggle btn btn-icon action-icon" id="folder"
-                                                        data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        <span class="fonticon-wrap">
-
-                                                            <svg class="bi" width="1.5em" height="1.5em"
-                                                                fill="currentColor">
-                                                                <use
-                                                                    xlink:href="~/admin/dist/assets/vendors/bootstrap-icons/bootstrap-icons.svg#folder" />
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right"
-                                                        aria-labelledby="folder">
-                                                        <a class="dropdown-item" href="#"><i class="bx bx-edit"></i>
-                                                            Draft</a>
-                                                        <a class="dropdown-item" href="#"><i
-                                                                class="bx bx-info-circle"></i>Spam</a>
-                                                        <a class="dropdown-item" href="#"><i
-                                                                class="bx bx-trash"></i>Trash</a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <div class="dropdown">
-                                                    <button type="button"
-                                                        class="btn btn-icon dropdown-toggle action-icon" id="tag"
-                                                        data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        <span class="fonticon-wrap">
-
-                                                            <svg class="bi" width="1.5em" height="1.5em"
-                                                                fill="currentColor">
-                                                                <use
-                                                                    xlink:href="~/admin/dist/assets/vendors/bootstrap-icons/bootstrap-icons.svg#tag" />
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right"
-                                                        aria-labelledby="tag">
-                                                        <a href="#" class="dropdown-item align-items-center">
-                                                            <span class="bullet bullet-success bullet-sm"></span>
-                                                            <span>Product</span>
-                                                        </a>
-                                                        <a href="#" class="dropdown-item align-items-center">
-                                                            <span class="bullet bullet-primary bullet-sm"></span>
-                                                            <span>Work</span>
-                                                        </a>
-                                                        <a href="#" class="dropdown-item align-items-center">
-                                                            <span class="bullet bullet-warning bullet-sm"></span>
-                                                            <span>Misc</span>
-                                                        </a>
-                                                        <a href="#" class="dropdown-item align-items-center">
-                                                            <span class="bullet bullet-danger bullet-sm"></span>
-                                                            <span>Family</span>
-                                                        </a>
-                                                        <a href="#" class="dropdown-item align-items-center">
-                                                            <span class="bullet bullet-info bullet-sm"></span>
-                                                            <span> Design</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <!-- action left end here -->
-
-                                    <!-- action right start here -->
-                                    <div
-                                        class="action-right d-flex flex-grow-1 align-items-center justify-content-around">
-                                        <!-- search bar  -->
-                                        <div class="email-fixed-search flex-grow-1">
-                                            <div class="sidebar-toggle d-block d-lg-none">
-                                                <i class="bx bx-menu"></i>
-                                            </div>
-
-                                            <div class="form-group position-relative  mb-0 has-icon-left">
-                                                <input type="text" class="form-control" placeholder="Search email..">
-                                                <div class="form-control-icon">
-                                                    <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                                        <use
-                                                            xlink:href="~/admin/dist/assets/vendors/bootstrap-icons/bootstrap-icons.svg#search" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- pagination and page count -->
-                                        <span class="d-none d-sm-block">1-10 of 653</span>
-                                        <button class="btn btn-icon email-pagination-prev d-none d-sm-block">
-                                            <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                                <use
-                                                    xlink:href="~/admin/dist/assets/vendors/bootstrap-icons/bootstrap-icons.svg#chevron-left" />
-                                            </svg>
-                                        </button>
-                                        <button class="btn btn-icon email-pagination-next d-none d-sm-block">
-                                            <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                                <use
-                                                    xlink:href="~/admin/dist/assets/vendors/bootstrap-icons/bootstrap-icons.svg#chevron-right" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- / action right -->
-
-                                <div class="email-user-list list-group ps ps--active-y">
-                                    <ul class="users-list-wrapper media-list" id="email-list">
-                                        <!-- li elementləri buraya dinamik gələcək -->
-                                    </ul>
-
-                                </div>
-
-
-
-
-                                <!-- email user list end -->
-
-                                <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-                            </div>
-                            <div class="ps__rail-y" style="top: 0px; height: 733px; right: 0px;">
-                                <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 567px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--/ Email list Area -->
-
-                <!-- Detailed Email View -->
-                <div class="email-app-details">
-                    <!-- email detail view header -->
-                    <div class="email-detail-header">
-                        <div class="email-header-left d-flex align-items-center mb-1">
-                            <span class="go-back me-3">
-                                <span class="fonticon-wrap d-inline">
-                                    <i class="fas fa-chevron-left"></i>
-                                </span>
-                            </span>
-                            <h5 class="email-detail-title font-weight-normal mb-0">
-                                Advertising Internet Online
-                                <span class="badge badge-light-danger badge-pill ms-1">PRODUCT</span>
-                            </h5>
-                        </div>
-                        <div class="email-header-right mb-1 ml-2 pl-1">
-                            <ul class="list-inline m-0">
-                                <li class="list-inline-item">
-                                    <button class="btn btn-icon action-icon">
-                                        <span class="fonticon-wrap">
-                                            <i class="fas fa-trash"></i>
-                                        </span>
-                                    </button>
-                                </li>
-                                <li class="list-inline-item">
-                                    <button class="btn btn-icon action-icon">
-                                        <span class="fonticon-wrap">
-                                            <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                                <use
-                                                    xlink:href="~/admin/dist/assets/vendors/bootstrap-icons/bootstrap-icons.svg#envelope" />
-                                            </svg>
-                                        </span>
-                                    </button>
-                                </li>
-                                <li class="list-inline-item">
-                                    <div class="dropdown">
-                                        <button class="btn btn-icon dropdown-toggle action-icon" id="open-mail-menu"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="fonticon-wrap">
-                                                <i class="fas fa-folder"></i>
-                                            </span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="open-mail-menu">
-                                            <a class="dropdown-item" href="#"><i class="bx bx-edit"></i>
-                                                Draft</a>
-                                            <a class="dropdown-item" href="#"><i class="bx bx-info-circle"></i>
-                                                Spam</a>
-                                            <a class="dropdown-item" href="#"><i class="bx bx-trash"></i>
-                                                Trash</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-inline-item">
-                                    <div class="dropdown">
-                                        <button class="btn btn-icon dropdown-toggle action-icon" id="open-mail-tag"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="fonticon-wrap">
-                                                <i class="fas fa-tag"></i>
-                                            </span>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="open-mail-tag">
-                                            <a href="#" class="dropdown-item align-items-center">
-                                                <span class="bullet bullet-success bullet-sm"></span>
-                                                Product
-                                            </a>
-                                            <a href="#" class="dropdown-item align-items-center">
-                                                <span class="bullet bullet-primary bullet-sm"></span>
-                                                Work
-                                            </a>
-                                            <a href="#" class="dropdown-item align-items-center">
-                                                <span class="bullet bullet-warning bullet-sm"></span>
-                                                Misc
-                                            </a>
-                                            <a href="#" class="dropdown-item align-items-center">
-                                                <span class="bullet bullet-danger bullet-sm"></span>
-                                                Family
-                                            </a>
-                                            <a href="#" class="dropdown-item align-items-center">
-                                                <span class="bullet bullet-info bullet-sm"></span>
-                                                Design
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-inline-item">
-                                    <span class="no-of-list d-none d-sm-block ms-1">1-10 of 653</span>
-                                </li>
-                                <li class="list-inline-item">
-                                    <button class="btn btn-icon email-pagination-prev action-icon">
-                                        <i class="bx bx-chevron-left"></i>
-                                    </button>
-                                </li>
-                                <li class="list-inline-item">
-                                    <button class="btn btn-icon email-pagination-next action-icon">
-                                        <i class="bx bx-chevron-right"></i>
-                                    </button>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- email detail view header end-->
-                    <div class="email-scroll-area">
-                        <!-- email details  -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="collapsible email-detail-head">
-                                    <div class="card collapse-header" role="tablist">
-                                        <div id="headingCollapse5"
-                                            class="card-header d-flex justify-content-between align-items-center"
-                                            data-toggle="collapse" role="tab" data-target="#collapse5"
-                                            aria-expanded="false" aria-controls="collapse5">
-                                            <div class="collapse-title media">
-                                                <div class="pr-1">
-                                                    <div class="avatar mr-75">
-                                                        <img src="~/admin/dist/assets/images/faces/18.jpg"
-                                                            alt="avtar img holder" width="30" height="30">
-                                                    </div>
-                                                </div>
-                                                <div class="media-body mt-25">
-                                                    <span class="text-primary">Elnora Reese</span>
-                                                    <span class="d-sm-inline d-none">
-                                                        &lt;elnora@gmail.com&gt;</span>
-                                                    <small class="text-muted d-block">to Lois Jimenez</small>
-                                                </div>
-                                            </div>
-                                            <div class="information d-sm-flex d-none align-items-center">
-                                                <small class="text-muted me-3">15 Jul 2019, 10:30</small>
-                                                <span class="favorite">
-                                                    <i class="bx bx-star me-3"></i>
-                                                </span>
-                                                <div class="dropdown">
-                                                    <a href="#" class="dropdown-toggle" id="fisrt-open-submenu"
-                                                        data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        <i class="bx bx-dots-vertical-rounded mr-0"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right"
-                                                        aria-labelledby="fisrt-open-submenu">
-                                                        <a href="#" class="dropdown-item mail-reply">
-                                                            <i class="bx bx-share"></i>
-                                                            Reply
-                                                        </a>
-                                                        <a href="#" class="dropdown-item">
-                                                            <i class="bx bx-redo"></i>
-                                                            Forward
-                                                        </a>
-                                                        <a href="#" class="dropdown-item">
-                                                            <i class="bx bx-info-circle"></i>
-                                                            Report Spam
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="collapse5" role="tabpanel" aria-labelledby="headingCollapse5"
-                                            class="collapse">
-                                            <div class="card-content">
-                                                <div class="card-body py-1">
-                                                    <p class="text-bold-500">Greetings!</p>
-                                                    <p>
-                                                        Lorem Ipsum is simply dummy text of the printing and
-                                                        typesetting industry. Lorem Ipsum has been
-                                                        the industry's standard dummy text ever since the 1500s,
-                                                        when an unknown printer took a galley of
-                                                        type and scrambled it to make a type specimen book.
-                                                    </p>
-                                                    <p>
-                                                        It has survived not only five centuries, but also the
-                                                        leap into electronic typesetting, remaining
-                                                        essentially unchanged.
-                                                    </p>
-                                                    <p class="mb-0">Sincerely yours,</p>
-                                                    <p class="text-bold-500">Envato Design Team</p>
-                                                </div>
-                                                <div class="card-footer pt-0 border-top">
-                                                    <label class="sidebar-label">Attached Files</label>
-                                                    <ul class="list-unstyled mb-0">
-                                                        <li class="cursor-pointer pb-25">
-                                                            <img src="~/admin/dist/assets/images/icon/psd.png"
-                                                                alt="psd.png" height="30">
-                                                            <small
-                                                                class="text-muted ms-1 attchement-text">uikit-design.psd</small>
-                                                        </li>
-                                                        <li class="cursor-pointer">
-                                                            <img src="~/admin/dist/assets/images/icon/sketch.png"
-                                                                alt="sketch.png" height="30">
-                                                            <small
-                                                                class="text-muted ms-1 attchement-text">uikit-design.sketch</small>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card collapse-header" role="tablist">
-                                        <div id="headingCollapse6"
-                                            class="card-header d-flex justify-content-between align-items-center"
-                                            data-toggle="collapse" role="tab" data-target="#collapse6"
-                                            aria-expanded="false" aria-controls="collapse6">
-                                            <div class="collapse-title media">
-                                                <div class="pr-1">
-                                                    <div class="avatar mr-75">
-                                                        <img src="~/admin/dist/assets/images/faces/19.jpg"
-                                                            alt="avtar img holder" width="30" height="30">
-                                                    </div>
-                                                </div>
-                                                <div class="media-body mt-25">
-                                                    <span class="text-primary">Lois Jimenez </span>
-                                                    <span class="d-sm-inline d-none">
-                                                        &lt;lois_jim@gmail.com&gt;</span>
-                                                    <small class="text-muted d-block">to Elnora Reese</small>
-                                                </div>
-                                            </div>
-                                            <div class="information d-sm-flex d-none align-items-center">
-                                                <i class="bx bx-paperclip me-3"></i>
-                                                <small class="text-muted me-3">10 Jul 2019, 10:30</small>
-                                                <span class="favorite">
-                                                    <i class="bx bx-star me-3"></i>
-                                                </span>
-                                                <div class="dropdown">
-                                                    <a href="#" class="dropdown-toggle" id="second-open-submenu"
-                                                        data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        <i class="bx bx-dots-vertical-rounded mr-0"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right"
-                                                        aria-labelledby="second-open-submenu">
-                                                        <a href="#" class="dropdown-item mail-reply">
-                                                            <i class="bx bx-share"></i>
-                                                            Reply
-                                                        </a>
-                                                        <a href="#" class="dropdown-item">
-                                                            <i class="bx bx-redo"></i>
-                                                            Forward
-                                                        </a>
-                                                        <a href="#" class="dropdown-item">
-                                                            <i class="bx bx-info-circle"></i>
-                                                            Report Spam
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="collapse6" role="tabpanel" aria-labelledby="headingCollapse7"
-                                            class="collapse">
-                                            <div class="card-content">
-                                                <div class="card-body py-1">
-                                                    <p class="text-bold-500">Greetings!</p>
-                                                    <p>
-                                                        Successful businesses have many things in common, today
-                                                        we’ll look at the big ‘R’of recognition
-                                                        and how a digital advertising network may help.
-                                                        Recognition can be illustrated by two individuals
-                                                        entering a crowded room at a party. Both walk to the far
-                                                        side of the room, one of them slips
-                                                        through the crowd easily and unnoticed as they reach the
-                                                        far side.
-                                                    </p>
-                                                    <p>
-                                                        Gummies sweet tart marzipan lemon drops donut pie.
-                                                        Chocolate cake gingerbread jujubes gingerbread
-                                                        chocolate cake tart bear claw apple pie jelly-o.
-                                                        Gummies biscuit brownie marshmallow oat cake tootsie
-                                                        roll bear claw topping. Oat cake sesame snaps
-                                                        icing cupcake wafer tiramisu jelly-o sugar plum carrot
-                                                        cake
-                                                    </p>
-                                                    <p class="mb-0">Sincerely yours,</p>
-                                                    <p class="text-bold-500">Envato Design Team</p>
-                                                </div>
-                                                <div class="card-footer pt-0 border-top">
-                                                    <label class="sidebar-label">Attached Files</label>
-                                                    <ul class="list-unstyled mb-0">
-                                                        <li class="cursor-pointer pb-25">
-                                                            <img src="~/admin/dist/assets/images/icon/psd.png"
-                                                                alt="psd.png" height="30">
-                                                            <small
-                                                                class="text-muted ms-1 attchement-text">uikit-design.psd</small>
-                                                        </li>
-                                                        <li class="cursor-pointer">
-                                                            <img src="~/admin/dist/ssets/images/icon/sketch.png"
-                                                                alt="sketch.png" height="30">
-                                                            <small
-                                                                class="text-muted ms-1 attchement-text">uikit-design.sketch</small>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card collapse-header open" role="tablist">
-                                        <div id="headingCollapse7"
-                                            class="card-header d-flex justify-content-between align-items-center"
-                                            data-toggle="collapse" role="tab" data-target="#collapse7"
-                                            aria-expanded="false" aria-controls="collapse7">
-                                            <div class="collapse-title media">
-                                                <div class="pr-1">
-                                                    <div class="avatar mr-75">
-                                                        <img src="~/admin/dist/assets/images/faces/18.jpg"
-                                                            alt="avtar img holder" width="30" height="30">
-                                                    </div>
-                                                </div>
-                                                <div class="media-body mt-25">
-                                                    <span class="text-primary">Elnora Reese</span>
-                                                    <span class="d-sm-inline d-none">&lt;elnora@gmail.com&gt;</span>
-                                                    <small class="text-muted d-block">to Lois Jimenez</small>
-                                                </div>
-                                            </div>
-                                            <div class="information d-sm-flex d-none align-items-center">
-                                                <small class="text-muted me-3">05 Jul 2019, 10:30</small>
-                                                <span class="favorite text-warning">
-                                                    <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                                        <use
-                                                            xlink:href="assets/vendors/bootstrap-icons/bootstrap-icons.svg#star-fill" />
-                                                    </svg>
-                                                </span>
-                                                <div class="dropdown">
-                                                    <a href="#" class="dropdown-toggle" id="third-open-menu"
-                                                        data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        <i class="bx bx-dots-vertical-rounded mr-0"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right"
-                                                        aria-labelledby="second-open-submenu">
-                                                        <a href="#" class="dropdown-item mail-reply">
-                                                            <i class="bx bx-share"></i>
-                                                            Reply
-                                                        </a>
-                                                        <a href="#" class="dropdown-item">
-                                                            <i class="bx bx-redo"></i>
-                                                            Forward
-                                                        </a>
-                                                        <a href="#" class="dropdown-item">
-                                                            <i class="bx bx-info-circle"></i>
-                                                            Report Spam
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="collapse7" role="tabpanel" aria-labelledby="headingCollapse7"
-                                            class="collapse show">
-                                            <div class="card-content">
-                                                <div class="card-body py-1">
-                                                    <p class="text-bold-500">Greetings!</p>
-                                                    <p>
-                                                        It is a long established fact that a reader will be
-                                                        distracted by the readable content of a page
-                                                        when looking at its layout.The point of using Lorem
-                                                        Ipsum is that it has a more-or-less normal
-                                                        distribution of letters, as opposed to using 'Content
-                                                        here, content here',making it look like
-                                                        readable English.
-                                                    </p>
-                                                    <p>
-                                                        There are many variations of passages of Lorem Ipsum
-                                                        available, but the majority have suffered
-                                                        alteration in some form, by injected humour, or
-                                                        randomised words which don't look even slightly
-                                                        believable.
-                                                    </p>
-                                                    <p class="mb-0">Sincerely yours,</p>
-                                                    <p class="text-bold-500">Envato Design Team</p>
-                                                </div>
-                                                <div class="card-footer pt-0 border-top">
-                                                    <label class="sidebar-label">Attached Files</label>
-                                                    <ul class="list-unstyled mb-0">
-                                                        <li class="cursor-pointer pb-25">
-                                                            <img src="../../../app-assets/images/icon/psd.png"
-                                                                alt="psd.png" height="30">
-                                                            <small
-                                                                class="text-muted ms-1 attchement-text">uikit-design.psd</small>
-                                                        </li>
-                                                        <li class="cursor-pointer">
-                                                            <img src="../../../app-assets/images/icon/sketch.png"
-                                                                alt="sketch.png" height="30">
-                                                            <small
-                                                                class="text-muted ms-1 attchement-text">uikit-design.sketch</small>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- email details  end-->
-                        <div class="row px-2 mb-4">
-                            <!-- quill editor for reply message -->
-                            <div class="col-12 px-0">
-                                <div class="card shadow-none border rounded">
-                                    <div class="card-body quill-wrapper">
-                                        <span>Reply to Lois Jimenez</span>
-                                        <div class="snow-container" id="detail-view-quill">
-                                            <div class="detail-view-editor ql-container ql-snow">
-                                                <div class="ql-editor ql-blank" data-gramm="false"
-                                                    data-placeholder="Type something....." contenteditable="true">
-                                                    <p><br></p>
-                                                </div>
-                                                <div class="ql-clipboard" tabindex="-1" contenteditable="true">
-                                                </div>
-                                                <div class="ql-tooltip ql-hidden"><a class="ql-preview" target="_blank"
-                                                        href="about:blank"></a><input type="text" data-formula="e=mc^2"
-                                                        data-link="https://quilljs.com" data-video="Embed URL"><a
-                                                        class="ql-action"></a><a class="ql-remove"></a></div>
-                                            </div>
-                                            <div class="d-flex justify-content-end">
-                                                <div class="detail-quill-toolbar ql-toolbar ql-snow">
-                                                    <span class="ql-formats me-3">
-                                                        <button class="ql-bold" type="button"><svg viewBox="0 0 18 18">
-                                                                <path class="ql-stroke"
-                                                                    d="M5,4H9.5A2.5,2.5,0,0,1,12,6.5v0A2.5,2.5,0,0,1,9.5,9H5A0,0,0,0,1,5,9V4A0,0,0,0,1,5,4Z">
-                                                                </path>
-                                                                <path class="ql-stroke"
-                                                                    d="M5,9h5.5A2.5,2.5,0,0,1,13,11.5v0A2.5,2.5,0,0,1,10.5,14H5a0,0,0,0,1,0,0V9A0,0,0,0,1,5,9Z">
-                                                                </path>
-                                                            </svg></button>
-                                                        <button class="ql-italic" type="button"><svg
-                                                                viewBox="0 0 18 18">
-                                                                <line class="ql-stroke" x1="7" x2="13" y1="4" y2="4">
-                                                                </line>
-                                                                <line class="ql-stroke" x1="5" x2="11" y1="14" y2="14">
-                                                                </line>
-                                                                <line class="ql-stroke" x1="8" x2="10" y1="14" y2="4">
-                                                                </line>
-                                                            </svg></button>
-                                                        <button class="ql-underline" type="button"><svg
-                                                                viewBox="0 0 18 18">
-                                                                <path class="ql-stroke"
-                                                                    d="M5,3V9a4.012,4.012,0,0,0,4,4H9a4.012,4.012,0,0,0,4-4V3">
-                                                                </path>
-                                                                <rect class="ql-fill" height="1" rx="0.5" ry="0.5"
-                                                                    width="12" x="3" y="15"></rect>
-                                                            </svg></button>
-                                                        <button class="ql-link" type="button"><svg viewBox="0 0 18 18">
-                                                                <line class="ql-stroke" x1="7" x2="11" y1="7" y2="11">
-                                                                </line>
-                                                                <path class="ql-even ql-stroke"
-                                                                    d="M8.9,4.577a3.476,3.476,0,0,1,.36,4.679A3.476,3.476,0,0,1,4.577,8.9C3.185,7.5,2.035,6.4,4.217,4.217S7.5,3.185,8.9,4.577Z">
-                                                                </path>
-                                                                <path class="ql-even ql-stroke"
-                                                                    d="M13.423,9.1a3.476,3.476,0,0,0-4.679-.36,3.476,3.476,0,0,0,.36,4.679c1.392,1.392,2.5,2.542,4.679.36S14.815,10.5,13.423,9.1Z">
-                                                                </path>
-                                                            </svg></button>
-                                                        <button class="ql-image" type="button"><svg viewBox="0 0 18 18">
-                                                                <rect class="ql-stroke" height="10" width="12" x="3"
-                                                                    y="4"></rect>
-                                                                <circle class="ql-fill" cx="6" cy="7" r="1">
-                                                                </circle>
-                                                                <polyline class="ql-even ql-fill"
-                                                                    points="5 12 5 11 7 9 8 10 11 7 13 9 13 12 5 12">
-                                                                </polyline>
-                                                            </svg></button>
-                                                    </span>
-                                                </div>
-                                                <button class="btn btn-primary send-btn">
-                                                    <i class="bx bx-send me-3"></i>
-                                                    <span class="d-none d-sm-inline"> Send</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-                            <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
-                        </div>
-                        <div class="ps__rail-y" style="top: 0px; height: 736px; right: 0px;">
-                            <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 626px;"></div>
-                        </div>
-                    </div>
-                </div>
-                <!--/ Detailed Email View -->
-            </div>
-        </div>
+    </div>
 </div>
-</div>
-</section>
-</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        (function () {
+            const STORAGE_KEY = "twMailApp_v2";
+
+            const SEED_MAILS = [
+                { id: 1, box: "inbox", from: "Aysel", email: "aysel@mail.com", subject: "Rezervasiya", text: "Tur haqqında sualım var", date: "16 Dec", starred: false, read: false, prevBox: null },
+                { id: 2, box: "inbox", from: "Murad", email: "murad@mail.com", subject: "Qiymət", text: "Qiymət neçədir?", date: "15 Dec", starred: true, read: true, prevBox: null },
+                { id: 3, box: "sent", from: "Admin", email: "admin@site.com", subject: "Cavab", text: "Məlumat göndərildi", date: "14 Dec", starred: false, read: true, prevBox: null },
+                { id: 4, box: "draft", from: "Admin", email: "admin@site.com", subject: "Qaralama", text: "Sonra tamamlayacam", date: "13 Dec", starred: false, read: false, prevBox: null },
+                { id: 5, box: "spam", from: "Promo", email: "promo@spam.com", subject: "WIN iPhone", text: "Click now!", date: "10 Dec", starred: false, read: false, prevBox: null },
+                { id: 6, box: "trash", from: "Old", email: "old@mail.com", subject: "Silinmiş", text: "...", date: "01 Dec", starred: false, read: true, prevBox: "inbox" },
+            ];
+
+            function loadMails() {
+                try {
+                    const raw = localStorage.getItem(STORAGE_KEY);
+                    if (!raw) return SEED_MAILS;
+                    const parsed = JSON.parse(raw);
+                    if (!Array.isArray(parsed)) return SEED_MAILS;
+                    return parsed;
+                } catch {
+                    return SEED_MAILS;
+                }
+            }
+
+            function saveMails() {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(S.mails));
+            }
+
+            const S = {
+                box: "inbox",
+                page: 1,
+                pageSize: 8,
+                search: "",
+                selected: new Set(),
+                activeId: null,
+                mails: loadMails()
+            };
+
+            const folders = document.getElementById("twFolders");
+
+            const listCol = document.getElementById("twListCol");
+            const detailCol = document.getElementById("twDetailCol");
+
+            const mailList = document.getElementById("twMailList");
+            const search = document.getElementById("twSearch");
+            const selectAll = document.getElementById("twSelectAll");
+            const prev = document.getElementById("twPrev");
+            const next = document.getElementById("twNext");
+            const pageInfo = document.getElementById("twPageInfo");
+
+            const restoreSelected = document.getElementById("twRestoreSelected");
+            const restoreAll = document.getElementById("twRestoreAll");
+
+            const cInbox = document.getElementById("twCountInbox");
+            const cSent = document.getElementById("twCountSent");
+            const cDraft = document.getElementById("twCountDraft");
+            const cStar = document.getElementById("twCountStarred");
+            const cSpam = document.getElementById("twCountSpam");
+            const cTrash = document.getElementById("twCountTrash");
+
+            const backBtn = document.getElementById("twBackBtn");
+            const dTitle = document.getElementById("twDetailTitle");
+            const dMeta = document.getElementById("twDetailMeta");
+            const dBody = document.getElementById("twDetailBody");
+            const dDel = document.getElementById("twDetailDelete");
+            const dRestore = document.getElementById("twDetailRestore");
+            const dRead = document.getElementById("twDetailToggleRead");
+            const dStar = document.getElementById("twDetailToggleStar");
+
+            // ✅ Reply
+            const replyBtn = document.getElementById("twReplyBtn");
+
+            const delSelected = document.getElementById("twDeleteSelected");
+            const toggleReadSelected = document.getElementById("twToggleReadSelected");
+
+            const composeBtn = document.getElementById("twComposeBtn");
+            const composeModalEl = document.getElementById("twComposeModal");
+            const composeTo = document.getElementById("twComposeTo");
+            const composeSubject = document.getElementById("twComposeSubject");
+            const composeBody = document.getElementById("twComposeBody");
+            const composeSend = document.getElementById("twComposeSend");
+
+            function esc(s) {
+                return (s ?? "").toString()
+                    .replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+                    .replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+            }
+
+            function openDetailPanel() {
+                detailCol.classList.remove("tw-hidden");
+                listCol.classList.remove("col-lg-9");
+                listCol.classList.add("col-lg-4");
+            }
+
+            function closeDetailPanel() {
+                detailCol.classList.add("tw-hidden");
+                listCol.classList.remove("col-lg-4");
+                listCol.classList.add("col-lg-9");
+            }
+
+            function updateCounts() {
+                cInbox.textContent = S.mails.filter(x => x.box === "inbox").length;
+                cSent.textContent = S.mails.filter(x => x.box === "sent").length;
+                cDraft.textContent = S.mails.filter(x => x.box === "draft").length;
+                cSpam.textContent = S.mails.filter(x => x.box === "spam").length;
+                cTrash.textContent = S.mails.filter(x => x.box === "trash").length;
+                cStar.textContent = S.mails.filter(x => x.starred).length;
+            }
+
+            function syncTrashUI() {
+                const isTrash = S.box === "trash";
+                restoreSelected.classList.toggle("tw-hidden", !isTrash);
+                restoreAll.classList.toggle("tw-hidden", !isTrash);
+
+                dRestore.classList.toggle("tw-hidden", !(isTrash && S.activeId));
+            }
+
+            function getBoxList() {
+                let list = S.mails;
+                if (S.box === "starred") list = list.filter(x => x.starred);
+                else list = list.filter(x => x.box === S.box);
+
+                const q = S.search.trim().toLowerCase();
+                if (q) {
+                    list = list.filter(x =>
+                        (x.from || "").toLowerCase().includes(q) ||
+                        (x.email || "").toLowerCase().includes(q) ||
+                        (x.subject || "").toLowerCase().includes(q) ||
+                        (x.text || "").toLowerCase().includes(q)
+                    );
+                }
+                return list;
+            }
+
+            function paginate(list) {
+                const total = list.length;
+                const totalPages = Math.max(1, Math.ceil(total / S.pageSize));
+                S.page = Math.min(Math.max(1, S.page), totalPages);
+
+                const start = (S.page - 1) * S.pageSize;
+                const end = Math.min(start + S.pageSize, total);
+                return { items: list.slice(start, end), start: total ? start + 1 : 0, end, total };
+            }
+
+            function renderList() {
+                syncTrashUI();
+
+                const list = getBoxList();
+                const pg = paginate(list);
+                pageInfo.textContent = `${pg.start}-${pg.end} of ${pg.total}`;
+
+                const visibleIds = pg.items.map(x => x.id);
+                selectAll.checked = visibleIds.length > 0 && visibleIds.every(id => S.selected.has(id));
+
+                mailList.innerHTML = "";
+                if (pg.items.length === 0) {
+                    mailList.innerHTML = `<div class="p-3 text-muted">No mails.</div>`;
+                    return;
+                }
+
+                for (const m of pg.items) {
+                    const selected = S.selected.has(m.id);
+                    const active = S.activeId === m.id;
+                    const unreadCls = m.read ? "" : "tw-unread";
+
+                    mailList.innerHTML += `
+<div class="list-group-item d-flex justify-content-between align-items-center tw-mail-row ${active ? "active" : ""} ${unreadCls}" data-id="${m.id}">
+  <div class="d-flex align-items-center gap-2">
+    <input type="checkbox" class="form-check-input tw-check" ${selected ? "checked" : ""} />
+    <span class="tw-star">${m.starred ? "⭐" : "☆"}</span>
+    <div>
+      <div class="${m.read ? "tw-muted" : ""}"><b>${esc(m.from)}</b> <span class="text-muted">(${esc(m.email)})</span></div>
+      <div class="${m.read ? "tw-muted" : ""}"><b>${esc(m.subject)}</b> — ${esc(m.text)}</div>
+    </div>
+  </div>
+  <small class="text-muted">${esc(m.date)}</small>
+</div>`;
+                }
+            }
+
+            function renderDetail(id) {
+                if (!id) {
+                    S.activeId = null;
+                    dTitle.textContent = "(Select a mail)";
+                    dMeta.textContent = "—";
+                    dBody.textContent = "Select a mail from the list.";
+                    closeDetailPanel();
+                    renderList();
+                    return;
+                }
+
+                const mail = S.mails.find(x => x.id === id);
+                if (!mail) return;
+
+                S.activeId = id;
+                mail.read = true;
+
+                dTitle.textContent = mail.subject;
+                dMeta.textContent = `${mail.from} <${mail.email}> • ${mail.date}`;
+                dBody.textContent = mail.text;
+
+                saveMails();
+                updateCounts();
+                renderList();
+                openDetailPanel();
+                syncTrashUI();
+            }
+
+            function toggleStar(id) {
+                const m = S.mails.find(x => x.id === id);
+                if (!m) return;
+                m.starred = !m.starred;
+                saveMails();
+                updateCounts();
+                renderList();
+                if (S.activeId === id) renderDetail(id);
+            }
+
+            function moveToTrash(ids) {
+                const set = new Set(ids);
+                for (const id of set) {
+                    const m = S.mails.find(x => x.id === id);
+                    if (!m) continue;
+                    if (m.box !== "trash") m.prevBox = m.box || "inbox";
+                    m.box = "trash";
+                }
+                saveMails();
+                updateCounts();
+                S.selected.clear();
+                renderList();
+                if (S.activeId && set.has(S.activeId)) renderDetail(null);
+            }
+
+            function restoreFromTrash(ids) {
+                const set = new Set(ids);
+                for (const id of set) {
+                    const m = S.mails.find(x => x.id === id);
+                    if (!m) continue;
+                    if (m.box !== "trash") continue;
+                    m.box = m.prevBox || "inbox";
+                    m.prevBox = null;
+                }
+                saveMails();
+                updateCounts();
+                S.selected.clear();
+                renderList();
+                if (S.activeId && set.has(S.activeId)) renderDetail(null);
+            }
+
+            function deleteSelectedMails() {
+                if (S.selected.size === 0) return;
+                moveToTrash(Array.from(S.selected));
+            }
+
+            function toggleReadSelectedMails() {
+                if (S.selected.size === 0) return;
+                for (const id of S.selected) {
+                    const m = S.mails.find(x => x.id === id);
+                    if (m) m.read = !m.read;
+                }
+                saveMails();
+                renderList();
+                if (S.activeId) renderDetail(S.activeId);
+            }
+
+            function moveSelected(toBox) {
+                let ids = Array.from(S.selected);
+                if (ids.length === 0 && S.activeId) ids = [S.activeId];
+                if (ids.length === 0) return;
+
+                for (const id of ids) {
+                    const m = S.mails.find(x => x.id === id);
+                    if (!m) continue;
+
+                    if (toBox === "trash") {
+                        if (m.box !== "trash") m.prevBox = m.box || "inbox";
+                        m.box = "trash";
+                    } else {
+                        m.box = toBox;
+                        if (m.box !== "trash") m.prevBox = null;
+                    }
+                }
+
+                saveMails();
+                updateCounts();
+                S.selected.clear();
+                renderList();
+                renderDetail(null);
+            }
+
+            function openComposeModal() {
+                const modal = new bootstrap.Modal(composeModalEl);
+                modal.show();
+            }
+
+            // ✅ Reply logic
+            function replyToActiveMail() {
+                if (!S.activeId) return;
+                const m = S.mails.find(x => x.id === S.activeId);
+                if (!m) return;
+
+                composeTo.value = m.email;
+
+                const subj = (m.subject || "").trim();
+                const hasRe = subj.toLowerCase().startsWith("re:");
+                composeSubject.value = hasRe ? subj : `Re: ${subj || "Message"}`;
+
+                // quote əlavə et (istəmirsənsə silə bilərsən)
+                const quote =
+`\n\n--- Original message ---\nFrom: ${m.from} <${m.email}>\nDate: ${m.date}\nSubject: ${m.subject}\n\n${m.text}`;
+                composeBody.value = quote;
+
+                openComposeModal();
+            }
+
+            // Folders click
+            folders.addEventListener("click", (e) => {
+                const a = e.target.closest("a[data-box]");
+                if (!a) return;
+                e.preventDefault();
+
+                folders.querySelectorAll("a[data-box]").forEach(x => x.classList.remove("active"));
+                a.classList.add("active");
+
+                S.box = a.dataset.box;
+                S.page = 1;
+                S.search = "";
+                search.value = "";
+                S.selected.clear();
+
+                renderDetail(null);
+                renderList();
+            });
+
+            // List click
+            mailList.addEventListener("click", (e) => {
+                const row = e.target.closest(".tw-mail-row");
+                if (!row) return;
+                const id = Number(row.dataset.id);
+
+                if (e.target.classList.contains("tw-check")) {
+                    if (e.target.checked) S.selected.add(id);
+                    else S.selected.delete(id);
+                    renderList();
+                    return;
+                }
+
+                if (e.target.classList.contains("tw-star")) {
+                    toggleStar(id);
+                    return;
+                }
+
+                renderDetail(id);
+            });
+
+            search.addEventListener("input", () => {
+                S.search = search.value;
+                S.page = 1;
+                renderList();
+            });
+
+            selectAll.addEventListener("change", () => {
+                const pg = paginate(getBoxList());
+                if (selectAll.checked) pg.items.forEach(x => S.selected.add(x.id));
+                else pg.items.forEach(x => S.selected.delete(x.id));
+                renderList();
+            });
+
+            prev.addEventListener("click", () => { S.page--; renderList(); });
+            next.addEventListener("click", () => { S.page++; renderList(); });
+
+            delSelected.addEventListener("click", () => deleteSelectedMails());
+            toggleReadSelected.addEventListener("click", () => toggleReadSelectedMails());
+
+            document.addEventListener("click", (e) => {
+                const mv = e.target.closest("[data-move]");
+                if (!mv) return;
+                e.preventDefault();
+                moveSelected(mv.dataset.move);
+            });
+
+            restoreSelected.addEventListener("click", () => {
+                if (S.selected.size === 0) return;
+                restoreFromTrash(Array.from(S.selected));
+            });
+
+            restoreAll.addEventListener("click", () => {
+                const allTrash = S.mails.filter(x => x.box === "trash").map(x => x.id);
+                if (allTrash.length === 0) return;
+                restoreFromTrash(allTrash);
+            });
+
+            backBtn.addEventListener("click", () => renderDetail(null));
+
+            dDel.addEventListener("click", () => {
+                if (!S.activeId) return;
+                moveToTrash([S.activeId]);
+            });
+
+            dRestore.addEventListener("click", () => {
+                if (!S.activeId) return;
+                restoreFromTrash([S.activeId]);
+            });
+
+            dRead.addEventListener("click", () => {
+                if (!S.activeId) return;
+                const m = S.mails.find(x => x.id === S.activeId);
+                if (!m) return;
+                m.read = !m.read;
+                saveMails();
+                renderDetail(m.id);
+            });
+
+            dStar.addEventListener("click", () => {
+                if (!S.activeId) return;
+                toggleStar(S.activeId);
+            });
+
+            // ✅ Reply button click
+            replyBtn.addEventListener("click", () => replyToActiveMail());
+
+            // Compose
+            composeBtn.addEventListener("click", () => openComposeModal());
+
+            composeSend.addEventListener("click", () => {
+                const to = composeTo.value.trim();
+                const subj = composeSubject.value.trim();
+                const body = composeBody.value.trim();
+                if (!to || !subj || !body) return;
+
+                const newId = Math.max(0, ...S.mails.map(x => x.id)) + 1;
+                S.mails.unshift({
+                    id: newId,
+                    box: "sent",
+                    from: "Admin",
+                    email: to,            // burada recipient-i göstəririk
+                    subject: subj,
+                    text: body,
+                    date: new Date().toLocaleDateString("en-GB", { day: "2-digit", month: "short" }),
+                    starred: false,
+                    read: true,
+                    prevBox: null
+                });
+
+                composeTo.value = "";
+                composeSubject.value = "";
+                composeBody.value = "";
+                bootstrap.Modal.getInstance(composeModalEl).hide();
+
+                saveMails();
+                updateCounts();
+                renderList();
+            });
+
+            // INIT
+            updateCounts();
+            renderList();
+            renderDetail(null);
+            closeDetailPanel();
+        })();
+    </script>
+}

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "WR7/EtPIBwht21hy+T8jmb2bGmm6CeWDSXd/WlHWKaI=",
+  "Hash": "HuEIm8Pp/WKhfFczpcaItG4x7pU+4XMulnDWtLVx1mU=",
   "Source": "TravelWeb",
   "BasePath": "_content/TravelWeb",
   "Mode": "Default",
@@ -36079,6 +36079,25 @@
       "OriginalItemSpec": "wwwroot/uploads/39760737-5ea6-4589-91ec-5c1789d5457c.svg"
     },
     {
+      "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/uploads/61f07720-77bc-4865-9c13-ac620ac38172.jpg",
+      "SourceId": "TravelWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/",
+      "BasePath": "_content/TravelWeb",
+      "RelativePath": "uploads/61f07720-77bc-4865-9c13-ac620ac38172.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/61f07720-77bc-4865-9c13-ac620ac38172.jpg"
+    },
+    {
       "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/uploads/6f50142a-417f-4ee4-b9e9-5f8850e9a495.png",
       "SourceId": "TravelWeb",
       "SourceType": "Discovered",
@@ -36172,6 +36191,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/uploads/8f380c54-5220-4480-8659-d3cdbb18f70e.jpg"
+    },
+    {
+      "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/uploads/8fa81713-a5ea-4e5e-88ef-0a5f2445ef0f.png",
+      "SourceId": "TravelWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/",
+      "BasePath": "_content/TravelWeb",
+      "RelativePath": "uploads/8fa81713-a5ea-4e5e-88ef-0a5f2445ef0f.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/uploads/8fa81713-a5ea-4e5e-88ef-0a5f2445ef0f.png"
     },
     {
       "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/uploads/97ef9408-ea6b-4c27-9605-35bf3a114ff6.jpg",
@@ -36476,6 +36514,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/web/assets/fonts/FontAwesome.otf"
+    },
+    {
+      "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/about1.jpg",
+      "SourceId": "TravelWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/",
+      "BasePath": "_content/TravelWeb",
+      "RelativePath": "web/assets/images/about1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/web/assets/images/about1.jpg"
     },
     {
       "Identity": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/web/assets/images/banner1.jpg",
