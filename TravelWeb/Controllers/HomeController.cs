@@ -16,13 +16,15 @@ public class HomeController : Controller
     private readonly IGuideService _guideService;
     private readonly ITourService _tourService;
     private readonly ITestimonialService _testimonialService;
-    public HomeController(IDestinationService destinationService, IGuideService guideService, ITourService tourService, ITestimonialService testimonialService, Context context)
+    private readonly IRezervationService _rezervationService;
+    public HomeController(IDestinationService destinationService, IGuideService guideService, ITourService tourService, ITestimonialService testimonialService, Context context, IRezervationService rezervationService)
     {
         _destinationService = destinationService;
         _guideService = guideService;
         _tourService = tourService;
         _testimonialService = testimonialService;
         _context = context;
+        _rezervationService = rezervationService;
     }
 
     [AllowAnonymous]
@@ -30,6 +32,8 @@ public class HomeController : Controller
     {
 
         ViewBag.TravelCount = _destinationService.ListAllService().Count();
+        ViewBag.DestinationCount = _tourService.ListAllService().Count();
+        ViewBag.RezervationCount = _rezervationService.ListAllService().Count();
         ViewBag.GuideCount = _guideService.ListAllService().Count();
         ViewBag.PopularTour = _tourService.ListAllService(x => x.TourRaiting == 5);
         ViewBag.Testimontals = _testimonialService.ListAllService();
@@ -38,15 +42,14 @@ public class HomeController : Controller
         return View();
     }
 
-    [HttpPost]
-    public IActionResult RezervSeach(RezerFormViewModel model)
+    [HttpGet]
+    public IActionResult RezervSeach(string city)
     {
-        if (string.IsNullOrEmpty(model.SelectedDestination))
-            return RedirectToAction("Index", "Home"); 
+          if (string.IsNullOrEmpty(city))
+        return RedirectToAction("Index", "Tour", new { city = city });
 
-        return RedirectToAction("Index", "Tour", new { city = model.SelectedDestination }); 
+        return RedirectToAction("Index", "Home");
     }
-
 
 
 

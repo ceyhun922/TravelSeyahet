@@ -110,12 +110,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvTG9naW4vSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Offer/Index 2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT2ZmZXIvSW5kZXggMi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Offer/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvT2ZmZXIvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Register/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUmVnaXN0ZXIvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Rotasion/RotasionDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUm90YXNpb24vUm90YXNpb25EZXRhaWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Rotasion/Rotasions.cshtml]
@@ -194,6 +202,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19OYXZiYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Shared/_Navbarr.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19OYXZiYXJyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Shared/_SideBar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19TaWRlQmFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -244,6 +256,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Writter/Tours.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV3JpdHRlci9Ub3Vycy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Writter/UpdateComment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvV3JpdHRlci9VcGRhdGVDb21tZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/Views/Writter/_RezervationTable.cshtml]

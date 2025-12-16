@@ -30,25 +30,27 @@ namespace TravelWeb.Controllers
             _userManager = userManager;
             _commentService = commentService;
         }
-
         [HttpGet]
         public IActionResult Index(string city)
         {
-            var values = _tourService.AllToursWithRotasionsService();
+            var values = _tourService.AllToursWithRotasionsService() ?? new List<Tour>();
 
-            if (! string.IsNullOrEmpty(city))
+            if (!string.IsNullOrEmpty(city))
             {
-                values =values.Where(x=>x.Destination.DestinationCity==city).ToList();
-                ViewBag.City = city;
+                values = values.Where(x => x.Destination.DestinationCity.Equals(city, StringComparison.OrdinalIgnoreCase)).ToList();
+                ViewBag.City = city; // Şehir bilgisini ViewBag'e ekliyoruz
             }
 
-
-            if (values == null)
-            {
-                values = new List<Tour>();
-            }
             return View(values);
         }
+
+
+        /*             if (startDate != DateTime.MinValue && endDate != DateTime.MinValue)
+            {
+                values = values.Where(t => t.Rotasions.Any(r => r.Tour.TourDateTime >= startDate && r.Tour.TourDateTime <= endDate)).ToList();
+                ViewBag.StartDate = startDate.ToString("yyyy-MM-dd");
+                ViewBag.EndDate = endDate.ToString("yyyy-MM-dd");
+            } */
 
         /* [HttpPost]
         public IActionResult LocationFilter([FromQuery] FilterLocationViewModel model)
@@ -101,15 +103,15 @@ namespace TravelWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> PostComment(Comment comment)
         {
-            var user =await _userManager.GetUserAsync(User);
+            var user = await _userManager.GetUserAsync(User);
 
-                if (user != null)
-                {
-                    comment.UserId = user.Id;
-                    comment.CommentUserName = user.UserName;
-                }
+            if (user != null)
+            {
+                comment.UserId = user.Id;
+                comment.CommentUserName = user.UserName;
+            }
 
-                _commentService.InsertService(comment);
+            _commentService.InsertService(comment);
 
             return RedirectToAction("TourDetail", new { id = comment.TourId });
         }
@@ -118,8 +120,8 @@ namespace TravelWeb.Controllers
 
         public IActionResult Tours(int? tourId)
         {
-            var tours = _tourService.ListAllService(); 
-            ViewBag.SelectedTour = tourId; 
+            var tours = _tourService.ListAllService();
+            ViewBag.SelectedTour = tourId;
             return View(tours);
         }
 
@@ -134,7 +136,7 @@ namespace TravelWeb.Controllers
                 RezervationDescription = description,
                 RezervationDate = DateTime.Now,
                 RezervationTime = TimeOnly.FromDateTime(DateTime.Now),
-                DestinationId = _tourService.GetFindIdService(tourId).DestinationId ?? 0, 
+                DestinationId = _tourService.GetFindIdService(tourId).DestinationId ?? 0,
                 TotalPrice = _tourService.GetFindIdService(tourId).TourPrice * countPerson
             };
 

@@ -86,7 +86,7 @@ namespace TravelWeb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentID"));
 
-                    b.Property<bool?>("CommentStatus")
+                    b.Property<bool>("CommentStatus")
                         .HasColumnType("bit");
 
                     b.Property<string>("CommentUserComment")

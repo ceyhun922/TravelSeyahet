@@ -1,21 +1,19 @@
 @model RezerFormViewModel
 
-@using (Html.BeginForm("RezervSeach", "Home", FormMethod.Post, new { @class = "booking-form" }))
+@using (Html.BeginForm("Index", "Tour", FormMethod.Get, new { @class = "booking-form" }))
 {
     <div class="row book-form">
         <div class="form-input col-md-3 mt-md-0 mt-3">
-
-            <select name="SelectedDestination" class="selectpicker">
-                <option value="">Seçin</option>
-      @if (Model.Destinations != null)
-                  {
-                      @foreach (var item in Model.Destinations)
-                      {
-                          <option value="@item.DestinationCity">@item.DestinationCity</option>
-                      }
-                  }
+            <select name="city" class="selectpicker">
+                <option value="">Şehir Seçin</option>
+                @if (Model.Destinations != null)
+                {
+                    @foreach (var item in Model.Destinations)
+                    {
+                        <option value="@item.DestinationCity">@item.DestinationCity</option>
+                    }
+                }
             </select>
-
         </div>
 
         <div class="form-input col-md-3 mt-md-0 mt-3">

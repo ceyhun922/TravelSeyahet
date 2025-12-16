@@ -13,6 +13,12 @@
 else
 {
     <table class="table">
+        @if (TempData.ContainsKey("success"))
+        {
+            <div class="alert alert-success">
+                @TempData["success"]
+            </div>
+        }
         <thead>
             <tr>
                 <th>ID</th>
@@ -23,6 +29,8 @@ else
             </tr>
         </thead>
         <tbody>
+
+
             @foreach (var item in Model)
             {
                 <tr>
@@ -37,10 +45,12 @@ else
                         </strong>
                     </td>
                     <td>
-                        <a class="btn btn-warning text-dark">Yenile</a>
+                        <a class="btn btn-warning text-dark" asp-action="UpdateComment" asp-controller="Writter"
+                            asp-route-id="@item.CommentID">Yenile</a>
                     </td>
                     <td>
-                        <a class="btn btn-danger">Sil</a>
+                        <a class="delete-btn btn btn-danger" asp-action="DeleteComment" asp-controller="Writter" asp-route-id="@item.CommentID" data-id="@item.CommentID">Sil</a> 
+                      
                     </td>
                     <td>
                         <a class="btn btn-info" asp-action="TourDetail" asp-controller="Tour" asp-route-id="@item.TourId">Şerhe
@@ -52,3 +62,40 @@ else
     </table>
 
 }
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+
+
+
+    setTimeout((e) => {
+        const alert = document.querySelector(".alert")
+        if (alert) {
+            alert.remove()
+        }
+    }, 1000);
+
+  document.querySelectorAll(".delete-btn").forEach(btn => {
+    btn.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        const id = this.getAttribute("data-id");
+
+        Swal.fire({
+            title: 'Əminsən?',
+            text: "Şərh silinəcək!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Bəli, sil',
+            cancelButtonText: 'Ləğv et'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href =
+                    `/Writter/DeleteComment/${id}`;
+            }
+        });
+    });
+});
+
+</script>

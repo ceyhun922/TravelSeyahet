@@ -1,0 +1,23 @@
+@model Comment
+
+@{
+    Layout = "_WritterLayout";
+}
+
+
+<p>Şerh Update</p>
+
+<form class="w-25" asp-action="UpdateComment" asp-controller="Writter">
+    @Html.HiddenFor(x => x.CommentID)
+
+    <div class="mt-3">
+        <label class="form-label">Şərh</label>
+        @Html.TextAreaFor(x => x.CommentUserComment, new { @class = "form-control", rows = 4 })
+    </div>
+
+       <div class="mt-3">
+        @Html.CheckBoxFor(x => x.CommentStatus)
+    <span>@(Model.CommentStatus == true ? "Passif Et" : "Aktiv Et")</span>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Yadda saxla</button>
+</form>

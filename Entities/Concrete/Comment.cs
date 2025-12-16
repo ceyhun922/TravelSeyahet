@@ -9,7 +9,7 @@ namespace Entities.Concrete
         public string? CommentUserName { get; set; }
         public string? CommentUserMail { get; set; }
         public string? CommentUserComment { get; set; }
-        public bool? CommentStatus { get; set; }
+        public bool CommentStatus { get; set; }
         public int UserId { get; set; }
         public Writer? Writer { get; set; }
         public int TourId { get; set; }

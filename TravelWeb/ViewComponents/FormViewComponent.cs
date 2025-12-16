@@ -5,13 +5,17 @@ using Services.Abstract;
 
 namespace TravelWeb.ViewComponents
 {
+
+
     public class FormViewComponent : ViewComponent
     {
+        private readonly ILogger<FormViewComponent> _logger;
         private readonly IDestinationService _destinationService;
 
-        public FormViewComponent(IDestinationService destinationService)
+        public FormViewComponent(IDestinationService destinationService, ILogger<FormViewComponent> logger)
         {
             _destinationService = destinationService;
+            _logger = logger;
         }
 
         public IViewComponentResult Invoke()
@@ -20,7 +24,7 @@ namespace TravelWeb.ViewComponents
 
             if (destinations == null || !destinations.Any())
             {
-                Console.WriteLine("Destinations boşdur!");
+                _logger.LogWarning("Destinations boşdur!");
             }
 
             var form = new RezerFormViewModel

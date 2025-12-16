@@ -25,9 +25,10 @@ namespace TravelWeb.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IWebHostEnvironment _env;
         private readonly IWriterService _writerService;
+        private readonly ICommentService _commentService;
 
 
-        public WritterController(UserManager<Writer> userManager, SignInManager<Writer> signInManager, ITourService tourService, IDestinationService destinationService, Context context, IRezervationService rezervationService, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env, IWriterService writerService)
+        public WritterController(UserManager<Writer> userManager, SignInManager<Writer> signInManager, ITourService tourService, IDestinationService destinationService, Context context, IRezervationService rezervationService, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment env, IWriterService writerService, ICommentService commentService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -38,6 +39,7 @@ namespace TravelWeb.Controllers
             _httpContextAccessor = httpContextAccessor;
             _env = env;
             _writerService = writerService;
+            _commentService = commentService;
         }
 
         public IActionResult NewRezervations()
@@ -153,10 +155,49 @@ namespace TravelWeb.Controllers
         public async Task<IActionResult> MyComments()
         {
             var user = await _userManager.GetUserAsync(User);
-
-            var values = _context.Comments.Where(x => x.UserId == user.Id).ToList();
+            var values = _commentService.ListAllService(x => x.UserId == user.Id);
             return View(values);
         }
+
+        [HttpGet]
+        public IActionResult UpdateComment(int id)
+        {
+            var comment = _commentService.GetFindIdService(id);
+
+            if (comment == null)
+                return NotFound();
+
+            return View(comment);
+        }
+        
+        [HttpPost]
+        public IActionResult UpdateComment(Comment comment)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(comment);
+            }
+
+            var value =_commentService.GetFindIdService(comment.CommentID);
+            value.CommentUserComment =comment.CommentUserComment;
+            value.CommentStatus =comment.CommentStatus ;
+            
+            _commentService.UpdateService(value);
+            TempData["success"] ="Şərhiniz yeniləndi";
+            return RedirectToAction("MyComments","Writter");
+        }
+
+        [HttpGet]
+        public IActionResult DeleteComment(int id)
+        {
+            var value =_commentService.GetFindIdService(id);
+
+            _commentService.RemoveService(value);
+            TempData["success"] ="Şərhiniz silindi";
+
+            return RedirectToAction("MyComments","Writter");
+        }
+
 
         [HttpGet]
         public IActionResult Traffichart()
@@ -207,8 +248,8 @@ namespace TravelWeb.Controllers
 
             var rez = _rezervationService.ListAllService(x => x.UserId == user.Id && x.RezervationStatus == RezervationStatus.Approved).Count();
             var topRez = _context.Tours?.Include(x => x.Guide).Include(x => x.Destination).Include(x => x.Destination).ToList().Take(5);
-            ViewBag.RezAmount =_rezervationService.ListAllService(x=>x.RezervationStatus ==RezervationStatus.Approved).Sum(x=>x.TotalPrice);
-            ViewBag.RezAmountAvg =Math.Round((decimal)ViewBag.RezAmount * 1.10m);
+            ViewBag.RezAmount = _rezervationService.ListAllService(x => x.RezervationStatus == RezervationStatus.Approved).Sum(x => x.TotalPrice);
+            ViewBag.RezAmountAvg = Math.Round((decimal)ViewBag.RezAmount * 1.10m);
             ViewBag.TopRez = topRez;
             ViewBag.Rezervations = rez;
 
@@ -365,18 +406,18 @@ namespace TravelWeb.Controllers
             if (!rezervasyon.Any())
                 return Json(new { message = "Rezervasiya Tapılmadı" });
 
-            var culture =new CultureInfo("az-AZ");
+            var culture = new CultureInfo("az-AZ");
 
             var mostRezervation = rezervasyon
                 .GroupBy(x => new
                 {
                     x.Tour.TourLocaion,
-                    Month =x.RezervationDate.Month
+                    Month = x.RezervationDate.Month
                 })
                 .Select(g => new
                 {
                     Location = g.Key.TourLocaion,
-                    Month =culture.DateTimeFormat.GetMonthName(g.Key.Month),
+                    Month = culture.DateTimeFormat.GetMonthName(g.Key.Month),
                     Count = g.Count(),
                     Amount = g.Sum(x => x.TotalPrice)
                 })
