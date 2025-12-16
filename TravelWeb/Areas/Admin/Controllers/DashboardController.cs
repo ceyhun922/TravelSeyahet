@@ -41,12 +41,14 @@ namespace TravelWeb.Areas.Admin.Controllers
             var user = await _userManager.GetUserAsync(User);
             var tours = _tourService.ListAllService().Count();
             var rezervations = _rezervationService.ListAllService().Count();
+            var lastMessage =_context.Contacts.ToList().TakeLast(3);
 
 
             ViewBag.UserCount = users;
             ViewBag.Image = user?.WriterImage;
-            @ViewBag.TourCount = tours;
-            @ViewBag.RezervationCount = rezervations;
+            ViewBag.TourCount = tours;
+            ViewBag.RezervationCount = rezervations;
+            ViewBag.LastMessage =lastMessage;
 
             return View();
         }

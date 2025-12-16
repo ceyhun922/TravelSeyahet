@@ -496,7 +496,6 @@
                 const hasRe = subj.toLowerCase().startsWith("re:");
                 composeSubject.value = hasRe ? subj : `Re: ${subj || "Message"}`;
 
-                // quote əlavə et (istəmirsənsə silə bilərsən)
                 const quote =
 `\n\n--- Original message ---\nFrom: ${m.from} <${m.email}>\nDate: ${m.date}\nSubject: ${m.subject}\n\n${m.text}`;
                 composeBody.value = quote;
