@@ -53,6 +53,7 @@ namespace TravelWeb.Controllers
 
                 if (result.Succeeded)
                 {
+                    await _manager.AddToRoleAsync(writer,"User");
                     await _signInManager.SignInAsync(writer, isPersistent: false);
                     return RedirectToAction("Index", "Login");
                 }
