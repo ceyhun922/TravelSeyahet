@@ -23,7 +23,7 @@
             </div>
             <div class="card-body">
 
-                
+
                 @if (TempData.ContainsKey("success") || TempData["success"] != null)
                 {
                     <div class="alert alert-success">
@@ -35,13 +35,13 @@
 
                 <table class="table table-striped" id="table1">
                     <thead>
-                       
+
                         <tr>
                             <th>ID</th>
-                            <th>City</th>
+                            <th>Şəhər</th>
                             <th>Status</th>
-                            <th>Update</th>
-                            <th>Delete</th>
+                            <th>Yenilə</th>
+                            <th>Sil</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,17 +53,23 @@
                                 <td>@item.DestinationCity</td>
 
                                 <td>
-                                    <span
-                                        class="badge bg-@(item.DestinationStatus == true ? "success" : "danger")">@(item.DestinationStatus)</span>
+                                    <button data-url="@Url.Action("StatusToogle", "City")" data-id="@item.DestinationId"
+                                        class="btn btn-@(item.DestinationStatus ? "danger" : "success") toggle-status">
+
+                                        <span class="text-white">
+                                            @(item.DestinationStatus ? "Passif Et" : "Aktif Et")
+                                        </span>
+                                    </button>
                                 </td>
                                 <td>
-                                    <a class="mx-1 btn btn-warning text-dark" asp-action="UpdateCity" asp-controller="City" asp-route-cityid="@item.DestinationId">Update</a>
+                                    <a class="mx-1 btn btn-warning text-dark" asp-action="UpdateCity" asp-controller="City"
+                                        asp-route-cityid="@item.DestinationId">Update</a>
                                 </td>
                                 <td>
                                     <button class="btn btn-danger">Delete</button>
 
                                 </td>
-                               
+
                             </tr>
                         }
                     </tbody>
@@ -79,5 +85,37 @@
     <script>
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
+
+
+        document.addEventListener("click", function (e) {
+            const btn = e.target.closest(".toggle-status");
+            if (!btn) return;
+
+            const id = Number(btn.dataset.id);
+            const url = btn.dataset.url;
+
+            fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id })
+            })
+                .then(r => r.json())
+                .then(data => {
+                    if (!data.success) return;
+
+                    const span = btn.querySelector("span");
+
+                    if (data.status) {
+                        btn.classList.remove("btn-success");
+                        btn.classList.add("btn-danger");
+                        span.textContent = "Passif Et";
+                    } else {
+                        btn.classList.remove("btn-danger");
+                        btn.classList.add("btn-success");
+                        span.textContent = "Aktif Et";
+                    }
+                });
+        });
+
     </script>
 }

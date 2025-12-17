@@ -1,4 +1,5 @@
 using Entities.Concrete;
+using Entities.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Abstract;
@@ -67,6 +68,21 @@ namespace TravelWeb.Areas.Admin.Controllers
         public IActionResult UpdateCity()
         {
             return RedirectToAction(nameof(Index), new { area = "Admin" });
+        }
+
+
+        [HttpPost]
+        public IActionResult StatusToogle([FromBody] RequestStatusDTO request)
+        {
+            var destination =_destinationService.GetFindIdService(request.Id);
+
+            if(destination == null)
+                return Json(new {success =false});
+
+            destination.DestinationStatus =!destination.DestinationStatus;
+            _destinationService.UpdateService(destination);
+
+            return Json(new {success =true, status =destination.DestinationStatus});
         }
 
 
