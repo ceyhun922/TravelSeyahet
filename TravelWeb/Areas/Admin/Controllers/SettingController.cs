@@ -65,6 +65,7 @@ namespace TravelWeb.Areas.Admin.Controllers
             }
 
             user.WriterStatus = writer.WriterStatus;
+           /*  user.PhoneNumber =writer.PhoneNumber; */
 
             var result = await _userManager.UpdateAsync(user);
             TempData["success"] ="Melumat Yenilendi";

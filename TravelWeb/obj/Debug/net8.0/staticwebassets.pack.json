@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/UserImages/0d09b916-0170-4d12-8484-855907bf0372.jpg",
+      "PackagePath": "staticwebassets/UserImages/0d09b916-0170-4d12-8484-855907bf0372.jpg"
+    },
+    {
       "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/UserImages/2c408296-efe7-4eeb-a9c1-7c9fa4dfbc97.png",
       "PackagePath": "staticwebassets/UserImages/2c408296-efe7-4eeb-a9c1-7c9fa4dfbc97.png"
     },
@@ -23,6 +27,10 @@
     {
       "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/UserImages/b93a4bea-5ffd-4666-ba47-0d1061d0cdf8.png",
       "PackagePath": "staticwebassets/UserImages/b93a4bea-5ffd-4666-ba47-0d1061d0cdf8.png"
+    },
+    {
+      "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/UserImages/c57babf0-b70e-40d3-a082-a50d915d287c.jpg",
+      "PackagePath": "staticwebassets/UserImages/c57babf0-b70e-40d3-a082-a50d915d287c.jpg"
     },
     {
       "Id": "/Users/ceyhunyusif/Desktop/TravelAze/TravelWeb/wwwroot/UserImages/df43c646-0977-429c-bdbc-06ee2d3df417.jpg",
